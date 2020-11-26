@@ -7,23 +7,16 @@
 
 #tituloCabecera{
 height: 20%;
+background: linear-gradient(180deg, rgba(115,173,247,1) 13%, rgba(197,230,251,1) 64%, rgba(230,240,242,1) 100%);
+align-items: center;
+padding-top: 1%;
 }
 #titulo{
-left: 0%;
-right: 0%;
-top: 0%;
-bottom: 0%;
-
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 1250%;
-line-height: 234px;
-text-align: center;
-
-color: #FFFFFF;
-text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+    display:block;
+    margin:auto;
+    width: 8%;
 }
+
 
 
 

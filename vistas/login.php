@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Css/estilo.css">
-    <link rel="stylesheet" href="../Css/cabecera.css">
-    <link rel="icon" type="image/svg" href="iconos/404.svg" sizes="64x64">
-    <title>404</title>
+    <?php
+        require("headers.html");
+    ?>
 </head>
 <body>
     <header>
@@ -17,7 +14,7 @@
 
     <div id="boxFormulario">
 
-        <form id="inicioSesion">
+        <form id="inicioSesion" class="formularios">
 
             
             <label id = "textCorreo">Correo *</label>

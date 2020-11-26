@@ -1,0 +1,56 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#cabeceraLog{
+height: 20%;
+background: linear-gradient(180deg, rgba(115,173,247,1) 13%, rgba(197,230,251,1) 64%, rgba(230,240,242,1) 100%);
+padding-top: 1%;
+width: 100%;
+display: flex;
+align-items: center;
+text-align: center;
+justify-content: space-between;
+flex-direction: row;
+}
+#logo{
+    width: 80%;
+    margin-left:-25%;
+}
+
+#menu{
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    margin-left: 2%;
+    width: 10%;
+}
+
+.opcion{
+    margin-top: 2%;
+    margin-bottom: 5%;
+    padding: 2%;
+    background: #295F9D;
+    border-radius: 10px;
+    color: #FFFFFF;
+}
+
+#perfil{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    width: 10%;
+    align-items: center;
+
+}
+
+#foto{
+    width: 20%;
+}
+
+
+
+

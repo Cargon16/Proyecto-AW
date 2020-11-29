@@ -17,6 +17,7 @@ html{
     position: absolute;
     width: 100%;
     height: 60%;
+    
 }
 
 .formularios{
@@ -29,6 +30,8 @@ html{
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+   
 
 }
 .formularios input{
@@ -73,3 +76,52 @@ font-size: 100%;
     background: none !important;
     border: none !important;
 }
+
+.busquedas{
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    align-items: center;
+}
+
+.busquedas input{
+    width: 85%;
+    height: 30%;
+    margin-top: 1%;
+    margin-bottom: 3%;
+
+    float: left;
+
+    border: 1px solid #989898;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: url(../iconos/buscar.png) no-repeat scroll 7px 7px #FFFCFC;
+    padding-left: 30px;
+}
+
+.busquedas button{
+    width: 5%;
+    height: 30%;
+
+    margin-top: 1%;
+    margin-bottom: 3%;
+    margin-right: 0.2%;
+    margin-left: 2%;
+    float: left;
+
+    background: #295F9D;
+    border-radius: 10px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+
+    /* identical to box height */
+
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+

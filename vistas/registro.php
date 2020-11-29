@@ -8,7 +8,7 @@
 <body>
     <header>
         <?php  
-        require("headerLogged.html");
+        require("headerNoLogged.html");
         ?>
     </header>
 

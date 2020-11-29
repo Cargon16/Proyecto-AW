@@ -33,7 +33,7 @@
            
             <label id="tituloFormulario">Cuerpo</label>
             <label id="textSubCuerpo">Incluye toda la información que alguien necesitaría para responder tu pregunta</label>
-            <input id="inputCuerpo" value="¿Cuál es tu pregunta sobre programación de aplicaciones web?"> </input>
+            <input id="inputCuerpo" > </input>
 
             <label id="tituloFormulario">Etiquetas</label>
             <label id="textSubEtiquetas">Añade hasta 5 etiquetas para describir sobre qué trata tu pregunta</label>

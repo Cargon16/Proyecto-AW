@@ -14,14 +14,12 @@
 
     <div id="boxFormulario">
 
-        <form id="registro" class="formularios">
+        <form id="registro" class="formularios" method="post" action="./usuarios/signup">
 
             
             <label id = "textCorreo">Correo *</label>
             <input id="inputCorreo" name="correo"> </input>
            
-            
-            
             <label id = "textPassword">Contraseña *</label>
             <input id="inputPassword" name="password"> </input>
 

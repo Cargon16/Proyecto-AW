@@ -14,7 +14,7 @@
 
     <div id="boxFormulario">
 
-        <form id="inicioSesion" class="formularios">
+        <form id="inicioSesion" class="formularios" method="post" action="./usuarios/signin">
 
             
             <label id = "textCorreo">Correo *</label>

@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Cargon16/ProyectoAW/issues"
   },
-  "homepage": "https://github.com/Cargon16/ProyectoAW#readme"
+  "homepage": "https://github.com/Cargon16/ProyectoAW#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
 }

@@ -18,12 +18,12 @@
 
             
             <label id = "textCorreo">Correo *</label>
-            <input id="inputCorreo"> </input>
+            <input id="inputCorreo" name="correo"> </input>
            
             
             
             <label id = "textPassword">Contraseña *</label>
-            <input id="inputPassword"> </input>
+            <input id="inputPassword" name="password"> </input>
            
             <button id="buttonIniciarSesion">Iniciar Sesion</button>
             

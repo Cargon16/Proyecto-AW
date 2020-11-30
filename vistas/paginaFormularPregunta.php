@@ -29,15 +29,15 @@
 
             <label id="tituloFormulario">Título</label>
             <label id = "textSubTitulo">Sé específico e imagina que estás haciendo la pregunta a otra persona</label>
-            <input id="inputCorreo" value="¿Cuál es tu pregunta sobre programación de aplicaciones web?"> </input>
+            <input id="inputCorreo" name="correo" placeholder="¿Cuál es tu pregunta sobre programación de aplicaciones web?" type="text"> </input>
            
             <label id="tituloFormulario">Cuerpo</label>
             <label id="textSubCuerpo">Incluye toda la información que alguien necesitaría para responder tu pregunta</label>
-            <input id="inputCuerpo" > </input>
+            <textarea id="inputCuerpo" name="cuerpo" type="text" > </textarea>
 
             <label id="tituloFormulario">Etiquetas</label>
             <label id="textSubEtiquetas">Añade hasta 5 etiquetas para describir sobre qué trata tu pregunta</label>
-            <input id="inputEtiquetas"value="Por ejemplo: @node@express"> </input>
+            <input id="inputEtiquetas" name="etiquetas" placeholder="Por ejemplo: @node@express" type="text"> </input>
 
             <button id="buttonPublicarPregunta">Publica tu pregunta</button>
            

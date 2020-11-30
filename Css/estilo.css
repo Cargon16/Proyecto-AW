@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -11,6 +12,8 @@ html{
     background-color: #e6f0f2;
     background-repeat: repeat-x;
     background-size: 100%;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: medium;
 }
 
 #boxFormulario{
@@ -57,8 +60,6 @@ font-size: 100%;
 
     background: #295F9D;
     border-radius: 10px;
-
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
 
@@ -112,7 +113,6 @@ font-size: 100%;
     background: #295F9D;
     border-radius: 10px;
 
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
 
@@ -135,7 +135,7 @@ font-size: 100%;
 }
 
 #divTitulo{
-    text-align: center;
+    margin-left: 19%;
     font-size: 200%;
     margin-bottom: 1%;
 }
@@ -149,36 +149,30 @@ font-size: 100%;
     width: 100%;
     height: 100%;
     position: absolute;
-    border: 2px solid red;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
 
 }
 
 .formularioPregunta label{
-    
     font-size: 100%;
+    margin-left: 30%;
 }
 
 .formularioPregunta button{
     width: 10%;
-    height: 3%;
+    height: 10%;
 
-    margin-top: 1%;
     margin-bottom: 3%;
-    margin-right: 0.2%;
-    margin-left: 2%;
+    margin-right:auto;
+    margin-left: auto;
     float: left;
 
     background: #295F9D;
     border-radius: 10px;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-
+    font-size: 100%;
     /* identical to box height */
 
     justify-content: center;
@@ -189,10 +183,11 @@ font-size: 100%;
 }
 
 .formularioPregunta input{
-    width: 30%;
-    height: 59%;
-    margin-top: 1%;
-    margin-bottom: 3%;
+    width: 40%;
+    height: 7%;
+    margin-top: 0.1%;
+    margin-left: 30%;
+    margin-bottom: 0.5%;
     padding-left: 1%;
     display: inline-block;
     text-align: start;
@@ -202,6 +197,15 @@ font-size: 100%;
     border-radius: 5px;
     background: #FFFCFC;
     
+}
+
+#inputCuerpo{
+    width: 40%;
+    padding-top: 0%;
+    height: 50%;
+    margin-top: 0.1%;
+    margin-left: 30%;
+    margin-bottom: 0.5%;
 }
 
 

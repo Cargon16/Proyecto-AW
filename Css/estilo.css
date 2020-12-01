@@ -16,6 +16,10 @@ html{
     font-size: medium;
 }
 
+/*
+Codigo login.php y registro.php
+*/
+
 #boxFormulario{
     position: absolute;
     width: 100%;
@@ -78,6 +82,11 @@ font-size: 100%;
     border: none !important;
 }
 
+/*
+Codigo busqueda.html
+*/
+
+
 .busquedas{
     width: 100%;
     height: 20%;
@@ -124,6 +133,11 @@ font-size: 100%;
     text-align: center;
     color: #FFFFFF;
 }
+
+/*
+Codigo paginaFormularPregunta.php
+*/
+
 
 #boxFormularioPregunta{
 
@@ -206,6 +220,150 @@ font-size: 100%;
     margin-top: 0.1%;
     margin-left: 30%;
     margin-bottom: 0.5%;
+}
+
+/*
+Codigo paginaPerfilUsuario.php
+*/
+
+#boxPerfil{
+
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    margin-top: 5%;
+    border: 2px solid red;
+}
+
+#boxSuperior{
+    position: flex;
+    width: 60%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+
+    align-items: center;
+
+    border: 2px solid green;
+}
+
+#boxInferior{
+    position: flex;
+    width: 60%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+
+    align-items: center;
+
+    border: 2px solid yellow;
+    
+}
+#boxUsuario{
+    position: relative;
+    width: 25%;
+    height: 80%;
+    margin-right: auto;
+    margin-left: 8%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    float: left;
+
+    background-color: slateblue;
+    border: 2px solid blue;
+}
+#boxEstadistica{
+    position: relative;
+    width: 60%;
+    height: 80%;
+    margin-left: auto;
+    float: right;
+    margin-top: 3%;
+
+    align-items: center;
+    border: 2px solid chartreuse;
+}
+
+#text_estadisticas{
+position: relative;
+width: 60%;
+height: 10%;
+margin: auto;
+margin-top: 2%;
+
+align-items: center;
+text-align: center;
+justify-content: center;
+font-size: 100%;
+
+background-color: red;
+border-radius: 10px;
+border: 2px solid red;
+}
+
+#boxReputacion{
+    position: relative;
+    width: 100%;
+    height: 80%;
+
+    border: 2px solid seagreen;
+}
+
+#text_medallas{
+    position: relative;
+    width: 80%;
+    height: 10%;
+    margin: auto;
+    margin-top: 2%;
+    
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 100%;
+    
+    background-color: red;
+    border-radius: 10px;
+    border: 2px solid red; 
+}
+
+#boxBronce{
+    position: relative;
+    width: 32%;
+    height: 70%;
+
+    float: left;
+    margin-top: 2%;
+    margin-left: 0.5%;
+
+    text-align: center;
+    border: 2px solid chocolate; 
+}
+
+#boxPlata{
+    position: relative;
+    width: 32%;
+    height: 70%;
+
+    float: left;
+    margin-top: 2%;
+    margin-left: 1%;
+    margin-right: 0%;
+    
+    text-align: center;
+    border: 2px solid cyan; 
+}
+
+#boxOro{
+    position: relative;
+    width: 32%;
+    height: 70%;
+
+    margin-top: 2%;
+    margin-right: 0.5%;
+    float: right;
+
+    text-align: center;
+    border: 2px solid darkgoldenrod; 
 }
 
 

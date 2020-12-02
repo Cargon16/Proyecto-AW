@@ -24,25 +24,42 @@
             </div>
             
             <div id="boxEstadistica">
+                <div id="boxTextEstadisticas">
                 <p id="text_estadisticas">ESTADISTICAS</p>
-                <div id="boxReputacion">
-
+                </div>
+                <div id="boxReputacion" style="display:flex">
+                    <div id="boxPreguntas">
+                        <p>Preguntas</p>
+                    </div>
+                    <div id="boxRepu">
+                        <p>Reputacion</p>
+                    </div>
+                    <div id="boxRespuestas">
+                        <p>Respuestas</p>
+                    </div>
                 </div>
 
             </div>
           
         </div>
         <div id= "boxInferior">
+            <div id="boxTextMedallas">
             <p id="text_medallas">MEDALLAS</p>
+            </div>
+
+            <div id = "boxMedallas" style="display:flex">
             <div id="boxBronce">
-                BRONCE
+                <p>BRONCE</p>
             </div>
             <div id="boxPlata">
-                PLATA
+                <p>PLATA</p> 
             </div>
             <div id="boxOro">
-                ORO
+                <p>ORO</p>
             </div>
+
+            </div>
+            
         </div>
     </div>
 </body>

@@ -232,7 +232,6 @@ Codigo paginaPerfilUsuario.php
     height: 60%;
     position: absolute;
     margin-top: 5%;
-    border: 2px solid red;
 }
 
 #boxSuperior{
@@ -244,24 +243,12 @@ Codigo paginaPerfilUsuario.php
 
     align-items: center;
 
-    border: 2px solid green;
 }
 
-#boxInferior{
-    position: flex;
-    width: 60%;
-    height: 40%;
-    margin-left: auto;
-    margin-right: auto;
 
-    align-items: center;
-
-    border: 2px solid yellow;
-    
-}
 #boxUsuario{
     position: relative;
-    width: 25%;
+    width: 20%;
     height: 80%;
     margin-right: auto;
     margin-left: 8%;
@@ -269,8 +256,10 @@ Codigo paginaPerfilUsuario.php
     margin-bottom: 3%;
     float: left;
 
-    background-color: slateblue;
-    border: 2px solid blue;
+
+
+    background-color: rgba(36, 3, 250, 0.527);
+
 }
 #boxEstadistica{
     position: relative;
@@ -279,34 +268,104 @@ Codigo paginaPerfilUsuario.php
     margin-left: auto;
     float: right;
     margin-top: 3%;
+    margin-right: 10%;
+
 
     align-items: center;
-    border: 2px solid chartreuse;
+  
+}
+
+#boxTextEstadisticas{
+    align-items: center;
+    text-align: center;
+
 }
 
 #text_estadisticas{
-position: relative;
-width: 60%;
-height: 10%;
-margin: auto;
-margin-top: 2%;
+    position: relative;
+    width: 100%;
+    height: 10%;
+    margin: auto;
+    margin-top: 2%;
 
-align-items: center;
-text-align: center;
-justify-content: center;
-font-size: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 100%;
 
-background-color: red;
-border-radius: 10px;
-border: 2px solid red;
+    color: rgb(247, 235, 235);
+    background-color: #295F9D;
+    border-radius: 10px;
+
 }
 
 #boxReputacion{
     position: relative;
     width: 100%;
     height: 80%;
+}
 
-    border: 2px solid seagreen;
+#boxPreguntas{
+    
+    position: flex;
+    width: 32%;
+    height: 74%;
+    
+    float: left;
+    margin-top: 2%;
+   
+
+    text-align: center;
+
+}
+
+#boxPreguntas p{
+    margin-top: 30%;
+
+}
+
+
+#boxRepu{
+    position: flex;
+    width: 32%;
+    height: 74%;
+
+    float: left;
+    margin-top: 2%;
+    margin-left: 1%;
+    
+    text-align: center;
+
+}
+
+#boxRepu p{
+    margin-top: 10%;
+
+}
+
+#boxRespuestas{
+    position: flex;
+    width: 32%;
+    height: 74%;
+
+    margin-top: 2%;
+    margin-left: 1%;
+    float: right;
+    display: left;
+
+    text-align: center;
+
+}
+
+#boxRespuestas p{
+    margin-top: 30%;
+
+}
+
+#boxTextMedallas{
+    align-items: center;
+    text-align: center;
+
 }
 
 #text_medallas{
@@ -316,54 +375,105 @@ border: 2px solid red;
     margin: auto;
     margin-top: 2%;
     
+    margin-left: auto;
+    margin-right: auto;
     align-items: center;
     text-align: center;
     justify-content: center;
     font-size: 100%;
     
-    background-color: red;
+    color: rgb(247, 235, 235);
+    background-color: #295F9D;
     border-radius: 10px;
-    border: 2px solid red; 
+}
+
+#boxInferior{
+
+    width: 60%;
+    height: 40%;
+    
+
+    margin-left: auto;
+    margin-right: auto;
+
+    align-items: center;
+
+    
+}
+
+#boxMedallas{
+    width: 100%;
+    height: 100%;
 }
 
 #boxBronce{
-    position: relative;
+    position: flex;
     width: 32%;
-    height: 70%;
+    height: 74%;
 
     float: left;
     margin-top: 2%;
-    margin-left: 0.5%;
+   
 
     text-align: center;
-    border: 2px solid chocolate; 
+
+}
+
+#boxBronce p{
+    width: 60%;
+    height: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+
+    background-color: rgba(219, 141, 23, 0.705);
 }
 
 #boxPlata{
-    position: relative;
+    position: flex;
     width: 32%;
-    height: 70%;
+    height: 74%;
 
     float: left;
     margin-top: 2%;
     margin-left: 1%;
-    margin-right: 0%;
     
     text-align: center;
-    border: 2px solid cyan; 
+
+}
+
+#boxPlata p{
+    width: 60%;
+    height: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+
+    background-color: rgba(192, 192, 192, 0.699);
 }
 
 #boxOro{
-    position: relative;
+    position: flex;
     width: 32%;
-    height: 70%;
+    height: 74%;
 
     margin-top: 2%;
-    margin-right: 0.5%;
+    margin-left: 1%;
     float: right;
+    display: left;
 
     text-align: center;
-    border: 2px solid darkgoldenrod; 
+
+}
+
+#boxOro p{
+    width: 60%;
+    height: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+   
+    background-color: rgba(255, 238, 4, 0.651);
 }
 
 

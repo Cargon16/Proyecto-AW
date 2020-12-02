@@ -20,11 +20,11 @@ html{
 Codigo login.php y registro.php
 */
 
-#boxFormulario{
+.boxFormulario{
     position: absolute;
     width: 100%;
     height: 60%;
-    
+   
 }
 
 .formularios{
@@ -92,6 +92,8 @@ Codigo busqueda.html
     height: 20%;
     position: absolute;
     align-items: center;
+   
+    
 }
 
 .busquedas input{
@@ -145,13 +147,24 @@ Codigo paginaFormularPregunta.php
     margin-top: 5%;
     width: 100%;
     height: 60%;
-
+    
+    
 }
 
 #divTitulo{
-    margin-left: 19%;
+    position: flex;
+    width: 50%;
     font-size: 200%;
-    margin-bottom: 1%;
+    margin-bottom: 1%;  
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+#divTitulo label{
+    text-align: center;
+    margin-right: auto;
 }
 
 #tituloFormulario{
@@ -167,6 +180,7 @@ Codigo paginaFormularPregunta.php
     display: flex;
     flex-direction: column;
     align-items: left;
+  
 
 }
 
@@ -477,5 +491,60 @@ Codigo paginaPerfilUsuario.php
 }
 
 
+
+/*
+pagina preguntas.html
+*/
+
+#boxPregunta{
+    width: 50%;
+    height: 50%;
+    margin-top: 6%;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+
+#boxTituloPreguntas{
+    position: flex;
+    width: 100%;
+    height: 20%;
+    text-align: center;
+    font-size: 200%;
+    display: flex;
+    
+    margin-bottom: 1%;  
+
+}
+
+#boxTituloPreguntas label{
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 100%;
+}
+
+#boxSubGrupo{
+    position: flex;
+    width: 100%;
+    height: 70%;
+    margin-left: 3%;
+    margin-top: 4%;
+}
+
+#boxSubGrupo label{
+    font-size: 130%;
+    float: left;
+}
+#boxSubGrupo button{
+    width: 30%;
+    height: 15%;
+    
+    border-radius: 10px;
+    color: rgb(245, 234, 234);
+    background: #295F9D;
+    float: right;
+}
 
 

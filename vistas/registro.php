@@ -32,8 +32,9 @@
             <label id = "textPerfil">Nombre para mostrar*</label>
             <input id = "inputPerfil" name="perfil" type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
 
-            <button id="buttonCrearCuenta">Crear Cuenta</button>
-            <button id="buttonIniciarSesion">Iniciar Sesion</button>
+
+            <a href="paginaPrincipal.php" id="buttonCrearCuentaRegi" role="button">Crear cuenta</a>
+            <a href="login.php" id="buttonIniciarSesionRegi" role="button">Iniciar sesion</a>
             
             
            

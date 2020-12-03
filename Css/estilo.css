@@ -143,29 +143,19 @@ Codigo paginaFormularPregunta.php
 
 
 #boxFormularioPregunta{
-
     position: absolute;
     margin-top: 5%;
     width: 100%;
     height: 60%;
     
-    
 }
 
 #divTitulo{
-    position: flex;
     width: 50%;
     font-size: 200%;
-    margin-bottom: 1%;  
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-
-
-}
-#divTitulo label{
+    margin-bottom: 1%;
     text-align: center;
-    margin-right: auto;
+
 }
 
 #tituloFormulario{
@@ -180,14 +170,12 @@ Codigo paginaFormularPregunta.php
 
     display: flex;
     flex-direction: column;
-    align-items: left;
-  
+    align-items: center;
 
 }
 
 .formularioPregunta label{
     font-size: 100%;
-    margin-left: 30%;
 }
 
 .formularioPregunta button{
@@ -195,9 +183,6 @@ Codigo paginaFormularPregunta.php
     height: 10%;
 
     margin-bottom: 3%;
-    margin-right:auto;
-    margin-left: auto;
-    float: left;
 
     background: #295F9D;
     border-radius: 10px;
@@ -215,7 +200,6 @@ Codigo paginaFormularPregunta.php
     width: 40%;
     height: 7%;
     margin-top: 0.1%;
-    margin-left: 30%;
     margin-bottom: 0.5%;
     padding-left: 1%;
     display: inline-block;
@@ -233,7 +217,6 @@ Codigo paginaFormularPregunta.php
     padding-top: 0%;
     height: 50%;
     margin-top: 0.1%;
-    margin-left: 30%;
     margin-bottom: 0.5%;
 }
 
@@ -246,7 +229,7 @@ Codigo paginaPerfilUsuario.php
     width: 100%;
     height: 60%;
     position: absolute;
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
 #boxSuperior{
@@ -547,5 +530,4 @@ pagina preguntas.html y resultados.html
     background: #295F9D;
     float: right;
 }
-
 

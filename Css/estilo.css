@@ -58,6 +58,7 @@ margin-right: auto;
 font-size: 100%;
 }
 
+
 .formularios button{
     margin-top: 5%;
     padding: 2%;
@@ -82,6 +83,108 @@ font-size: 100%;
     background: none !important;
     border: none !important;
 }
+
+#buttonIniciarSesion{
+    margin-top: 5%;
+    padding: 2%;
+    width: 20%;
+
+    background: #295F9D;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: normal;
+
+    /* identical to box height */
+
+    text-decoration: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+#buttonCrearCuenta{
+    margin-top: 5%;
+    padding: 2%;
+    width: 20%;
+
+    background: #295F9D;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: normal;
+
+    /* identical to box height */
+
+    text-decoration: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+#buttonCrearCuenta{
+    margin-top: 5%;
+    padding: 2%;
+    width: 20%;
+
+    background: #295F9D;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: normal;
+
+    /* identical to box height */
+
+    text-decoration: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+#buttonIniciarSesionRegi{
+    margin-top: 5%;
+    padding: 2%;
+    width: 20%;
+
+    background: #295F9D;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: normal;
+
+    /* identical to box height */
+
+    text-decoration: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+#buttonCrearCuentaRegi{
+    margin-top: 5%;
+    padding: 2%;
+    width: 20%;
+
+    background: #295F9D;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: normal;
+
+    /* identical to box height */
+
+    text-decoration: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
 
 /*
 Codigo busqueda.html
@@ -521,12 +624,19 @@ pagina preguntas.html y resultados.html
     font-size: 130%;
     float: left;
 }
-#boxSubGrupo button{
+
+#buttonFormularPregunta{
     width: 30%;
     height: 15%;
     
+
     border-radius: 10px;
-    color: rgb(245, 234, 234);
+    text-decoration: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
     background: #295F9D;
     float: right;
 }

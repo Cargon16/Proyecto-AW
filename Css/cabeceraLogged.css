@@ -41,7 +41,11 @@ flex-direction: row;
     background: #295F9D;
     border-radius: 10px;
     color: #FFFFFF;
+<<<<<<< HEAD
     width: 100%;
+=======
+    text-decoration: none;
+>>>>>>> a917255a082c2a459a25f5149f67899166681306
 }
 
 #perfil{

@@ -25,9 +25,8 @@
             <label id = "textPassword">Contraseña *</label>
             <input id="inputPassword" name="password"> </input>
            
-            <button id="buttonIniciarSesion">Iniciar Sesion</button>
-            
-            <button id="buttonCrearCuenta">Crear Cuenta</button>
+            <a href="paginaPrincipal.php" id="buttonIniciarSesion" role="button">Iniciar Sesion</a>
+            <a href="registro.php" id="buttonCrearCuenta" role="button">Crear Cuenta</a>
            
         </form>
 

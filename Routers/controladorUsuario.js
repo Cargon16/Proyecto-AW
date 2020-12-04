@@ -33,7 +33,7 @@ function registro(request, response) {
     });
 }
 
-function profile(request, response) {
+function perfil(request, response) {
     daoUsuario.getUser(response.locals.emailUsuario, function(info, success) {
         if (success) {
             response.status(200);
@@ -59,7 +59,7 @@ function procesarLogin(request, response){
     daoUsuario.isUserCorrect(request.locals.emailUsuario, request.locals.password, function(err, existe){
         if(err){
             response.status(500);
-            console.log("procesarLogin_post" + err);\
+            console.log("procesarLogin_post" + err);
             next(err);
         }else{
             response.status(200);
@@ -125,4 +125,14 @@ function usuarioRegistrado(request, response){
             }
         })
     }
+}
+
+module.exports={
+    root,
+    login,
+    registro,
+    perfil,
+    logout,
+    procesarLogin,
+    usuarioRegistrado
 }

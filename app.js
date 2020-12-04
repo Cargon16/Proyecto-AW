@@ -12,7 +12,7 @@ const ficherosestaticos = path.join(__dirname, "public");
 const app = express();
 const mysqlStore = mysqlSession(session);
 const sessionStore = new mysqlStore(config.mysqlConfig);
-
+const routerUsuario = require("./Routers/routersUsuarios");
 
 const middlewareSession = session({
     saveUninitialized: false,
@@ -25,6 +25,8 @@ app.use(express.static(ficherosestaticos));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "vistas")); //directorio donde van a estas las vistas plantillas
 app.use(middlewareSession);
+app.use("/", routerUsuario);
+app.use("/login",routerUsuario);
 
 //  Función que arranca el servidor
 app.listen(config.port, function (err) {

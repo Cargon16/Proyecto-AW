@@ -14,26 +14,26 @@
 
     <div id="boxFormulario">
 
-        <form id="registro" class="formularios" method="post" action="./usuarios/signup">
+        <form id="registro" class="formularios" method="POST" action="/registro">
 
             
             <label id = "textCorreo">Correo *</label>
-            <input id="inputCorreo" name="correo"> </input>
+            <input id="inputCorreo" name="emailUsuario"> </input>
            
             <label id = "textPassword">Contraseña *</label>
             <input id="inputPassword" name="password"> </input>
 
             <label id = "textPassword">Confirmar contraseña *</label>
-            <input id="inputPassword" name="confirmPassword"> </input>
+            <input id="inputPassword" name="passwordConfirm"> </input>
 
             <label id = "textNombre">Nombre para mostrar*</label>
-            <input id="inputNombre" name="nombre"> </input>
+            <input id="inputNombre" name="nombreMostrar"> </input>
            
-            <label id = "textPerfil">Nombre para mostrar*</label>
+            <label id = "textPerfil">Foto de perfil*</label>
             <input id = "inputPerfil" name="perfil" type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
 
 
-            <a href="paginaPrincipal" id="buttonCrearCuentaRegi" role="button">Crear cuenta</a>
+            <a href="paginaPrincipal" id="buttonCrearCuentaRegi" role="button" type="submit">Crear cuenta</a>
             <a href="login" id="buttonIniciarSesionRegi" role="button">Iniciar sesion</a>
             
             

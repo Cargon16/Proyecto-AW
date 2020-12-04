@@ -25,6 +25,7 @@ app.use(express.static(ficherosestaticos));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "vistas")); //directorio donde van a estas las vistas plantillas
 app.use(middlewareSession);
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/", routerUsuario);
 app.use("/login",routerUsuario);
 

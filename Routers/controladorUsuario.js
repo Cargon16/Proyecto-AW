@@ -75,14 +75,12 @@ function procesarLogin(request, response){
 }
 
 function usuarioRegistrado(request, response){
-
-    var usuario = function(request){
-        if(request.locals.emailUsuario == "" || request.locals.password == "" || request.locals.passwordConfirm == "" || request.locals.nombreMostrar){
-            return false;
+    var usuario;
+        if(request.body.emailUsuario == "" || request.body.password == "" || request.body.passwordConfirm == "" || request.body.nombreMostrar == ""){
+            usuario = null;
 
         }else{
             var imagen = null;
-
             //aqui iria lo de la imagen
             /**
              * if (request.file) {
@@ -90,23 +88,20 @@ function usuarioRegistrado(request, response){
                  }
              */
 
-             var user = {
-                 email : request.locals.emailUsuario,
-                 password : request.locals.password,
-                 passwordConfirm : request.locals.passwordConfirm,
-                 nombreMostrar : request.locals.nombreMostrar
+             usuario = {
+                 "email" : request.body.emailUsuario,
+                 "password" : request.body.password,
+                 "nombreMostrar" : request.body.nombreMostrar,
+                 "fotoPerfil" : imagen
              };
 
-             return user;
-
         }
-    }
-    if(usuario == false){
+    if(usuario == null){
         response.render("registro", {
             msg: "Revisa los campos obligatorios(*)"
         });
     }else{
-        daoUsuario.insertUsuario(usuario, function(err, insertado){
+        daoUsuario.insertarUsuario(usuario, function(err, insertado){
             if(err){
                 response.status(500);
                 console.log(err + "post_usuarioRegistrado");

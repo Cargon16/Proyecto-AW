@@ -1,4 +1,5 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <?php
     require("headers.html");

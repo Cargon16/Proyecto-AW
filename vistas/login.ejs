@@ -14,7 +14,7 @@
 
     <div id="boxFormulario">
 
-        <form id="inicioSesion" class="formularios" method="POST" action="./usuarios/signin">
+        <form id="inicioSesion" class="formularios" method="POST" action="/procesarLogin">
 
             
             <label id = "textCorreo">Correo *</label>
@@ -23,9 +23,9 @@
             
             
             <label id = "textPassword">Contraseña *</label>
-            <input id="inputPassword" name="password"> </input>
+            <input id="inputPassword" name="password" type="password"> </input>
            
-            <a href="paginaPrincipal" id="buttonIniciarSesion" role="button">Iniciar Sesion</a>
+            <input id="buttonIniciarSesion" type="submit" value="Iniciar sesión"/>
             <a href="registro" id="buttonCrearCuenta" role="button">Crear Cuenta</a>
            
         </form>

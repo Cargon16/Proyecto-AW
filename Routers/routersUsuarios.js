@@ -13,6 +13,7 @@ router.get("/login", routerUsuarios.login);
 router.get("/registro", routerUsuarios.registro);
 router.get("/perfil", routerSessionUsuario.usuarioActual, routerUsuarios.perfil);
 router.get("/logout", routerSessionUsuario.usuarioActual, routerUsuarios.logout);
+router.get("/paginaPrincipal", routerSessionUsuario.usuarioActual, routerUsuarios.paginaPrincipal);
 
 /*POST*/
 router.post("/procesarLogin", routerUsuarios.procesarLogin);

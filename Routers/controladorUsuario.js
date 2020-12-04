@@ -17,7 +17,7 @@ function root(request, response) {
 
 function login(request, response) {
     response.status(200);
-    if (request.session.currentUser != null) {
+    if (request.session.usuarioActual != null) {
         response.redirect("/paginaPrincipal");
     } else {
         response.render("login", {
@@ -55,8 +55,19 @@ function logout(request, response){
     response.redirect("/login");
 }
 
+function paginaPrincipal(request, response){
+    response.status(200);
+    if (request.session.usuarioActual == null) {
+        response.redirect("/login");
+    } else {
+        response.render("paginaPrincipal", {
+            errorMsg: null
+        });
+    }
+}
+
 function procesarLogin(request, response){
-    daoUsuario.isUserCorrect(request.locals.emailUsuario, request.locals.password, function(err, existe){
+    daoUsuario.isUserCorrect(request.body.correo, request.body.password, function(err, existe){
         if(err){
             response.status(500);
             console.log("procesarLogin_post" + err);
@@ -64,10 +75,11 @@ function procesarLogin(request, response){
         }else{
             response.status(200);
             if(existe){
-                request.session.usuarioActual = request.locals.emailUsuario;
+                request.session.usuarioActual = request.body.correo;
+                response.redirect("/login");
             }else{
-                response.render("preocesarLogin",{
-                    errorMsg: "Direccion de correo y/o password no validos"
+                response.render("login",{
+                    errorMsg: "Direccion de correo y/o password no válidos"
                 })
             }
         }
@@ -80,7 +92,8 @@ function usuarioRegistrado(request, response){
             usuario = null;
 
         }else{
-            var imagen = null;
+            var imagen = request.body.perfil;
+            console.log(imagen);
             //aqui iria lo de la imagen
             /**
              * if (request.file) {
@@ -129,5 +142,6 @@ module.exports={
     perfil,
     logout,
     procesarLogin,
-    usuarioRegistrado
+    usuarioRegistrado,
+    paginaPrincipal
 }

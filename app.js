@@ -26,12 +26,6 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "vistas")); //directorio donde van a estas las vistas plantillas
 app.use(middlewareSession);
 
-app.use(function (request, response) {
-
-    response.render("login", {errorMsg: null});
-
-});
-
 //  Función que arranca el servidor
 app.listen(config.port, function (err) {
     if (err) {

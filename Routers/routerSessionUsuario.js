@@ -9,8 +9,8 @@ const mysqlSession = require("express-mysql-session");
 
 
 function usuarioActual (request, response, next) {
-    if (request.session.usuarioActual !== undefined) {
-        response.locals.usuarioActual = request.session.usuarioActual;
+    if (request.session.nombreUsuario !== undefined) {
+        response.locals.nombreUsuario = request.session.nombreUsuario;
         next();
     } else {
         response.status(200);

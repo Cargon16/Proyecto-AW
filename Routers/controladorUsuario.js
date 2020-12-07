@@ -17,11 +17,11 @@ function root(request, response) {
 
 function login(request, response) {
     response.status(200);
-    if (request.session.usuarioActual != null) {
+    if (request.session.nombreUsuario != null) {
         response.redirect("/paginaPrincipal");
     } else {
         response.render("login", {
-            errorMsg: null
+            "errorMsg": null
         });
     }
 }
@@ -34,12 +34,11 @@ function registro(request, response) {
 }
 
 function perfil(request, response) {
-    daoUsuario.getUser(response.locals.emailUsuario, function(info, success) {
+    daoUsuario.getUser(request.session.nombreUsuario, function(info, success) {
         if (success) {
             response.status(200);
-
-            response.render("perfil", {
-                usuarioActual: info
+            response.render("paginaPerfilUsuario", {
+                "usuario": success
             });
         } else {
             response.status(404);
@@ -51,17 +50,17 @@ function perfil(request, response) {
 
 function logout(request, response){
     response.status(200);
-    response.session.destroy();
+    request.session.destroy();
     response.redirect("/login");
 }
 
 function paginaPrincipal(request, response){
     response.status(200);
-    if (request.session.usuarioActual == null) {
+    if (request.session.nombreUsuario == null) {
         response.redirect("/login");
     } else {
         response.render("paginaPrincipal", {
-            errorMsg: null
+            "usuario" : request.session.nombreUsuario
         });
     }
 }
@@ -75,12 +74,19 @@ function procesarLogin(request, response){
         }else{
             response.status(200);
             if(existe){
-                request.session.usuarioActual = request.body.correo;
-                response.redirect("/login");
+                daoUsuario.getUserName(request.body.correo, function(err, nombre) {
+                    if (err) {
+                        console.log("login post\n" + err);
+                        next(err);
+                    } else {
+                        request.session.nombreUsuario = nombre;
+                        response.redirect("/login");
+                    }
+                });
             }else{
                 response.render("login",{
                     errorMsg: "Direccion de correo y/o password no válidos"
-                })
+                });
             }
         }
     })
@@ -92,20 +98,14 @@ function usuarioRegistrado(request, response){
             usuario = null;
 
         }else{
-            var imagen = request.body.perfil;
-            console.log(imagen);
-            //aqui iria lo de la imagen
-            /**
-             * if (request.file) {
-                imageName = request.file.filename;
-                 }
-             */
-
+            let arr = request.file.path.split("\\");
+            let name = arr[arr.length-1];
+            console.log(name);
              usuario = {
                  "email" : request.body.emailUsuario,
                  "password" : request.body.password,
                  "nombreMostrar" : request.body.nombreMostrar,
-                 "fotoPerfil" : imagen
+                 "fotoPerfil" : name
              };
 
         }
@@ -122,8 +122,9 @@ function usuarioRegistrado(request, response){
             }else{
                 response.status(200);
                 if(insertado){
-                    response.render("registro",{
-                        msg: "Usuario creado."
+                    response.render("login",{
+                        "msg": "Usuario creado.",
+                        "imagen": request.file.filename
                     })
                 }else{
                     response.render("registro",{
@@ -135,6 +136,7 @@ function usuarioRegistrado(request, response){
     }
 }
 
+
 module.exports={
     root,
     login,
@@ -143,5 +145,5 @@ module.exports={
     logout,
     procesarLogin,
     usuarioRegistrado,
-    paginaPrincipal
+    paginaPrincipal,
 }

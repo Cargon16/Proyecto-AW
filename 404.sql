@@ -79,7 +79,7 @@ CREATE TABLE `usuarios` (
   `Nombre` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
   `Reputacion` int(30) NOT NULL,
   `FechaAlta` date NOT NULL,
-  `FotoPerfil` longblob DEFAULT NULL
+  `FotoPerfil` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --

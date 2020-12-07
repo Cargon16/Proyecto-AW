@@ -6,6 +6,9 @@ const routerSessionUsuario = require("./routerSessionUsuario");
 const express = require("express");
 var router = express.Router();
 const path = require("path");
+const multer = require("multer");
+
+const multerFactory = multer({ dest: path.join("public","imagen") });
 
 /*GET*/
 router.get("/", routerUsuarios.root);
@@ -14,11 +17,13 @@ router.get("/registro", routerUsuarios.registro);
 router.get("/perfil", routerSessionUsuario.usuarioActual, routerUsuarios.perfil);
 router.get("/logout", routerSessionUsuario.usuarioActual, routerUsuarios.logout);
 router.get("/paginaPrincipal", routerSessionUsuario.usuarioActual, routerUsuarios.paginaPrincipal);
-
+router.get("/imagen/:id", function(request, response){
+    console.log("holaaaaa");
+    let pathImg = path.join(__dirname, "public", request.params.Correo);
+});
 /*POST*/
 router.post("/procesarLogin", routerUsuarios.procesarLogin);
-router.post("/registro", routerUsuarios.usuarioRegistrado);
-
+router.post("/registro", multerFactory.single("perfil"), routerUsuarios.usuarioRegistrado);
 
 module.exports = router;
 

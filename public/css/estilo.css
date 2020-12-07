@@ -364,6 +364,10 @@ Codigo paginaPerfilUsuario.php
     background-color: rgba(36, 3, 250, 0.527);
 
 }
+
+#boxUsuario img{
+    width: 70%;
+}
 #boxEstadistica{
     position: relative;
     width: 60%;

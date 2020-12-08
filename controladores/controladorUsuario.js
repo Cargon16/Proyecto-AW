@@ -4,11 +4,12 @@ const config = require("../config");
 const mysql = require("mysql");
 const pool = mysql.createPool(config.mysqlConfig);
 const express = require('express');
-
+const fs = require("fs");
 
 
 const UserDAO = require("../usuarios/DAOusuarios");
 const daoUsuario = new UserDAO(pool);
+
 
 function root(request, response) {
     response.status(200);
@@ -102,6 +103,13 @@ function procesarLogin(request, response) {
     })
 }
 
+function leerDirectorio(callback){
+    fs.readdir("./public/imagenPre", function(err,files){
+        callback(files);
+    });
+}
+
+
 function usuarioRegistrado(request, response) {
     var usuario = null;
     let msg = null;
@@ -117,9 +125,24 @@ function usuarioRegistrado(request, response) {
                 msg= "Las contraseñas deben coincidir.";
             }
             else {
-                let arr = request.file.path.split("\\");
-                let name = arr[arr.length - 1];
-                console.log(name);
+
+                function getRandom(nums)
+                {
+                    var ranNum= Math.round(Math.random()*nums + 1);
+                    return ranNum;
+                }
+
+                let name, files;
+                if(request.file != null){
+                    let arr = request.file.path.split("\\");
+                    name = arr[arr.length - 1];
+
+                }else{
+                    leerDirectorio(files);
+                    console.log(files);
+                    name=files[0];
+                }
+            
                 usuario = {
                     "email": request.body.emailUsuario,
                     "password": request.body.password,
@@ -147,7 +170,7 @@ function usuarioRegistrado(request, response) {
                 if (insertado) {
                     response.render("login", {
                         "msg": "Usuario creado.",
-                        "imagen": request.file.filename
+                        "imagen": name
                     })
                 } else {
                     response.render("registro", {

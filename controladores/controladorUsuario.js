@@ -10,7 +10,6 @@ const fs = require("fs");
 const UserDAO = require("../usuarios/DAOusuarios");
 const daoUsuario = new UserDAO(pool);
 
-
 function root(request, response) {
     response.status(200);
     response.redirect("/login")
@@ -103,46 +102,40 @@ function procesarLogin(request, response) {
     })
 }
 
-function leerDirectorio(callback){
-    fs.readdir("./public/imagenPre", function(err,files){
-        callback(files);
-    });
-}
-
-
 function usuarioRegistrado(request, response) {
     var usuario = null;
     let msg = null;
     if (request.body.emailUsuario == "" || request.body.password == "" || request.body.passwordConfirm == "" || request.body.nombreMostrar == "") {
-        msg= "Revisa los campos obligatorios(*)";
+        msg = "Revisa los campos obligatorios(*)";
     }
-    else{
+    else {
         if (request.body.password.length < 8) {
-            msg ="La contraseña debe tener al menos ocho caracteres.";
+            msg = "La contraseña debe tener al menos ocho caracteres.";
         }
-        else{
+        else {
             if (request.body.password != request.body.passwordConfirm) {
-                msg= "Las contraseñas deben coincidir.";
+                msg = "Las contraseñas deben coincidir.";
             }
             else {
 
-                function getRandom(nums)
-                {
-                    var ranNum= Math.round(Math.random()*nums + 1);
-                    return ranNum;
-                }
-
-                let name, files;
-                if(request.file != null){
+                var ranNum = Math.floor(Math.random() * 2); 
+                let name;
+                if (request.file != null) {
                     let arr = request.file.path.split("\\");
                     name = arr[arr.length - 1];
 
-                }else{
-                    leerDirectorio(files);
-                    console.log(files);
-                    name=files[0];
+                } else {
+                    let files = fs.readdirSync("./public/imagenPre");
+                    fs.copyFile('./public/imagenPre/' + files[ranNum], './public/imagen/' + files[ranNum], (err) => {
+                        if (err) throw err;
+                        console.log('File was copied to destination');
+                      });
+                    fs.rename('./public/imagen/' + files[ranNum], './public/imagen/' + request.body.emailUsuario + '.png', function(err) {
+                        if ( err ) console.log('ERROR: ' + err);
+                    });
+                    name = request.body.emailUsuario + '.png';
                 }
-            
+
                 usuario = {
                     "email": request.body.emailUsuario,
                     "password": request.body.password,
@@ -161,7 +154,7 @@ function usuarioRegistrado(request, response) {
         daoUsuario.insertarUsuario(usuario, function (err, insertado) {
             if (err) {
                 response.status(500);
-                console.log(err + "post_usuarioRegistrado");
+                console.log(err + " post_usuarioRegistrado");
                 response.render("registro", {
                     "msg": "Error al crear usuario"
                 })
@@ -170,7 +163,7 @@ function usuarioRegistrado(request, response) {
                 if (insertado) {
                     response.render("login", {
                         "msg": "Usuario creado.",
-                        "imagen": name
+                        "imagen": usuario.fotoPerfil
                     })
                 } else {
                     response.render("registro", {

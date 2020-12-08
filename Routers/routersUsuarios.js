@@ -17,10 +17,6 @@ router.get("/registro", routerUsuarios.registro);
 router.get("/perfil", routerSessionUsuario.usuarioActual, routerUsuarios.perfil);
 router.get("/logout", routerSessionUsuario.usuarioActual, routerUsuarios.logout);
 router.get("/paginaPrincipal", routerSessionUsuario.usuarioActual, routerUsuarios.paginaPrincipal);
-router.get("/imagen/:id", function(request, response){
-    console.log("holaaaaa");
-    let pathImg = path.join(__dirname, "public", request.params.Correo);
-});
 /*POST*/
 router.post("/procesarLogin", routerUsuarios.procesarLogin);
 router.post("/registro", multerFactory.single("perfil"), routerUsuarios.usuarioRegistrado);

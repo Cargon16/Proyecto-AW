@@ -81,14 +81,12 @@ function procesarLogin(request, response) {
         if (err) {
             response.status(500);
             console.log("procesarLogin_post" + err);
-            next(err);
         } else {
             response.status(200);
             if (existe) {
                 daoUsuario.getUserName(request.body.correo, function (err, nombre) {
                     if (err) {
                         console.log("login post\n" + err);
-                        next(err);
                     } else {
                         request.session.nombreUsuario = nombre;
                         request.session.correo = request.body.correo;
@@ -141,7 +139,9 @@ function usuarioRegistrado(request, response) {
             if (err) {
                 response.status(500);
                 console.log(err + "post_usuarioRegistrado");
-                next(err);
+                response.render("registro", {
+                    "msg": "Error al crear usuario"
+                })
             } else {
                 response.status(200);
                 if (insertado) {

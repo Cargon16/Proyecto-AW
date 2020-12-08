@@ -23,6 +23,8 @@
         <div id="boxSuperior">
             <div id="boxUsuario">
                 <img src="/imagen/<%- usuario.FotoPerfil %>">
+                <h2><%- usuario.Nombre %></h2>
+                <h2>Miembro desde: <%- usuario.FechaAlta.getDate()+"/"+ usuario.FechaAlta.getMonth()+"/"+usuario.FechaAlta.getFullYear() %></h2>
             </div>
 
             <div id="boxEstadistica">
@@ -31,14 +33,16 @@
                 </div>
                 <div id="boxReputacion" style="display:flex">
                     <div id="boxPreguntas">
-                        <p>Preguntas</p>
+                        <h2>Preguntas</h2>
+                        <p class="datos"><%- numeroPreguntas %></p>
                     </div>
                     <div id="boxRepu">
-                        <p>Reputacion</p>
-                        <%- usuario.Reputacion %>
+                        <h2>Reputacion</h2>
+                        <p class="datos"><%- usuario.Reputacion %></p>
                     </div>
                     <div id="boxRespuestas">
-                        <p>Respuestas</p>
+                        <h2>Respuestas</h2>
+                        <p class="datos"><%- numeroRespuestas %></p>
                     </div>
                 </div>
 

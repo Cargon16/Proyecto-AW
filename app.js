@@ -13,6 +13,7 @@ const app = express();
 const mysqlStore = mysqlSession(session);
 const sessionStore = new mysqlStore(config.mysqlConfig);
 const routerUsuario = require("./Routers/routersUsuarios");
+const routerPregunta = require("./Routers/routersPreguntas");
 
 const middlewareSession = session({
     saveUninitialized: false,
@@ -28,6 +29,7 @@ app.use(middlewareSession);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/", routerUsuario);
 app.use("/login",routerUsuario);
+app.use("/preguntas", routerPregunta);
 
 //  Función que arranca el servidor
 app.listen(config.port, function (err) {

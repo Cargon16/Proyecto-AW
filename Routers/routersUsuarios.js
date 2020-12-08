@@ -1,6 +1,6 @@
 "use strict"
 
-const routerUsuarios = require("./controladorUsuario");
+const routerUsuarios = require("../controladores/controladorUsuario");
 const routerSessionUsuario = require("./routerSessionUsuario");
 
 const express = require("express");

@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <%-
     include("headers")
 %>
 </head>
+
 <body>
     <header>
-    <%-
+        <%-
         include("headerLogged");
-    %> 
+    %>
     </header>
     <%-
         include("busqueda");
-    %> 
-        
+    %>
+
     <div class="boxFormulario">
 
-<div id="boxPregunta">
-    <div id="boxTituloPreguntas">
-        <label>Todas las preguntas</label>
-    </div>
-    
-    <div id="boxSubGrupo">
-        <label>preguntas</label>
-        <button id="buttonFormularPregunta"> Formular una pregunta </button>
-    </div>
-</div>
+        <div id="boxPregunta">
+            <div id="boxTituloPreguntas">
+                <label>Todas las preguntas</label>
+            </div>
 
-</div>
+            <div id="boxSubGrupo">
+                <label><%- preguntas.length %> preguntas</label>
+                <button id="buttonFormularPregunta"> Formular una pregunta </button>
+            </div>
+
+            <% preguntas.forEach(function(pregunta, i, preguntas){ %>
+            <div class="pregunta">
+                <a href="/preguntas/pregunta/<%= pregunta.ID_Pregunta%>">
+                    <%= pregunta.Titulo%>
+                </a>
+            </div>
+            <%});%>
+        </div>
+
+    </div>
 </body>
+
 </html>

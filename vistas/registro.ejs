@@ -16,7 +16,7 @@
 
         <form id="registro" class="formularios" method="POST" action="/registro" enctype="multipart/form-data">
 
-            
+            <%- msg %>
             <label id = "textCorreo">Correo *</label>
             <input id="inputCorreo" name="emailUsuario"> </input>
            
@@ -36,11 +36,9 @@
             <input id="buttonCrearCuentaRegi" type="submit" value="Crear cuenta"/>
             
             <a href="login" id="buttonIniciarSesionRegi" role="button">Iniciar sesion</a>
-            
-            
            
         </form>
-
+       
     </div>
    
 

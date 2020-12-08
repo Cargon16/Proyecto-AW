@@ -114,6 +114,85 @@ class DAOusuarios {
         );
     }
 
+    getUserImage(email, callback){
+        this.pool.getConnection(function(err, connection) {
+            if (err) { 
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+            connection.query("SELECT FotoPerfil FROM usuarios WHERE Correo = ?" ,
+            [email],
+            function(err, rows) {
+                connection.release(); // devolver al pool la conexión
+                if (err) {
+                    callback(new Error("Error de acceso a la base de datos"));
+                }
+                else {
+                    if (rows.length === 0) {
+                        callback(null, false); //no está el usuario
+                    }
+                    else {
+                        callback(null, rows[0]);
+                    }           
+                }
+            });
+            }
+        }
+        );
+    }
+
+    getUserQuestionNumber(email, callback){
+        this.pool.getConnection(function(err, connection) {
+            if (err) { 
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+            connection.query("SELECT COUNT(*) AS cuenta FROM preguntas WHERE ID_Usuario = ?" ,
+            [email],
+            function(err, rows) {
+                connection.release(); // devolver al pool la conexión
+                if (err) {
+                    callback(new Error("Error de acceso a la base de datos"));
+                }
+                else {
+                    if (rows.length === 0) {
+                        callback(null, false); //no está el usuario
+                    }
+                    else {
+                        callback(null, rows[0]);
+                    }           
+                }
+            });
+            }
+        }
+        );
+    }
+    getUserAnswerNumber(email, callback){
+        this.pool.getConnection(function(err, connection) {
+            if (err) { 
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+            connection.query("SELECT COUNT(*) AS cuenta FROM respuestas WHERE ID_Usuario = ?" ,
+            [email],
+            function(err, rows) {
+                connection.release(); // devolver al pool la conexión
+                if (err) {
+                    callback(new Error("Error de acceso a la base de datos"));
+                }
+                else {
+                    if (rows.length === 0) {
+                        callback(null, false); //no está el usuario
+                    }
+                    else {
+                        callback(null, rows[0]);
+                    }           
+                }
+            });
+            }
+        }
+        );
+    }
 }
 
 module.exports = DAOusuarios;

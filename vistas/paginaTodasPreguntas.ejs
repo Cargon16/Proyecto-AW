@@ -49,7 +49,7 @@
                 </div>
                 <div class="formulador">
                     <h2>Formulada:
-                        <%- pregunta.Fecha.getDate()+"/"+ pregunta.Fecha.getMonth()+"/"+ pregunta.Fecha.getFullYear() %>
+                        <%- pregunta.Fecha.getDate()+"/"+ (pregunta.Fecha.getMonth()+1) +"/"+ pregunta.Fecha.getFullYear() %>
                     </h2>
                     <img id="foto" src="/imagen/<%- pregunta.FotoPerfil %>">
                     <a href="/perfil/<%-pregunta.ID_Usuario%>"><%-pregunta.Nombre%></a>

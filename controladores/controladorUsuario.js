@@ -120,7 +120,7 @@ function usuarioRegistrado(request, response) {
             }
             else {
 
-                var ranNum = Math.floor(Math.random() * 2); 
+                var ranNum = Math.floor(Math.random() * 2);
                 let name;
                 if (request.file != null) {
                     let arr = request.file.path.split("\\");
@@ -130,11 +130,12 @@ function usuarioRegistrado(request, response) {
                     let files = fs.readdirSync("./public/imagenPre");
                     fs.copyFile('./public/imagenPre/' + files[ranNum], './public/imagen/' + files[ranNum], (err) => {
                         if (err) throw err;
-                        console.log('File was copied to destination');
-                      });
-                    fs.rename('./public/imagen/' + files[ranNum], './public/imagen/' + request.body.emailUsuario + '.png', function(err) {
-                        if ( err ) console.log('ERROR: ' + err);
+                        else
+                        fs.rename('./public/imagen/' + files[ranNum], './public/imagen/' + request.body.emailUsuario + '.png', function (err) {
+                            if (err) console.log('ERROR: ' + err);
+                        });
                     });
+
                     name = request.body.emailUsuario + '.png';
                 }
 

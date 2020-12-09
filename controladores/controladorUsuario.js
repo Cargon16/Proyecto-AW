@@ -34,16 +34,17 @@ function registro(request, response) {
 }
 
 function perfil(request, response) {
-    daoUsuario.getUser(request.session.correo, function (info, success) {
+    daoUsuario.getUser(request.params.id, function (info, success) {
         if (success) {
             daoUsuario.getUserQuestionNumber(request.session.correo, function (info, numero) {
-                daoUsuario.getUserQuestionNumber(request.session.correo, function (info, respuestas) {
+                daoUsuario.getUserAnswerNumber(request.session.correo, function (info, respuestas) {
                     response.status(200);
                     response.render("paginaPerfilUsuario", {
                         "usuario": success,
                         "numeroPreguntas": numero.cuenta,
                         "numeroRespuestas": respuestas.cuenta,
-                        "imagen": success.FotoPerfil
+                        "correo": request.session.correo,
+                        "imagen": request.session.imagen
                     });
                 });
             });
@@ -70,6 +71,7 @@ function paginaPrincipal(request, response) {
             request.session.imagen = existe.FotoPerfil;
             response.render("paginaPrincipal", {
                 "usuario": request.session.nombreUsuario,
+                "correo": request.session.correo,
                 "imagen": existe.FotoPerfil
             });
         });

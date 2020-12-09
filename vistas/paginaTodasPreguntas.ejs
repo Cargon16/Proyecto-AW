@@ -31,9 +31,17 @@
 
             <% preguntas.forEach(function(pregunta, i, preguntas){ %>
             <div class="pregunta">
-                <a href="/preguntas/pregunta/<%= pregunta.ID_Pregunta%>">
-                    <%= pregunta.Titulo%>
-                </a>
+                <div class="info">
+                    <a href="/preguntas/pregunta/<%= pregunta.ID_Pregunta%>">
+                        <%= pregunta.Titulo%>
+                    </a>
+                    <%= pregunta.Cuerpo %>
+                </div>
+                <div class="formulador">
+                    <h2>Formulada: <%- pregunta.Fecha.getDate()+"/"+ pregunta.Fecha.getMonth()+"/"+ pregunta.Fecha.getFullYear() %></h2>
+                    <img id="foto" src="/imagen/<%- pregunta.FotoPerfil %>">
+                    <a href="/perfil/<%-pregunta.ID_Usuario%>"><%-pregunta.Nombre%></a>
+                </div>
             </div>
             <%});%>
         </div>

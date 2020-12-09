@@ -14,7 +14,7 @@ const multerFactory = multer({ dest: path.join("public","imagen") });
 router.get("/", routerUsuarios.root);
 router.get("/login", routerUsuarios.login);
 router.get("/registro", routerUsuarios.registro);
-router.get("/perfil", routerSessionUsuario.usuarioActual, routerUsuarios.perfil);
+router.get("/perfil/:id", routerSessionUsuario.usuarioActual, routerUsuarios.perfil);
 router.get("/logout", routerSessionUsuario.usuarioActual, routerUsuarios.logout);
 router.get("/paginaPrincipal", routerSessionUsuario.usuarioActual, routerUsuarios.paginaPrincipal);
 /*POST*/

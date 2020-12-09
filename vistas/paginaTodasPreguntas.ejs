@@ -35,7 +35,9 @@
                     <a href="/preguntas/pregunta/<%= pregunta.ID_Pregunta%>">
                         <%= pregunta.Titulo%>
                     </a>
-                    <%= pregunta.Cuerpo %>
+                    <p> <%= pregunta.Cuerpo.substring(0, 150) %>
+                    </p>
+                   
                 </div>
                 <div class="formulador">
                     <h2>Formulada: <%- pregunta.Fecha.getDate()+"/"+ pregunta.Fecha.getMonth()+"/"+ pregunta.Fecha.getFullYear() %></h2>

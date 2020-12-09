@@ -29,7 +29,7 @@
                 <button id="buttonFormularPregunta"> Formular una pregunta </button>
             </div>
 
-            <% preguntas.forEach(function(pregunta, i, preguntas){ %>
+            <% preguntas.forEach(function(pregunta, preguntas){ %>
             <div class="pregunta">
                 <div class="info">
                     <a href="/preguntas/pregunta/<%= pregunta.ID_Pregunta%>">
@@ -37,10 +37,20 @@
                     </a>
                     <p> <%= pregunta.Cuerpo.substring(0, 150) %>
                     </p>
-                   
+                    <div class="tags">
+                        <%
+                        let obj = JSON.parse(pregunta.Equiquetas);
+                        for(let i =0; i < obj.length; ++i){ %>
+                        <div class= "tag"><%= obj[i]["titulo"] %></div>
+                        <% }; %>
+                    </div>
+
+
                 </div>
                 <div class="formulador">
-                    <h2>Formulada: <%- pregunta.Fecha.getDate()+"/"+ pregunta.Fecha.getMonth()+"/"+ pregunta.Fecha.getFullYear() %></h2>
+                    <h2>Formulada:
+                        <%- pregunta.Fecha.getDate()+"/"+ pregunta.Fecha.getMonth()+"/"+ pregunta.Fecha.getFullYear() %>
+                    </h2>
                     <img id="foto" src="/imagen/<%- pregunta.FotoPerfil %>">
                     <a href="/perfil/<%-pregunta.ID_Usuario%>"><%-pregunta.Nombre%></a>
                 </div>

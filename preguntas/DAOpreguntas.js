@@ -14,7 +14,7 @@ class DAOpreguntas {
             }
             else {
                 connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Cuerpo, preguntas.Equiquetas, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
-                usuarios.Nombre, usuarios.FotoPerfil FROM preguntas, usuarios WHERE usuarios.Correo = preguntas.ID_Usuario",
+                usuarios.Nombre, usuarios.FotoPerfil FROM preguntas, usuarios WHERE usuarios.Correo = preguntas.ID_Usuario ORDER BY preguntas.Fecha DESC",
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {

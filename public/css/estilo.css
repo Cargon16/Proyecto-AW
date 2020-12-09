@@ -722,3 +722,18 @@ pagina preguntas.html y resultados.html
     font-weight: bold;
     color: rgb(17, 117, 184);
 }
+
+.tags{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    font-weight: bold;
+}
+.tag{
+    margin-left: 1%;
+    background-color: #cfcdcdc7;
+    border-radius: 3px;
+    padding: 0.5%;
+    text-align: center;
+    justify-content: center;
+}

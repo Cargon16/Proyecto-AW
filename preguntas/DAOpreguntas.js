@@ -13,7 +13,8 @@ class DAOpreguntas {
                 callback(new Error("Error de conexion a la base de datos."), null);
             }
             else {
-                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Cuerpo, preguntas.Equiquetas, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, usuarios.Nombre, usuarios.FotoPerfil  FROM preguntas, usuarios WHERE usuarios.Correo = preguntas.ID_Usuario",
+                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Cuerpo, preguntas.Equiquetas, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
+                usuarios.Nombre, usuarios.FotoPerfil FROM preguntas, usuarios WHERE usuarios.Correo = preguntas.ID_Usuario",
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {

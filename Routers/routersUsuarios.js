@@ -20,7 +20,7 @@ router.get("/paginaPrincipal", routerSessionUsuario.usuarioActual, routerUsuario
 /*POST*/
 router.post("/procesarLogin", routerUsuarios.procesarLogin);
 router.post("/registro", multerFactory.single("perfil"), routerUsuarios.usuarioRegistrado);
-
+router.post("/perfil", routerSessionUsuario.usuarioActual, routerUsuarios.perfil);
 module.exports = router;
 
 

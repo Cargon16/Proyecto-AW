@@ -737,3 +737,11 @@ pagina preguntas.html y resultados.html
     text-align: center;
     justify-content: center;
 }
+
+.btnPerfil{
+    background: none;
+    border:none;
+    margin-top: 4%;
+    color: rgb(17, 117, 184);
+    font-weight: bold;
+}

@@ -34,10 +34,10 @@ function registro(request, response) {
 }
 
 function perfil(request, response) {
-    daoUsuario.getUser(request.params.id, function (info, success) {
+    daoUsuario.getUser(request.body.ident, function (info, success) {
         if (success) {
-            daoUsuario.getUserQuestionNumber(request.session.correo, function (info, numero) {
-                daoUsuario.getUserAnswerNumber(request.session.correo, function (info, respuestas) {
+            daoUsuario.getUserQuestionNumber(request.body.ident, function (info, numero) {
+                daoUsuario.getUserAnswerNumber(request.body.ident, function (info, respuestas) {
                     response.status(200);
                     response.render("paginaPerfilUsuario", {
                         "usuario": success,

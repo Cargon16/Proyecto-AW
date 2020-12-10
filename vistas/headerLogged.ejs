@@ -13,7 +13,11 @@
 
     <div id="perfil">
         <img id="foto" src="/imagen/<%- imagen %>">
-        <input type="submit" action="/perfil" value="<%- correo.correo %>">
+        <form method="POST" action="/perfil">
+            <input id="ident" name="ident" type="hidden" value="<%-correo%>">
+            <input class="btnPerfil" type="submit" value="<%- usuario.Nombre %>">
+        </form>
+        
         <!--<a href="/perfil/<%-correo%>"><%-usuario.Nombre%></a>-->
         <a href="/logout" class="opcion" role="button">Cerrar sesion</a>
     </div>

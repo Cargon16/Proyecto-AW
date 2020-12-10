@@ -189,6 +189,26 @@ font-size: 100%;
     color: #FFFFFF;
 }
 
+#buttonPublicarPregunta{
+    margin-top: 2%;
+    padding: 1%;
+    width: 10%;
+    height: 10%;
+
+    background: #295F9D;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: normal;
+
+    /* identical to box height */
+
+    text-decoration: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
 
 
 /*

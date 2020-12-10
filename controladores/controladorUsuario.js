@@ -79,6 +79,7 @@ function paginaPrincipal(request, response) {
 }
 
 function procesarLogin(request, response) {
+    console.log(request);
     daoUsuario.isUserCorrect(request.body.correo, request.body.password, function (err, existe) {
         if (err) {
             response.status(500);

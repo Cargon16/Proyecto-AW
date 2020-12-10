@@ -12,8 +12,6 @@ const preguntasDAO = require("../preguntas/DAOpreguntas");
 const daoPreguntas = new preguntasDAO(pool);
 
 function preguntas(request, response) {
-    var todo = new Array();
-    let obj = new Object();
     daoPreguntas.getPreguntas(function(err, preguntas) {
         if (err) {
             response.status(404);
@@ -29,6 +27,16 @@ function preguntas(request, response) {
     });
 }
 
+function crearPregunta(request, response){
+    console.log("HOLAAAAAAAAAA");
+    response.status(200);
+    response.render("paginaFormularPregunta", {
+        msg: null
+    });
+}
+
+
 module.exports = {
-    preguntas
+    preguntas,
+    crearPregunta
 }

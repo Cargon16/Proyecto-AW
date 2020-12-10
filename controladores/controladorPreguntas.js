@@ -45,22 +45,27 @@ function procesarCrearPregunta(request, response){
     if(request.body.titulo == "" || request.body.cuerpo == "" || request.body.etiquetas == ""){
         msg = "Revisa los campos vacios.";
     }else{
-        console.log(request);
-       
+
+        let etiquetasDivididas = request.body.etiquetas.split("@");
+        etiquetasDivididas=etiquetasDivididas.slice(1,etiquetasDivididas.length);
         if(etiquetasDivididas.length > 5){
             msg = "Solo puedes introducir hasta 5 etiquetas."
         }else{
             pregunta ={
                 "titulo": request.body.titulo,
                 "cuerpo": request.body.cuerpo,
-                "etiquetas": request.body.etiquetas,
+                "etiquetas": etiquetasDivididas,
                 "usuario": request.session.correo
             };
+            
         }
     }
-    if(usuario==null){
+    if(pregunta==null){
         response.render("paginaFormularPregunta", {
-            "msg": msg
+            "msg": msg,
+            "imagen": request.session.imagen,
+            "correo": request.session.correo,
+            "usuario": request.session.nombreUsuario
         });
     }else{
         daoPreguntas.insertarPregunta(pregunta, function(err, insertado){
@@ -68,17 +73,26 @@ function procesarCrearPregunta(request, response){
                 response.status(500);
                 console.log(err + " post_preguntaInsertada");
                 response.render("paginaFormularPregunta", {
-                    "msg":"Error al crear pregunta"
+                    "msg":"Error al crear pregunta",
+                    "imagen": request.session.imagen,
+                    "correo": request.session.correo,
+                    "usuario": request.session.nombreUsuario
                 })
             }else{
                 response.status(200);
                 if(insertado){
-                    response.render("paginaTodasPreguntas",{
-                        "msg":"Pregunta creada.",
+                    response.render("paginaFormularPregunta", {
+                        "msg":"Pregunta creada con exito.",
+                        "imagen": request.session.imagen,
+                        "correo": request.session.correo,
+                        "usuario": request.session.nombreUsuario
                     })
                 }else{
                     response.render("paginaFormularPregunta",{
-                        "msg":"Error al crear pregunta"
+                        "msg":"Error al crear pregunta",
+                        "imagen": request.session.imagen,
+                        "correo": request.session.correo,
+                        "usuario": request.session.nombreUsuario
                     })
                 }
             }

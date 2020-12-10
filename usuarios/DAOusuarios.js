@@ -26,7 +26,6 @@ class DAOusuarios {
                         callback(new Error("Error de acceso a la base de datos"), null);
                     } else {
                         callback(null, true);
-                        console.log(result.insertId);
                     }
                 });
             }

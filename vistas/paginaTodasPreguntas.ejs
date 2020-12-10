@@ -52,7 +52,10 @@
                         <%- pregunta.Fecha.getDate()+"/"+ (pregunta.Fecha.getMonth()+1) +"/"+ pregunta.Fecha.getFullYear() %>
                     </h2>
                     <img id="foto" src="/imagen/<%- pregunta.FotoPerfil %>">
-                    <a href="/perfil/<%-pregunta.ID_Usuario%>"><%-pregunta.Nombre%></a>
+                    <form method="POST" action="/perfil">
+                        <input id="ident" name="ident" type="hidden" value="<%-pregunta.ID_Usuario%>">
+                        <input class="btnPerfil" type="submit" value="<%-pregunta.Nombre%>">
+                    </form>
                 </div>
             </div>
             <%});%>

@@ -48,7 +48,9 @@ CREATE TABLE `preguntas` (
   `Equiquetas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`Equiquetas`)),
   `ID_Usuario` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
   `Fecha` date NOT NULL,
-  `Reputacion` int(30) NOT NULL
+  `Reputacion` int(30) NOT NULL,
+  `Votos` int(30) NOT NULL,
+  `Visitas` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -63,7 +65,8 @@ CREATE TABLE `respuestas` (
   `ID_Usuario` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
   `ID_Pregunta` int(100) NOT NULL,
   `Fecha` date NOT NULL,
-  `Reputacion` int(30) NOT NULL
+  `Reputacion` int(30) NOT NULL,
+  `Votos` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------

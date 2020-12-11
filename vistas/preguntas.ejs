@@ -1,17 +1,38 @@
+<div id="boxSubGrupo">
+    <label><%- preguntas.length %> preguntas</label>
+    <a href="preguntas/crearPregunta" id="buttonFormularPregunta" role="button">Formular pregunta</a>
+</div>
 
-<div class="boxFormulario">
+<% preguntas.forEach(function(pregunta, preguntas){ %>
+<div class="pregunta">
+    <div class="info">
+        <a href="/preguntas/pregunta/<%= pregunta.ID_Pregunta%>">
+            <%= pregunta.Titulo%>
+        </a>
+        <p> <%= pregunta.Cuerpo.substring(0, 150) %>
+        </p>
+        <div class="tags">
+            <%
+            let obj = JSON.parse(pregunta.Equiquetas);
+            for(let i =0; i < obj.length; ++i){ %>
+            <div class= "tag"><%= obj[i]["titulo"] %></div>
+            <% }; %>
+        </div>
 
-    <div id="boxPregunta">
-        <div id="boxTituloPreguntas">
-            <label>Preguntas sin responder</label>
-        </div>
-        
-        <div id="boxSubGrupo">
-            <label>preguntas</label>
-            <a href="crearPregunta" id="buttonFormularPregunta" role="button">Formular pregunta</a>
-        </div>
+
     </div>
-    
+    <div class="formulador">
+        <h2>Formulada:
+            <%- pregunta.Fecha.getDate()+"/"+ (pregunta.Fecha.getMonth()+1) +"/"+ pregunta.Fecha.getFullYear() %>
+        </h2>
+        <img id="foto" src="/imagen/<%- pregunta.FotoPerfil %>">
+        <form method="POST" action="/perfil">
+            <input id="ident" name="ident" type="hidden" value="<%-pregunta.ID_Usuario%>">
+            <input class="btnPerfil" type="submit" value="<%-pregunta.Nombre%>">
+        </form>
+    </div>
+</div>
+<%});%>
 </div>
 
 

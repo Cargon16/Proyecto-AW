@@ -28,7 +28,7 @@ class DAOpreguntas {
         });
     }
 
-    insertarPregunta(pregunta, callback){
+    insertarPregunta(pregunta, callback) {
         this.pool.getConnection(function (error, connection) {
             if (error) {
                 callback(new Error("Error de conexion a la base de datos."), null);
@@ -38,19 +38,19 @@ class DAOpreguntas {
                 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                 var yyyy = today.getFullYear();
 
-                
+
                 //PARSEAR EQUIQUETAS
 
-                let etiquetas= '[';
+                let etiquetas = '[';
 
                 for (let i = 0; i < pregunta.etiquetas.length; i++) {
-                    if(i<pregunta.etiquetas.length-1){
-                        etiquetas += '{' + '"titulo":'+ '"'+pregunta.etiquetas[i] + '"},';
-                    }else etiquetas += '{' + '"titulo":'+ '"'+pregunta.etiquetas[i] + '"}';
-                   
+                    if (i < pregunta.etiquetas.length - 1) {
+                        etiquetas += '{' + '"titulo":' + '"' + pregunta.etiquetas[i] + '"},';
+                    } else etiquetas += '{' + '"titulo":' + '"' + pregunta.etiquetas[i] + '"}';
+
                 }
-                etiquetas+=']';
-                
+                etiquetas += ']';
+
                 today = yyyy + '/' + mm + '/' + dd;
                 const sql = "INSERT INTO preguntas (Titulo, Cuerpo, Equiquetas, ID_Usuario, Fecha, Reputacion) VALUES (?,?,?,?,?,?);";
                 let userData = [pregunta.titulo, pregunta.cuerpo, etiquetas, pregunta.usuario, today, 0];
@@ -64,6 +64,72 @@ class DAOpreguntas {
                 });
             }
         })
+    }
+
+    getPreguntasSinResponder(callback) {
+        this.pool.getConnection(function (error, connection) {
+            if (error) {
+                callback(new Error("Error de conexion a la base de datos."), null);
+            }
+            else {
+                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Cuerpo, preguntas.Equiquetas, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
+                usuarios.Nombre, usuarios.FotoPerfil FROM preguntas, usuarios WHERE usuarios.Correo = preguntas.ID_Usuario\
+                AND (SELECT COUNT(*) FROM respuestas where respuestas.ID_Pregunta = preguntas.ID_Pregunta) = 0 ORDER BY preguntas.Fecha DESC",
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            callback(null, rows);
+                        }
+                    });
+            }
+        });
+    }
+
+    getPregunta(id_pregunta, callback) {
+        this.pool.getConnection(function (error, connection) {
+            if (error) {
+                callback(new Error("Error de conexion a la base de datos."), null);
+            }
+            else {
+                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Votos, preguntas.Visitas, preguntas.Cuerpo, preguntas.Equiquetas, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
+                usuarios.Nombre, usuarios.FotoPerfil FROM preguntas, usuarios WHERE usuarios.Correo = preguntas.ID_Usuario AND preguntas.ID_Pregunta = ?",
+                    [id_pregunta],
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            callback(null, rows[0]);
+                        }
+                    });
+            }
+        });
+    }
+
+    getRespuestasPregunta(id_pregunta, callback){
+        this.pool.getConnection(function (error, connection) {
+            if (error) {
+                callback(new Error("Error de conexion a la base de datos."), null);
+            }
+            else {
+                connection.query("SELECT respuestas.Cuerpo, respuestas.Fecha, respuestas.Reputacion, respuestas.Votos, \
+                usuarios.Nombre, usuarios.FotoPerfil FROM respuestas, usuarios WHERE usuarios.Correo = respuestas.ID_Usuario AND respuestas.ID_Pregunta = ?",
+                    [id_pregunta],
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            callback(null, rows);
+                        }
+                    });
+            }
+        });
     }
 }
 

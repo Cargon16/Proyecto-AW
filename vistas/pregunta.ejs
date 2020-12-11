@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-
+    include("headers")
+    %>
+</head>
+<body>
+    <header>
+        <%-
+        include("headerLogged");
+    %>
+    </header>
+    <%-
+        include("busqueda");
+    %>
+
+    <div class="boxFormulario">
+
+        <div id="boxPregunta">
+            <div id="boxTituloPreguntas">
+                <label><%- pregunta.Titulo %></label>
+            </div>
+
+        <div class="visitas">
+            <h2>Vista <%-pregunta.Visitas %></h2>
+        </div>
+        <div class= "infoPregunta">
+            <div>
+                <h2><%- pregunta.Votos %> Votos</h2>
+                <%- pregunta.Cuerpo %>
+                <div class="tags">
+                    <%
+                    let obj = JSON.parse(pregunta.Equiquetas);
+                    for(let i =0; i < obj.length; ++i){ %>
+                    <div class= "tag"><%= obj[i]["titulo"] %></div>
+                    <% }; %>
+                </div>
+            </div>
+        </div>
+        <div class="formulante">
+            <div class="formulador">
+                <h2>Formulada:
+                    <%- pregunta.Fecha.getDate()+"/"+ (pregunta.Fecha.getMonth()+1) +"/"+ pregunta.Fecha.getFullYear() %>
+                </h2>
+                <img id="foto" src="/imagen/<%- pregunta.FotoPerfil %>">
+                <form method="POST" action="/perfil">
+                    <input id="ident" name="ident" type="hidden" value="<%-pregunta.ID_Usuario%>">
+                    <input class="btnPerfil" type="submit" value="<%-pregunta.Nombre%>">
+                </form>
+            </div>
+        </div>
+
+        </div>
+</body>
+
+</html>

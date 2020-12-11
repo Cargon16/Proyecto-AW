@@ -7,6 +7,7 @@ const express = require('express');
 const usuariosDAO = require("../usuarios/DAOusuarios");
 const daoUsuarios = new usuariosDAO(pool);
 const preguntasDAO = require("../preguntas/DAOpreguntas");
+const DAOpreguntas = require("../preguntas/DAOpreguntas");
 const daoPreguntas = new preguntasDAO(pool);
 
 function preguntas(request, response) {
@@ -101,8 +102,45 @@ function procesarCrearPregunta(request, response){
 
 }
 
+function preguntasSinResponder(request, response){
+    daoPreguntas.getPreguntasSinResponder(function(err, preguntas) {
+        if (err) {
+            response.status(404);
+        } else {
+            response.status(200);
+            response.render("paginaPreguntasSinResponder", {
+                "preguntas": preguntas,
+                "imagen": request.session.imagen,
+                "usuario": request.session.nombreUsuario,
+                "correo": request.session.correo
+            });
+        }
+    });
+}
+
+function getPregunta(request, response){
+    daoPreguntas.getPregunta(request.params.id, function(err, pregunta){
+        daoPreguntas.getRespuestasPregunta(request.params.id, function(err, respuestas){
+            if (err) {
+                response.status(404);
+            } else {
+                response.status(200);
+                response.render("pregunta", {
+                    "pregunta": pregunta,
+                    "respuestas": respuestas,
+                    "imagen": request.session.imagen,
+                    "usuario": request.session.nombreUsuario,
+                    "correo": request.session.correo
+                });
+            }
+        })
+        
+    });
+}
 module.exports = {
     preguntas,
     creaPregunta,
     procesarCrearPregunta,
+    preguntasSinResponder,
+    getPregunta
 }

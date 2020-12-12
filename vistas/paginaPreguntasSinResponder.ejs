@@ -1,29 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <%-
     include("headers")
-    %>
+%>
 </head>
+
 <body>
     <header>
-    <%-
+        <%-
         include("headerLogged");
-    %> 
+    %>
     </header>
-    
     <%-
         include("busqueda");
-    %> 
+    %>
 
-    <div id="boxPregunta">
-        <div id="boxTituloPreguntas">
-            <label>Preguntas sin responder</label>
-        </div>
-    <%-
+    <div class="boxFormulario">
+
+        <div id="boxPregunta">
+            <div id="boxTituloPreguntas">
+                <label>Preguntas sin responder</label>
+            </div>
+
+        <%-
         include("preguntas");
-    %> 
-    
-    </div>
+        %>
+
+        </div>
 </body>
+
 </html>

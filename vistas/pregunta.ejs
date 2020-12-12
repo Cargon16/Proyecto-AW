@@ -1,57 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <%-
-    include("headers")
-    %>
+    <%- include("headers") %>
 </head>
+
 <body>
     <header>
-        <%-
-        include("headerLogged");
-    %>
+        <%- include("headerLogged"); %>
     </header>
-    <%-
-        include("busqueda");
-    %>
+    <%- include("busqueda"); %>
 
-    <div class="boxFormulario">
+        <div class="boxFormulario">
 
-        <div id="boxPregunta">
-            <div id="boxTituloPreguntas">
-                <label><%- pregunta.Titulo %></label>
-            </div>
-
-        <div class="visitas">
-            <h2>Vista <%-pregunta.Visitas %></h2>
-        </div>
-        <div class= "infoPregunta">
-            <div>
-                <h2><%- pregunta.Votos %> Votos</h2>
-                <%- pregunta.Cuerpo %>
-                <div class="tags">
-                    <%
-                    let obj = JSON.parse(pregunta.Equiquetas);
-                    for(let i =0; i < obj.length; ++i){ %>
-                    <div class= "tag"><%= obj[i]["titulo"] %></div>
-                    <% }; %>
+            <div id="boxPregunta">
+                <div class="boxTituloQuestion">
+                    <label>
+                        <%- pregunta.Titulo %>
+                    </label>
                 </div>
-            </div>
-        </div>
-        <div class="formulante">
-            <div class="formulador">
-                <h2>Formulada:
-                    <%- pregunta.Fecha.getDate()+"/"+ (pregunta.Fecha.getMonth()+1) +"/"+ pregunta.Fecha.getFullYear() %>
-                </h2>
-                <img id="foto" src="/imagen/<%- pregunta.FotoPerfil %>">
-                <form method="POST" action="/perfil">
-                    <input id="ident" name="ident" type="hidden" value="<%-pregunta.ID_Usuario%>">
-                    <input class="btnPerfil" type="submit" value="<%-pregunta.Nombre%>">
-                </form>
-            </div>
-        </div>
 
-        </div>
+                <div class="visitas">
+                    <h2>Vista <%-pregunta.Visitas%> veces
+                    </h2>
+                </div>
+                <div class="votos">
+                    <h2>
+                        <%-pregunta.Votos%> Votos
+                    </h2>
+                </div>
+                <div class="infoPregunta">
+                    <div>
+                        <%- pregunta.Cuerpo %>
+                            <div class="tags">
+                                <% let obj=JSON.parse(pregunta.Equiquetas); for(let i=0; i < obj.length; ++i){ %>
+                                    <div class="tag">
+                                        <%= obj[i]["titulo"] %>
+                                    </div>
+                                    <% }; %>
+                            </div>
+                    </div>
+                </div>
+                <div class="formulante">
+                    <div class="formulador">
+                        <h2>Formulada:
+                            <%- pregunta.Fecha.getDate()+"/"+ (pregunta.Fecha.getMonth()+1) +"/"+
+                                pregunta.Fecha.getFullYear() %>
+                        </h2>
+                        <img id="foto" src="/imagen/<%- pregunta.FotoPerfil %>">
+                        <form method="POST" action="/perfil">
+                            <input id="ident" name="ident" type="hidden" value="<%-pregunta.ID_Usuario%>">
+                            <input class="btnPerfil" type="submit" value="<%-pregunta.Nombre%>">
+                        </form>
+                    </div>
+                </div>
+                <div class="numAnswers">
+                    <h2 class="numRespuestas">
+                        <%-respuestas.length%> Respuestas
+                    </h2>
+                </div>
+                <% respuestas.forEach(function(respuesta, respuestas){ %>
+                    <div class="respuesta">
+                        <div class="votosRespuesta">
+                            <h2>
+                                <%-respuesta.Votos%> Votos
+                            </h2>
+                        </div>
+                        <div class="info">
+                            <p>
+                                <%= respuesta.Cuerpo %>
+                            </p>
+                        </div>
+                        <div class="formulador">
+                            <h2>Formulada:
+                                <%- respuesta.Fecha.getDate()+"/"+ (respuesta.Fecha.getMonth()+1) +"/"+
+                                    respuesta.Fecha.getFullYear() %>
+                            </h2>
+                            <img id="foto" src="/imagen/<%- respuesta.FotoPerfil %>">
+                            <form method="POST" action="/perfil">
+                                <input id="ident" name="ident" type="hidden" value="<%-respuesta.ID_Usuario%>">
+                                <input class="btnPerfil" type="submit" value="<%-respuesta.Nombre%>">
+                            </form>
+                        </div>
+                    </div>
+                    <%});%>
+
+                        <form action="/preguntas/addRespuesta" method="POST" id="preguntaFormulada">
+                            <label id="tituloFormulario">Tu respuesta</label>
+                            <textarea id="inputCuerpo" name="turespuesta"> </textarea>
+                            <input type="hidden" value="<%- pregunta.ID_Pregunta%>" name="idPregunta">
+                            <div>
+                                <input id="buttonCrearCuentaResp" type="submit" value="Publica tu respuesta"/>
+                            </div>
+                            
+                        </form>
+            </div>
 </body>
 
 </html>

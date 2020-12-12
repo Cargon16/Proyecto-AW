@@ -52,8 +52,8 @@ class DAOpreguntas {
                 etiquetas += ']';
 
                 today = yyyy + '/' + mm + '/' + dd;
-                const sql = "INSERT INTO preguntas (Titulo, Cuerpo, Equiquetas, ID_Usuario, Fecha, Reputacion) VALUES (?,?,?,?,?,?);";
-                let userData = [pregunta.titulo, pregunta.cuerpo, etiquetas, pregunta.usuario, today, 0];
+                const sql = "INSERT INTO preguntas (Titulo, Cuerpo, Equiquetas, ID_Usuario, Fecha, Reputacion, Votos, Visitas) VALUES (?,?,?,?,?,?,?,?);";
+                let userData = [pregunta.titulo, pregunta.cuerpo, etiquetas, pregunta.usuario, today, 0, 0, 0];
                 connection.query(sql, userData, function (err, result) {
                     connection.release();
                     if (err) {
@@ -116,7 +116,7 @@ class DAOpreguntas {
                 callback(new Error("Error de conexion a la base de datos."), null);
             }
             else {
-                connection.query("SELECT respuestas.Cuerpo, respuestas.Fecha, respuestas.Reputacion, respuestas.Votos, \
+                connection.query("SELECT respuestas.Cuerpo, respuestas.Fecha, respuestas.Reputacion, respuestas.Votos, respuestas.ID_Usuario, \
                 usuarios.Nombre, usuarios.FotoPerfil FROM respuestas, usuarios WHERE usuarios.Correo = respuestas.ID_Usuario AND respuestas.ID_Pregunta = ?",
                     [id_pregunta],
                     function (err, rows) {
@@ -131,6 +131,50 @@ class DAOpreguntas {
             }
         });
     }
+    insertarRespuesta(respuesta, callback) {
+        this.pool.getConnection(function (error, connection) {
+            if (error) {
+                callback(new Error("Error de conexion a la base de datos."), null);
+            } else {
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                today = yyyy + '/' + mm + '/' + dd;
+                const sql = "INSERT INTO respuestas (Cuerpo, ID_Usuario, ID_Pregunta, Fecha, Reputacion, Votos) VALUES (?,?,?,?,?,?);";
+                let userData = [respuesta.cuerpo, respuesta.usuario, respuesta.pregunta, today, 0, 0];
+                connection.query(sql, userData, function (err, result) {
+                    connection.release();
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"), null);
+                    } else {
+                        callback(null, true);
+                    }
+                });
+            }
+        })
+    }
+
+    setVisitas(pregunta, callback){
+        this.pool.getConnection(function (error, connection) {
+            if (error) {
+                callback(new Error("Error de conexion a la base de datos."), null);
+            } else {
+                const sql = "UPDATE preguntas SET Visitas = Visitas + 1 WHERE preguntas.ID_Pregunta = ?";
+                let userData = [pregunta];
+                connection.query(sql, userData, function (err, result) {
+                    connection.release();
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"), null);
+                    } else {
+                        callback(null, true);
+                    }
+                });
+            }
+        })
+    }
+
 }
 
 module.exports = DAOpreguntas;

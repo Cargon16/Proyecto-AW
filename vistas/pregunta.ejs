@@ -28,6 +28,15 @@
                     <h2>
                         <%-pregunta.Votos%> Votos
                     </h2>
+                    <form class="voto" action="/preguntas/vote">
+                        <input type="hidden" value="10" name="v">
+                        <input type="image" src="/iconos/positive-vote.png">
+                    </form>
+                    <form class="voto" action="/preguntas/vote">
+                        <input type="hidden" value="-2" name="v">
+                        <input type="image" src="/iconos/negative-vote.png">
+                    </form>
+
                 </div>
                 <div class="infoPregunta">
                     <div>
@@ -90,9 +99,9 @@
                             <textarea id="inputCuerpo" name="turespuesta"> </textarea>
                             <input type="hidden" value="<%- pregunta.ID_Pregunta%>" name="idPregunta">
                             <div>
-                                <input id="buttonCrearCuentaResp" type="submit" value="Publica tu respuesta"/>
+                                <input id="buttonCrearCuentaResp" type="submit" value="Publica tu respuesta" />
                             </div>
-                            
+
                         </form>
             </div>
 </body>

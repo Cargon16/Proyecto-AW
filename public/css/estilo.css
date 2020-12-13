@@ -852,3 +852,14 @@ pagina preguntas.html y resultados.html
 .voto input{
     width: 120%;
 }
+
+#todosUsuarios{
+    margin-top: 10%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+}
+.divUsuario{
+    width: 30%;
+    text-align: center;
+}

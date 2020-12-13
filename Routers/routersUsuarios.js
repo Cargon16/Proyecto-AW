@@ -16,6 +16,7 @@ router.get("/login", routerUsuarios.login);
 router.get("/registro", routerUsuarios.registro);
 router.get("/logout", routerSessionUsuario.usuarioActual, routerUsuarios.logout);
 router.get("/paginaPrincipal", routerSessionUsuario.usuarioActual, routerUsuarios.paginaPrincipal);
+router.get("/usuarios", routerSessionUsuario.usuarioActual, routerUsuarios.usuarios);
 /*POST*/
 router.post("/procesarLogin", routerUsuarios.procesarLogin);
 router.post("/registro", multerFactory.single("perfil"), routerUsuarios.usuarioRegistrado);

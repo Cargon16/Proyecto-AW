@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%-
+    include("headers")
+%>
+</head>
+
+<body>
+    <header>
+        <%-
+        include("headerLogged");
+    %>
+    </header>
+    <%-
+        include("busqueda");
+    %>
+
+    <div class="boxFormulario">
+
+        <div id="boxPregunta">
+            <div id="boxTituloPreguntas">
+                <label>Usuarios</label>
+            </div>
+            <div id="todosUsuarios">
+                <%Usuarios.forEach(function(usuario, Usuarios){ %>
+                    <div class="divUsuario">
+                        <img id="foto" src="/imagen/<%- usuario.FotoPerfil %>">
+                        <form method="POST" action="/perfil">
+                            <input id="ident" name="ident" type="hidden" value="<%-usuario.Correo%>">
+                            <input class="btnPerfil" type="submit" value="<%- usuario.Nombre %>">
+                        </form>
+                        <label><%-usuario.Reputacion %></label>
+                    </div>
+                <% });%>
+            </div>
+        </div>
+</body>
+
+</html>

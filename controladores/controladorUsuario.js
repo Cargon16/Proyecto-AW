@@ -179,6 +179,22 @@ function usuarioRegistrado(request, response) {
     }
 }
 
+function usuarios(request, response){
+    daoUsuario.getUsuarios(function (err, existe) {
+        if (err) {
+            response.status(500);
+            console.log("procesarLogin_post" + err);
+        } else {
+            response.render("usuarios", {
+                "Usuarios": existe,
+                "usuarioActual": request.session.nombreUsuario,
+                "correo": request.session.correo,
+                "imagen": request.session.imagen
+            });
+        }
+    })
+}
+
 
 module.exports = {
     root,
@@ -189,4 +205,5 @@ module.exports = {
     procesarLogin,
     usuarioRegistrado,
     paginaPrincipal,
+    usuarios
 }

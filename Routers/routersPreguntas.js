@@ -21,6 +21,7 @@ router.get("/respondePregunta/:id", userSessionRouter.usuarioActual, questionRou
 router.post("/formularPregunta", questionRouter.procesarCrearPregunta);
 router.post("/addRespuesta", questionRouter.procesarCrearRespuesta);
 router.post("/vote", questionRouter.procesarVoto);
+router.post("/voteRespuesta", questionRouter.procesarVotoRespuesta);
 /*
 router.post("/procesarRespuesta", userSessionRouter.usuarioActual, questionRouter.procesarRespuesta);*/
 

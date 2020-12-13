@@ -44,6 +44,7 @@ function perfil(request, response) {
                         "numeroPreguntas": numero.cuenta,
                         "numeroRespuestas": respuestas.cuenta,
                         "correo": request.session.correo,
+                        "usuarioActual": request.session.nombreUsuario,
                         "imagen": request.session.imagen
                     });
                 });
@@ -70,7 +71,7 @@ function paginaPrincipal(request, response) {
         daoUsuario.getUserImage(request.session.correo, function (err, existe) {
             request.session.imagen = existe.FotoPerfil;
             response.render("paginaPrincipal", {
-                "usuario": request.session.nombreUsuario,
+                "usuarioActual": request.session.nombreUsuario,
                 "correo": request.session.correo,
                 "imagen": existe.FotoPerfil
             });

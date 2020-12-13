@@ -116,7 +116,7 @@ class DAOpreguntas {
                 callback(new Error("Error de conexion a la base de datos."), null);
             }
             else {
-                connection.query("SELECT respuestas.Cuerpo, respuestas.Fecha, respuestas.Reputacion, respuestas.Votos, respuestas.ID_Usuario, \
+                connection.query("SELECT respuestas.ID_Respuesta, respuestas.Cuerpo, respuestas.Fecha, respuestas.Reputacion, respuestas.Votos, respuestas.ID_Usuario, \
                 usuarios.Nombre, usuarios.FotoPerfil FROM respuestas, usuarios WHERE usuarios.Correo = respuestas.ID_Usuario AND respuestas.ID_Pregunta = ?",
                     [id_pregunta],
                     function (err, rows) {
@@ -189,6 +189,36 @@ class DAOpreguntas {
                     } else {
                         let consulta = "UPDATE preguntas SET Reputacion = Reputacion + ? WHERE preguntas.ID_Pregunta = ?";
                         let valores =[info.puntuacion, info.id];
+                        connection.query(consulta, valores,
+                            function (err) {
+                                if (err) {
+                                    callback(new Error("Error de acceso a la base de datos 1"));
+                                }
+                                else
+                                    callback(null);
+                            });
+                    }
+                });
+            }
+        })
+    }
+
+
+    setVotosRespuesta(info, callback) {
+
+        this.pool.getConnection(function (error, connection) {
+            if (error) {
+                callback(new Error("Error de conexion a la base de datos."), null);
+            } else {
+                const sql = "UPDATE respuestas SET Votos = Votos + 1 WHERE ID_Respuesta = ?";
+                let userData = [info.ID_respuesta];
+                connection.query(sql, userData, function (err, result) {
+                    connection.release();
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"), null);
+                    } else {
+                        let consulta = "UPDATE respuestas SET Reputacion = Reputacion + ? WHERE ID_Respuesta = ?";
+                        let valores =[info.puntuacion, info.ID_respuesta];
                         connection.query(consulta, valores,
                             function (err) {
                                 if (err) {

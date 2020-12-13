@@ -19,7 +19,7 @@ function preguntas(request, response) {
             response.render("paginaTodasPreguntas", {
                 "preguntas": preguntas,
                 "imagen": request.session.imagen,
-                "usuario": request.session.nombreUsuario,
+                "usuarioActual": request.session.nombreUsuario,
                 "correo": request.session.correo
             });
         }
@@ -30,7 +30,7 @@ function creaPregunta(request, response) {
     response.status(200);
     response.render("paginaFormularPregunta", {
         msg: null,
-        "usuario": request.session.nombreUsuario,
+        "usuarioActual": request.session.nombreUsuario,
         "correo": request.session.correo,
         "imagen": request.session.imagen
     });
@@ -56,7 +56,7 @@ function procesarCrearPregunta(request, response) {
                 "titulo": request.body.titulo,
                 "cuerpo": request.body.cuerpo,
                 "etiquetas": etiquetasDivididas,
-                "usuario": request.session.correo
+                "usuarioActual": request.session.correo
             };
 
         }
@@ -66,7 +66,7 @@ function procesarCrearPregunta(request, response) {
             "msg": msg,
             "imagen": request.session.imagen,
             "correo": request.session.correo,
-            "usuario": request.session.nombreUsuario
+            "usuarioActual": request.session.nombreUsuario
         });
     } else {
         daoPreguntas.insertarPregunta(pregunta, function (err, insertado) {
@@ -77,7 +77,7 @@ function procesarCrearPregunta(request, response) {
                     "msg": "Error al crear pregunta",
                     "imagen": request.session.imagen,
                     "correo": request.session.correo,
-                    "usuario": request.session.nombreUsuario
+                    "usuarioActual": request.session.nombreUsuario
                 })
             } else {
                 response.status(200);
@@ -86,14 +86,14 @@ function procesarCrearPregunta(request, response) {
                         "msg": "Pregunta creada con exito.",
                         "imagen": request.session.imagen,
                         "correo": request.session.correo,
-                        "usuario": request.session.nombreUsuario
+                        "usuarioActual": request.session.nombreUsuario
                     })
                 } else {
                     response.render("paginaFormularPregunta", {
                         "msg": "Error al crear pregunta",
                         "imagen": request.session.imagen,
                         "correo": request.session.correo,
-                        "usuario": request.session.nombreUsuario
+                        "usuarioActual": request.session.nombreUsuario
                     })
                 }
             }
@@ -111,7 +111,7 @@ function preguntasSinResponder(request, response) {
             response.render("paginaPreguntasSinResponder", {
                 "preguntas": preguntas,
                 "imagen": request.session.imagen,
-                "usuario": request.session.nombreUsuario,
+                "usuarioActual": request.session.nombreUsuario,
                 "correo": request.session.correo
             });
         }
@@ -130,7 +130,7 @@ function getPregunta(request, response) {
                         "pregunta": pregunta,
                         "respuestas": respuestas,
                         "imagen": request.session.imagen,
-                        "usuario": request.session.nombreUsuario,
+                        "usuarioActual": request.session.nombreUsuario,
                         "correo": request.session.correo
                     });
                 }
@@ -149,7 +149,7 @@ function procesarCrearRespuesta(request, response) {
     } else {
         respuesta = {
             "cuerpo": request.body.turespuesta,
-            "usuario": request.session.correo,
+            "usuarioActual": request.session.correo,
             "pregunta": request.body.idPregunta
         };
 
@@ -160,7 +160,7 @@ function procesarCrearRespuesta(request, response) {
                 "msg": msg,
                 "imagen": request.session.imagen,
                 "correo": request.session.correo,
-                "usuario": request.session.nombreUsuario,
+                "usuarioActual": request.session.nombreUsuario,
                 "preguntas": preguntas
             });
         } else {
@@ -173,7 +173,7 @@ function procesarCrearRespuesta(request, response) {
                         "msg": "Error al crear pregunta",
                         "imagen": request.session.imagen,
                         "correo": request.session.correo,
-                        "usuario": request.session.nombreUsuario,
+                        "usuarioActual": request.session.nombreUsuario,
                         "preguntas": preguntas
                     })
                 } else {
@@ -183,7 +183,7 @@ function procesarCrearRespuesta(request, response) {
                             "msg": "Pregunta creada con exito.",
                             "imagen": request.session.imagen,
                             "correo": request.session.correo,
-                            "usuario": request.session.nombreUsuario,
+                            "usuarioActual": request.session.nombreUsuario,
                             "preguntas": preguntas
                         })
                     } else {
@@ -191,7 +191,7 @@ function procesarCrearRespuesta(request, response) {
                             "msg": "Error al crear pregunta",
                             "imagen": request.session.imagen,
                             "correo": request.session.correo,
-                            "usuario": request.session.nombreUsuario,
+                            "usuarioActual": request.session.nombreUsuario,
                             "preguntas": preguntas
                         })
                     }
@@ -206,9 +206,13 @@ function procesarVoto(request, response) {
     let pregunta = {
         "id": request.body.id,
         "puntuacion": request.body.puntuacion,
-        "usuario": request.body.usuario,
+        "usuarioActual": request.body.usuario,
+        "usuarioLoggueado":request.session.correo,
         "v": request.body.v
     };
+
+
+
     daoUsuarios.hasUserVoteThatQuestion(pregunta, function(err, res){
         if(!res){
             daoPreguntas.setVotosPregunta(pregunta, function (err, devuelve) {
@@ -227,7 +231,7 @@ function procesarVoto(request, response) {
                                         "pregunta": pregunta,
                                         "respuestas": respuestas,
                                         "imagen": request.session.imagen,
-                                        "usuario": request.session.nombreUsuario,
+                                        "usuarioActual": request.session.nombreUsuario,
                                         "correo": request.session.correo
                                     });
                                 }
@@ -248,7 +252,75 @@ function procesarVoto(request, response) {
                             "pregunta": pregunta,
                             "respuestas": respuestas,
                             "imagen": request.session.imagen,
-                            "usuario": request.session.nombreUsuario,
+                            "usuarioActual": request.session.nombreUsuario,
+                            "correo": request.session.correo
+                        });
+                    }
+                });
+            });
+        }
+    });
+}
+/*
+crear hasUserVoteThatAnswer
+
+crear setVotosRespuesta
+
+*/
+
+
+function procesarVotoRespuesta(request, response){
+    let respuesta = {
+        "id": request.body.id,
+        "puntuacion": request.body.puntuacion,
+        "usuarioActual": request.body.usuario,
+        "usuarioLoggueado":request.session.correo,
+        "v": request.body.v,
+        "ID_respuesta" : request.body.respuesta
+    };
+
+    console.log(respuesta);
+    daoUsuarios.hasUserVoteThatAnswer(respuesta, function(err, res){
+        console.log(res);
+        if(!res){
+            daoPreguntas.setVotosRespuesta(respuesta, function (err, devuelve) {
+                daoUsuarios.setUserReputation(respuesta, function (err, resultado) {
+        
+                    if (err) {
+                        response.status(404);
+                    } else {
+                        daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
+                            daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
+                                if (err) {
+                                    response.status(404);
+                                } else {
+                                    response.status(200);
+                                    response.render("pregunta", {
+                                        "pregunta": pregunta,
+                                        "respuestas": respuestas,
+                                        "imagen": request.session.imagen,
+                                        "usuarioActual": request.session.nombreUsuario,
+                                        "correo": request.session.correo
+                                    });
+                                }
+                            });
+                        });
+                    }
+                });
+            });
+        }
+        else{
+            daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
+                daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
+                    if (err) {
+                        response.status(404);
+                    } else {
+                        response.status(200);
+                        response.render("pregunta", {
+                            "pregunta": pregunta,
+                            "respuestas": respuestas,
+                            "imagen": request.session.imagen,
+                            "usuarioActual": request.session.nombreUsuario,
                             "correo": request.session.correo
                         });
                     }
@@ -265,5 +337,6 @@ module.exports = {
     preguntasSinResponder,
     getPregunta,
     procesarCrearRespuesta,
-    procesarVoto
+    procesarVoto,
+    procesarVotoRespuesta
 }

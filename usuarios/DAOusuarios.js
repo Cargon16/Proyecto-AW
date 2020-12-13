@@ -221,7 +221,7 @@ class DAOusuarios {
             }
             else {
                 connection.query("SELECT *  FROM votospreguntas WHERE ID_Usuario = ? AND ID_Pregunta = ?",
-                    [pregunta.usuario, pregunta.id],
+                    [pregunta.usuarioLoggueado, pregunta.id],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {
@@ -230,7 +230,45 @@ class DAOusuarios {
                         else {
                             if (rows.length == 0) {
                                 let consulta = "INSERT INTO votospreguntas (ID_Usuario, ID_Pregunta) VALUES (?,?);";
-                                let valores = [pregunta.usuario, pregunta.id];
+                                let valores = [pregunta.usuarioLoggueado, pregunta.id];
+                                connection.query(consulta, valores,
+                                    function (err) {
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        }
+                                        else
+                                            callback(null, false);
+                                    });
+                            }
+                            else {
+                                callback(null, true);
+                            }
+
+                        }
+                    });
+            }
+        }
+        );
+    }
+
+
+    hasUserVoteThatAnswer(respuesta, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+                connection.query("SELECT *  FROM votosrespuesta WHERE ID_Usuario = ? AND ID_Respuesta = ?",
+                    [respuesta.usuarioLoggueado, respuesta.ID_respuesta],
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            if (rows.length == 0) {
+                                let consulta = "INSERT INTO votosrespuesta (ID_Usuario, ID_Respuesta) VALUES (?,?);";
+                                let valores = [respuesta.usuarioLoggueado, respuesta.ID_respuesta];
                                 connection.query(consulta, valores,
                                     function (err) {
                                         if (err) {

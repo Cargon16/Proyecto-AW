@@ -27,6 +27,9 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `medallas`
 --
 
+DROP DATABASE `404` ;
+CREATE DATABASE `404` ;
+
 CREATE TABLE `medallas` (
   `ID_Medalla` int(100) NOT NULL,
   `Metal` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
@@ -94,6 +97,14 @@ CREATE TABLE `votosPreguntas` (
 
 
 --
+-- Estructura de la tabla `votosRespuesta`
+--
+CREATE TABLE `votosRespuesta` (
+  `ID_Usuario` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ID_Respuesta` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -132,6 +143,15 @@ ALTER TABLE `votosPreguntas`
   ADD PRIMARY KEY (`ID_Usuario`, `ID_Pregunta`),
   ADD KEY `fk_usuario_respuestas` (`ID_Usuario`),
   ADD KEY `fk_pregunta_respuestas` (`ID_Pregunta`);
+
+
+--
+-- Indices de la tabla `votosRespuesta`
+--
+ALTER TABLE `votosRespuesta`
+  ADD PRIMARY KEY (`ID_Usuario`, `ID_Respuesta`),
+  ADD KEY `fk_usuario_votorespuesta` (`ID_Usuario`),
+  ADD KEY `fk_respuesta_votorespuesta` (`ID_Respuesta`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -181,9 +201,13 @@ ALTER TABLE `respuestas`
 --
 -- Filtros para la tabla `votosPreguntas`
 --
-ALTER TABLE `respuestas`
+ALTER TABLE `votosPreguntas`
   ADD CONSTRAINT `fk_pregunta_voto` FOREIGN KEY (`ID_Pregunta`) REFERENCES `preguntas` (`ID_Pregunta`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_usuario_voto` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`Correo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `votosRespuesta`
+  ADD CONSTRAINT `fk_pregunta_votoRespuesta` FOREIGN KEY (`ID_Respuesta`) REFERENCES `respuestas` (`ID_Respuesta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_usuario_votoRespuesta` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`Correo`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

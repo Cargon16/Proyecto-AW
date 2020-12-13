@@ -202,11 +202,68 @@ function procesarCrearRespuesta(request, response) {
     });
 }
 
+function procesarVoto(request, response) {
+    let pregunta = {
+        "id": request.body.id,
+        "puntuacion": request.body.puntuacion,
+        "usuario": request.body.usuario,
+        "v": request.body.v
+    };
+    daoUsuarios.hasUserVoteThatQuestion(pregunta, function(err, res){
+        if(!res){
+            daoPreguntas.setVotosPregunta(pregunta, function (err, devuelve) {
+                daoUsuarios.setUserReputation(pregunta, function (err, resultado) {
+        
+                    if (err) {
+                        response.status(404);
+                    } else {
+                        daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
+                            daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
+                                if (err) {
+                                    response.status(404);
+                                } else {
+                                    response.status(200);
+                                    response.render("pregunta", {
+                                        "pregunta": pregunta,
+                                        "respuestas": respuestas,
+                                        "imagen": request.session.imagen,
+                                        "usuario": request.session.nombreUsuario,
+                                        "correo": request.session.correo
+                                    });
+                                }
+                            });
+                        });
+                    }
+                });
+            });
+        }
+        else{
+            daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
+                daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
+                    if (err) {
+                        response.status(404);
+                    } else {
+                        response.status(200);
+                        response.render("pregunta", {
+                            "pregunta": pregunta,
+                            "respuestas": respuestas,
+                            "imagen": request.session.imagen,
+                            "usuario": request.session.nombreUsuario,
+                            "correo": request.session.correo
+                        });
+                    }
+                });
+            });
+        }
+    });
+}
+
 module.exports = {
     preguntas,
     creaPregunta,
     procesarCrearPregunta,
     preguntasSinResponder,
     getPregunta,
-    procesarCrearRespuesta
+    procesarCrearRespuesta,
+    procesarVoto
 }

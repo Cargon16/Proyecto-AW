@@ -110,7 +110,7 @@ class DAOpreguntas {
         });
     }
 
-    getRespuestasPregunta(id_pregunta, callback){
+    getRespuestasPregunta(id_pregunta, callback) {
         this.pool.getConnection(function (error, connection) {
             if (error) {
                 callback(new Error("Error de conexion a la base de datos."), null);
@@ -156,7 +156,7 @@ class DAOpreguntas {
         })
     }
 
-    setVisitas(pregunta, callback){
+    setVisitas(pregunta, callback) {
         this.pool.getConnection(function (error, connection) {
             if (error) {
                 callback(new Error("Error de conexion a la base de datos."), null);
@@ -169,6 +169,34 @@ class DAOpreguntas {
                         callback(new Error("Error de acceso a la base de datos"), null);
                     } else {
                         callback(null, true);
+                    }
+                });
+            }
+        })
+    }
+
+    setVotosPregunta(info, callback) {
+        this.pool.getConnection(function (error, connection) {
+            if (error) {
+                callback(new Error("Error de conexion a la base de datos."), null);
+            } else {
+                const sql = "UPDATE preguntas SET Votos = Votos + 1 WHERE preguntas.ID_Pregunta = ?";
+                let userData = [info.id];
+                connection.query(sql, userData, function (err, result) {
+                    connection.release();
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"), null);
+                    } else {
+                        let consulta = "UPDATE preguntas SET Reputacion = Reputacion + ? WHERE preguntas.ID_Pregunta = ?";
+                        let valores =[info.puntuacion, info.id];
+                        connection.query(consulta, valores,
+                            function (err) {
+                                if (err) {
+                                    callback(new Error("Error de acceso a la base de datos 1"));
+                                }
+                                else
+                                    callback(null);
+                            });
                     }
                 });
             }

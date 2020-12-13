@@ -85,6 +85,15 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
+-- Estructura de la tabla `votosPreguntas`
+--
+CREATE TABLE `votosPreguntas` (
+  `ID_Usuario` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ID_Pregunta` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -115,6 +124,14 @@ ALTER TABLE `respuestas`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`Correo`);
+
+--
+-- Indices de la tabla `votosPreguntas`
+--
+ALTER TABLE `votosPreguntas`
+  ADD PRIMARY KEY (`ID_Usuario`, `ID_Pregunta`),
+  ADD KEY `fk_usuario_respuestas` (`ID_Usuario`),
+  ADD KEY `fk_pregunta_respuestas` (`ID_Pregunta`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -160,6 +177,13 @@ ALTER TABLE `preguntas`
 ALTER TABLE `respuestas`
   ADD CONSTRAINT `fk_pregunta_respuestas` FOREIGN KEY (`ID_Pregunta`) REFERENCES `preguntas` (`ID_Pregunta`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_usuario_respuestas` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`Correo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `votosPreguntas`
+--
+ALTER TABLE `respuestas`
+  ADD CONSTRAINT `fk_pregunta_voto` FOREIGN KEY (`ID_Pregunta`) REFERENCES `preguntas` (`ID_Pregunta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_usuario_voto` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`Correo`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

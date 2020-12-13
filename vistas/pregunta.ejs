@@ -28,12 +28,18 @@
                     <h2>
                         <%-pregunta.Votos%> Votos
                     </h2>
-                    <form class="voto" action="/preguntas/vote">
+                    <form class="voto" action="/preguntas/vote" method="POST">
                         <input type="hidden" value="10" name="v">
+                        <input type="hidden" value="<%- pregunta.ID_Pregunta%>" name="id">
+                        <input type="hidden" value="<%- pregunta.ID_Usuario %>" name="usuario">
+                        <input type="hidden" value="1" name="puntuacion">
                         <input type="image" src="/iconos/positive-vote.png">
                     </form>
-                    <form class="voto" action="/preguntas/vote">
+                    <form class="voto" action="/preguntas/vote" method="POST">
                         <input type="hidden" value="-2" name="v">
+                        <input type="hidden" value="<%- pregunta.ID_Pregunta%>" name="id">
+                        <input type="hidden" value="<%- pregunta.ID_Usuario %>" name="usuario">
+                        <input type="hidden" value="-1" name="puntuacion">
                         <input type="image" src="/iconos/negative-vote.png">
                     </form>
 

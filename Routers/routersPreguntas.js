@@ -20,6 +20,7 @@ router.get("/respondePregunta/:id", userSessionRouter.usuarioActual, questionRou
 /*POST*/
 router.post("/formularPregunta", questionRouter.procesarCrearPregunta);
 router.post("/addRespuesta", questionRouter.procesarCrearRespuesta);
+router.post("/vote", questionRouter.procesarVoto);
 /*
 router.post("/procesarRespuesta", userSessionRouter.usuarioActual, questionRouter.procesarRespuesta);*/
 

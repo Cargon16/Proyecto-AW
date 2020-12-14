@@ -13,7 +13,7 @@ class DAOpreguntas {
                 callback(new Error("Error de conexion a la base de datos."), null);
             }
             else {
-                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
+                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Visitas, preguntas.Votos, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
                 usuarios.Nombre, usuarios.FotoPerfil, tag.tag FROM preguntas LEFT JOIN tag ON preguntas.ID_Pregunta = tag.ID_Pregunta LEFT JOIN usuarios ON preguntas.ID_Usuario = usuarios.Correo ORDER BY preguntas.Fecha DESC",
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
@@ -55,9 +55,6 @@ class DAOpreguntas {
                                 //connection.release();
                                 if (err) {
                                     callback(new Error("Error de acceso a la base de datos"), null);
-                                } else {
-
-                                    callback(null, true);
                                 }
                             });
                         }
@@ -74,7 +71,7 @@ class DAOpreguntas {
                 callback(new Error("Error de conexion a la base de datos."), null);
             }
             else {
-                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
+                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Visitas, preguntas.Votos, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
                 usuarios.Nombre, usuarios.FotoPerfil, tag.tag FROM preguntas LEFT JOIN tag ON preguntas.ID_Pregunta = tag.ID_Pregunta LEFT JOIN usuarios ON preguntas.ID_Usuario = usuarios.Correo WHERE (SELECT COUNT(*) FROM respuestas where respuestas.ID_Pregunta = preguntas.ID_Pregunta) = 0 ORDER BY preguntas.Fecha DESC",
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
@@ -96,7 +93,7 @@ class DAOpreguntas {
                 callback(new Error("Error de conexion a la base de datos."), null);
             }
             else {
-                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
+                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Visitas, preguntas.Votos, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
                 usuarios.Nombre, usuarios.FotoPerfil, GROUP_CONCAT(tag.tag) 'tags' FROM usuarios, preguntas, tag WHERE tag.ID_Pregunta = preguntas.ID_Pregunta AND usuarios.Correo = preguntas.ID_Usuario AND preguntas.ID_Pregunta = ?",
                     [id_pregunta],
                     function (err, rows) {
@@ -250,6 +247,8 @@ function tratarTareas(filas) {
             tarea.Titulo = filas[f].Titulo;
             tarea.Cuerpo = filas[f].Cuerpo;
             tarea.Fecha = filas[f].Fecha;
+            tarea.Visitas = filas[f].Visitas;
+            tarea.Votos = filas[f].Votos;
             tarea.Reputacion = filas[f].Reputacion;
             tarea.ID_Usuario = filas[f].ID_Usuario;
             tarea.Nombre = filas[f].Nombre;

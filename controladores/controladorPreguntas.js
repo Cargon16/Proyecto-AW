@@ -81,12 +81,12 @@ function procesarCrearPregunta(request, response) {
                 })
             } else {
                 response.status(200);
-                    response.render("paginaFormularPregunta", {
-                        "msg": "Pregunta creada con exito.",
-                        "imagen": request.session.imagen,
-                        "correo": request.session.correo,
-                        "usuarioActual": request.session.nombreUsuario
-                    })
+                response.render("paginaFormularPregunta", {
+                    "msg": "Pregunta creada con exito.",
+                    "imagen": request.session.imagen,
+                    "correo": request.session.correo,
+                    "usuarioActual": request.session.nombreUsuario
+                })
             }
         })
     }
@@ -157,7 +157,7 @@ function procesarCrearRespuesta(request, response) {
         } else {
             daoPreguntas.insertarRespuesta(respuesta, function (err, insertado) {
 
-                if (err) {
+                if (err || !insertado) {
                     response.status(500);
                     console.log(err + " post_preguntaInsertada");
                     response.render("paginaTodasPreguntas", {
@@ -169,23 +169,13 @@ function procesarCrearRespuesta(request, response) {
                     })
                 } else {
                     response.status(200);
-                    if (insertado) {
-                        response.render("paginaTodasPreguntas", {
-                            "msg": "Pregunta creada con exito.",
-                            "imagen": request.session.imagen,
-                            "correo": request.session.correo,
-                            "usuarioActual": request.session.nombreUsuario,
-                            "preguntas": preguntas
-                        })
-                    } else {
-                        response.render("paginaTodasPreguntas", {
-                            "msg": "Error al crear pregunta",
-                            "imagen": request.session.imagen,
-                            "correo": request.session.correo,
-                            "usuarioActual": request.session.nombreUsuario,
-                            "preguntas": preguntas
-                        })
-                    }
+                    response.render("paginaTodasPreguntas", {
+                        "msg": "Pregunta creada con exito.",
+                        "imagen": request.session.imagen,
+                        "correo": request.session.correo,
+                        "usuarioActual": request.session.nombreUsuario,
+                        "preguntas": preguntas
+                    })
                 }
 
             });
@@ -198,17 +188,17 @@ function procesarVoto(request, response) {
         "id": request.body.id,
         "puntuacion": request.body.puntuacion,
         "usuarioActual": request.body.usuario,
-        "usuarioLoggueado":request.session.correo,
+        "usuarioLoggueado": request.session.correo,
         "v": request.body.v
     };
 
 
 
-    daoUsuarios.hasUserVoteThatQuestion(pregunta, function(err, res){
-        if(!res){
+    daoUsuarios.hasUserVoteThatQuestion(pregunta, function (err, res) {
+        if (!res) {
             daoPreguntas.setVotosPregunta(pregunta, function (err, devuelve) {
                 daoUsuarios.setUserReputation(pregunta, function (err, resultado) {
-        
+
                     if (err) {
                         response.status(404);
                     } else {
@@ -232,7 +222,7 @@ function procesarVoto(request, response) {
                 });
             });
         }
-        else{
+        else {
             daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
                 daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
                     if (err) {
@@ -260,23 +250,23 @@ crear setVotosRespuesta
 */
 
 
-function procesarVotoRespuesta(request, response){
+function procesarVotoRespuesta(request, response) {
     let respuesta = {
         "id": request.body.id,
         "puntuacion": request.body.puntuacion,
         "usuarioActual": request.body.usuario,
-        "usuarioLoggueado":request.session.correo,
+        "usuarioLoggueado": request.session.correo,
         "v": request.body.v,
-        "ID_respuesta" : request.body.respuesta
+        "ID_respuesta": request.body.respuesta
     };
 
     console.log(respuesta);
-    daoUsuarios.hasUserVoteThatAnswer(respuesta, function(err, res){
+    daoUsuarios.hasUserVoteThatAnswer(respuesta, function (err, res) {
         console.log(res);
-        if(!res){
+        if (!res) {
             daoPreguntas.setVotosRespuesta(respuesta, function (err, devuelve) {
                 daoUsuarios.setUserReputation(respuesta, function (err, resultado) {
-        
+
                     if (err) {
                         response.status(404);
                     } else {
@@ -300,7 +290,7 @@ function procesarVotoRespuesta(request, response){
                 });
             });
         }
-        else{
+        else {
             daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
                 daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
                     if (err) {

@@ -200,7 +200,7 @@ class DAOusuarios {
             }
             else {
                 connection.query("UPDATE usuarios SET Reputacion = Reputacion + ? WHERE Correo = ?",
-                    [pregunta.v, pregunta.usuario],
+                    [pregunta.v, pregunta.usuarioActual],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {

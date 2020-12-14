@@ -289,13 +289,13 @@ class DAOusuarios {
         );
     }
 
-    getUsuarios(callback){
+    getUsuarios(callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             }
             else {
-                connection.query("SELECT * FROM usuarios",
+                connection.query("SELECT tag , COUNT(tag) AS MostTag, usuarios.Correo, usuarios.Nombre, usuarios.Reputacion, usuarios.FotoPerfil FROM tag, preguntas, usuarios WHERE tag.ID_Pregunta = preguntas.ID_Pregunta AND preguntas.ID_Usuario = usuarios.Correo GROUP BY tag ORDER BY tag DESC LIMIT 1;",
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {

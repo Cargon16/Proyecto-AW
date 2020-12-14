@@ -48,7 +48,6 @@ CREATE TABLE `preguntas` (
   `ID_Pregunta` int(100) NOT NULL,
   `Titulo` varchar(500) COLLATE utf8mb4_spanish_ci NOT NULL,
   `Cuerpo` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `Equiquetas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`Equiquetas`)),
   `ID_Usuario` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
   `Fecha` date NOT NULL,
   `Reputacion` int(30) NOT NULL,
@@ -95,6 +94,13 @@ CREATE TABLE `votosPreguntas` (
   `ID_Pregunta` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
+--
+-- Estructura de la tabla `task`
+--
+CREATE TABLE `tag` (
+  `ID_Pregunta` int(11) NOT NULL,
+  `tag` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Estructura de la tabla `votosRespuesta`
@@ -107,6 +113,12 @@ CREATE TABLE `votosRespuesta` (
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `tags`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`ID_Pregunta`,`tag`);
 
 --
 -- Indices de la tabla `medallas`
@@ -208,6 +220,9 @@ ALTER TABLE `votosPreguntas`
 ALTER TABLE `votosRespuesta`
   ADD CONSTRAINT `fk_pregunta_votoRespuesta` FOREIGN KEY (`ID_Respuesta`) REFERENCES `respuestas` (`ID_Respuesta`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_usuario_votoRespuesta` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`Correo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `tag`
+  ADD CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`ID_Pregunta`) REFERENCES `preguntas` (`ID_Pregunta`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

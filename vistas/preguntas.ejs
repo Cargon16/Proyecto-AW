@@ -13,9 +13,9 @@
         </p>
         <div class="tags">
             <%
-            let obj = JSON.parse(pregunta.Equiquetas);
+            let obj = pregunta.tags;
             for(let i =0; i < obj.length; ++i){ %>
-            <div class= "tag"><%= obj[i]["titulo"] %></div>
+            <div class= "tag"><%= obj[i] %></div>
             <% }; %>
         </div>
 

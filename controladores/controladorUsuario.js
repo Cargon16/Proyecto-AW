@@ -52,7 +52,7 @@ function perfil(request, response) {
         } else {
             response.status(404);
             console.log("No existe ese usuario");
-            next(new Error("No encontrado"));
+            
         }
     });
 }

@@ -862,4 +862,8 @@ pagina preguntas.html y resultados.html
 .divUsuario{
     width: 30%;
     text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

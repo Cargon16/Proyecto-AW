@@ -70,7 +70,7 @@ function procesarCrearPregunta(request, response) {
         });
     } else {
         daoPreguntas.insertarPregunta(pregunta, function (err, insertado) {
-            if (err) {
+            if (err || !insertado) {
                 response.status(500);
                 console.log(err + " post_preguntaInsertada");
                 response.render("paginaFormularPregunta", {
@@ -81,21 +81,12 @@ function procesarCrearPregunta(request, response) {
                 })
             } else {
                 response.status(200);
-                if (insertado) {
                     response.render("paginaFormularPregunta", {
                         "msg": "Pregunta creada con exito.",
                         "imagen": request.session.imagen,
                         "correo": request.session.correo,
                         "usuarioActual": request.session.nombreUsuario
                     })
-                } else {
-                    response.render("paginaFormularPregunta", {
-                        "msg": "Error al crear pregunta",
-                        "imagen": request.session.imagen,
-                        "correo": request.session.correo,
-                        "usuarioActual": request.session.nombreUsuario
-                    })
-                }
             }
         })
     }

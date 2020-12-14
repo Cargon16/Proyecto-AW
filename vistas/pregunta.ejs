@@ -16,7 +16,7 @@
             <div id="boxPregunta">
                 <div class="boxTituloQuestion">
                     <label>
-                        <%- pregunta.Titulo %>
+                        <%-pregunta.Titulo %>
                     </label>
                 </div>
 
@@ -48,11 +48,11 @@
                     <div>
                         <%- pregunta.Cuerpo %>
                             <div class="tags">
-                                <% let obj=JSON.parse(pregunta.Equiquetas); for(let i=0; i < obj.length; ++i){ %>
-                                    <div class="tag">
-                                        <%= obj[i]["titulo"] %>
-                                    </div>
-                                    <% }; %>
+                                <%
+                                let obj = pregunta.tags.split(",");
+                                for(let i =0; i < obj.length; ++i){ %>
+                                <div class= "tag"><%= obj[i] %></div>
+                                <% }; %>
                             </div>
                     </div>
                 </div>

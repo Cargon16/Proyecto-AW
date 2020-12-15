@@ -341,22 +341,28 @@ class DAOusuarios {
     }
 }
 function tratarMedallas(filas) {
+    let todoMedallas = {};
     let medallas = [];
-
+    let contBronce =0, contPlata =0, contOro=0;
     for (let f = 0; f < filas.length; f++) {
         let medalla = {};
 
         if (medallas.some(n => n.Nombre === filas[f].Nombre)) { //si esa medalla ya se ha insertado 
             let t = medallas.filter(n => n.Nombre === filas[f].Nombre);   //se busca en el array
-            t[0].num++; //se añade la nueva etiqueta a su array de etiquetas
+            t[0].num++;
         } else {  //si no está en el array, se crea un objeto nuevo y se inserta
             medalla.Nombre = filas[f].Nombre;
             medalla.Metal = filas[f].Metal;
             medalla.num = 1;
             medallas.push(medalla);
-        }   
+        } 
+        switch(filas[f].Metal){
+            case "bronce": contBronce++;break;
+            case "plata": contPlata++;break;
+            case "oro": contOro++;break;
+        } 
     }
-
-    return medallas;
+    todoMedallas ={"contBronce":contBronce, "contPlata":contPlata, "contOro":contOro, "medallas": medallas};
+    return todoMedallas;
 }
 module.exports = DAOusuarios;

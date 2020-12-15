@@ -60,31 +60,43 @@
 
                 <div id="boxMedallas" style="display:flex">
                     <div id="boxBronce">
-                        <p>BRONCE</p>
-                        <% medallas.forEach(function(medalla, medallas){ if(medalla.Metal=="bronce" ){ %>
+                        <p>BRONCE: (<%= todoMedallas.contBronce%>)</p>
+                        <%
+                        for(let i=0; i < todoMedallas.medallas.length; ++i){ if(todoMedallas.medallas[i].Metal=="bronce" ){ %>
                             <div class=medallas>
                                 <div class="circuloBronce"></div>
-                                <%=medalla.Nombre%>
+                                <%=todoMedallas.medallas[i].Nombre%>
+                                <%if(todoMedallas.medallas[i].num >1){%>
+                                    <label>x</label>  <%=todoMedallas.medallas[i].num%>
+                                <%}%>
                             </div>
-                            <%}});%>
+                        <%}}%>
                     </div>
                     <div id="boxPlata">
-                        <p>PLATA</p>
-                        <% medallas.forEach(function(medalla, medallas){ if(medalla.Metal=="plata" ){ %>
+                        <p>PLATA: (<%= todoMedallas.contPlata%>)</p>
+                        <%
+                        for(let i=0; i < todoMedallas.medallas.length; ++i){ if(todoMedallas.medallas[i].Metal=="plata" ){ %>
                             <div class=medallas>
                                 <div class="circuloPlata"></div>
-                                <%=medalla.Nombre%>
+                                <%=todoMedallas.medallas[i].Nombre%>
+                                <%if(todoMedallas.medallas[i].num >1){%>
+                                    <label>x</label>  <%=todoMedallas.medallas[i].num%>
+                                <%}%>
                             </div>
-                        <%}});%>
+                        <%}}%>
                     </div>
                     <div id="boxOro">
-                        <p>ORO</p>
-                        <% medallas.forEach(function(medalla, medallas){ if(medalla.Metal=="oro" ){ %>
+                        <p>ORO: <%= todoMedallas.contOro%></p>
+                        <%
+                        for(let i=0; i < todoMedallas.medallas.length; ++i){ if(todoMedallas.medallas[i].Metal=="oro" ){ %>
                             <div class=medallas>
-                                <div class="circuloOro"> </div>
-                                <%=medalla.Nombre%>
+                                <div class="circuloOro"></div>
+                                <%=todoMedallas.medallas[i].Nombre%>
+                                <%if(todoMedallas.medallas[i].num >1){%>
+                                    <label>x</label>  <%=todoMedallas.medallas[i].num%>
+                                <%}%>
                             </div>
-                        <%}});%>
+                        <%}}%>
                     </div>
 
                 </div>

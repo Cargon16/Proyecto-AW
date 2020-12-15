@@ -549,12 +549,10 @@ Codigo paginaPerfilUsuario.php
 #boxBronce{
     display: flex;
     width: 33.3%;
-    height: 74%;
     margin-top: 2%;
     align-items: center;
     flex-direction: column;
     text-align: center;
-
 }
 
 #boxBronce p{
@@ -570,7 +568,6 @@ Codigo paginaPerfilUsuario.php
 #boxPlata{
     display: flex;
     width: 33.3%;
-    height: 74%;
     margin-top: 2%;
     align-items: center;
     flex-direction: column;
@@ -591,7 +588,6 @@ Codigo paginaPerfilUsuario.php
 #boxOro{
     display: flex;
     width: 33.3%;
-    height: 74%;
     margin-top: 2%;
     align-items: center;
     flex-direction: column;
@@ -917,6 +913,10 @@ img{
     align-items: center;
     border-radius: 5px;
     margin-top: 2%;
+    width: 40%;
+}
+.medallas label{
+    margin-left: 10%;
 }
 
 .circuloBronce {

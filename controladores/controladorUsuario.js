@@ -47,7 +47,7 @@ function perfil(request, response) {
                             "correo": request.session.correo,
                             "usuarioActual": request.session.nombreUsuario,
                             "imagen": request.session.imagen,
-                            "medallas": medallas
+                            "todoMedallas": medallas
                         });
                     });
                 });

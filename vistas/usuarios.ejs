@@ -2,45 +2,44 @@
 <html lang="es">
 
 <head>
-    <%-
-    include("headers")
-%>
+    <%- include("headers") %>
 </head>
 
 <body>
     <header>
-        <%-
-        include("headerLogged");
-    %>
+        <%- include("headerLogged"); %>
     </header>
-    <%-
-        include("busqueda");
-    %>
+    <%- include("busqueda"); %>
 
-    <div class="preguntas">
+        <div class="preguntas">
 
-        <div id="boxPregunta">
-            <div id="boxTituloPreguntas">
-                <label>Usuarios</label>
+            <div id="boxPregunta">
+                <div id="boxTituloPreguntas">
+                    <label>Usuarios</label>
+                </div>
+                <div id="todosUsuarios">
+                    <%Usuarios.forEach(function(usuario, Usuarios){ %>
+                        <div class="divUsuario">
+                            <img id="foto" src="/imagen/<%- usuario.FotoPerfil %>">
+                            <form class="nombreUsu" method="POST" action="/perfil">
+                                <input id="ident" name="ident" type="hidden" value="<%-usuario.Correo%>">
+                                <input class="btnPerfil" type="submit" value="<%- usuario.Nombre %>">
+                            </form>
+                            <div class="datosPerfil">
+                                <label>
+                                    <%-usuario.Reputacion %>
+                                </label>
+
+                                <% if(usuario.tag !=null){ %>
+                                    <p id="tag">
+                                        <%-usuario.tag%>
+                                    </p>
+                                    <%}%>
+                            </div>
+                        </div>
+                        <% });%>
+                </div>
             </div>
-            <div id="todosUsuarios">
-                <%Usuarios.forEach(function(usuario, Usuarios){ %>
-                    <div class="divUsuario">
-                        <img id="foto" src="/imagen/<%- usuario.FotoPerfil %>">
-                        <form class="nombreUsu" method="POST" action="/perfil">
-                            <input id="ident" name="ident" type="hidden" value="<%-usuario.Correo%>">
-                            <input class="btnPerfil" type="submit" value="<%- usuario.Nombre %>">
-                        </form>
-                        <label><%-usuario.Reputacion %></label>
-
-                        <%
-                        if(usuario.tag != null){ %>
-                            <label id="tag"><%-usuario.tag%></label>
-                        <%}%>
-                    </div>
-                <% });%>
-            </div>
-        </div>
 </body>
 
 </html>

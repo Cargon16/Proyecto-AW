@@ -252,7 +252,7 @@ function tratarTareas(filas) {
             tarea.Reputacion = filas[f].Reputacion;
             tarea.ID_Usuario = filas[f].ID_Usuario;
             tarea.Nombre = filas[f].Nombre;
-            tarea.FotoPerfil = filas[f].FotoPerfil;
+            tarea.FotoPerfil = filas[f].FotoPerfil; 
             tarea.tags = [];
             if (filas[f].tag !== null)
                 tarea.tags.push(filas[f].tag);

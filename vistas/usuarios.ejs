@@ -27,12 +27,16 @@
                 <%Usuarios.forEach(function(usuario, Usuarios){ %>
                     <div class="divUsuario">
                         <img id="foto" src="/imagen/<%- usuario.FotoPerfil %>">
-                        <form method="POST" action="/perfil">
+                        <form class="nombreUsu" method="POST" action="/perfil">
                             <input id="ident" name="ident" type="hidden" value="<%-usuario.Correo%>">
                             <input class="btnPerfil" type="submit" value="<%- usuario.Nombre %>">
                         </form>
                         <label><%-usuario.Reputacion %></label>
-                        <label><%- usuario.tag %></label>
+
+                        <%
+                        if(usuario.tag != null){ %>
+                            <label id="tag"><%-usuario.tag%></label>
+                        <%}%>
                     </div>
                 <% });%>
             </div>

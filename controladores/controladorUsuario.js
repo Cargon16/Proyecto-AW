@@ -180,13 +180,14 @@ function usuarioRegistrado(request, response) {
 }
 
 function usuarios(request, response){
-    daoUsuario.getUsuarios(function (err, existe) {
+    daoUsuario.getUsuarios(function (err, usuarios) {
         if (err) {
             response.status(500);
             console.log("procesarLogin_post" + err);
         } else {
+
             response.render("usuarios", {
-                "Usuarios": existe,
+                "Usuarios": usuarios,
                 "usuarioActual": request.session.nombreUsuario,
                 "correo": request.session.correo,
                 "imagen": request.session.imagen

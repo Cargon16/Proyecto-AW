@@ -295,18 +295,23 @@ class DAOusuarios {
                 callback(new Error("Error de conexión a la base de datos"));
             }
             else {
-                connection.query("SELECT tag , COUNT(tag) AS MostTag, usuarios.Correo, usuarios.Nombre, usuarios.Reputacion, usuarios.FotoPerfil FROM tag, preguntas, usuarios WHERE tag.ID_Pregunta = preguntas.ID_Pregunta AND preguntas.ID_Usuario = usuarios.Correo GROUP BY tag ORDER BY tag DESC LIMIT 1;",
+                //connection.query("SELECT * FROM usuarios;",
+                connection.query("SELECT (SELECT tag.tag  FROM tag LEFT JOIN preguntas ON tag.ID_Pregunta=preguntas.ID_Pregunta\
+                    WHERE preguntas.ID_Usuario=u1.Correo GROUP BY tag ORDER BY tag DESC LIMIT 1) AS tag, u1.Correo, u1.Nombre, u1.Reputacion, u1.FotoPerfil\
+                    FROM usuarios u1;",
                     function (err, rows) {
+
                         connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
-                        else {
+                        else {                         
                             callback(null, rows);
                         }
                     });
             }
         }
+        
         );
     }
 }

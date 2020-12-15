@@ -860,12 +860,10 @@ pagina preguntas.html y resultados.html
     margin-right: auto;
     width: auto;
     height: auto;
+
+    display: flex;
     
-    display: grid;
-    grid-template-rows:auto auto auto auto auto auto;
-    grid-template-columns: auto auto auto auto auto auto;
-    grid-column-gap: 3%;
-    grid-row-gap: 3%;
+    border: 2px solid green;
    
 
 }
@@ -873,7 +871,11 @@ pagina preguntas.html y resultados.html
    
     padding-top: 10%;
     padding-bottom: 20%;
-    min-width: 100%;
+
+    width: 30%;
+    height: 30%;
+
+    float: left;
 
     text-align: center;
     align-items: center;
@@ -886,6 +888,7 @@ pagina preguntas.html y resultados.html
     border: 1px solid rgb(126, 126, 126);
     background-color: whitesmoke;
     border-radius: 10%;
+    border: 2px solid red;
 }
 
 #tag{

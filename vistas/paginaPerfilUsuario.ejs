@@ -60,7 +60,7 @@
 
                 <div id="boxMedallas" style="display:flex">
                     <div id="boxBronce">
-                        <p>BRONCE: (<%= todoMedallas.contBronce%>)</p>
+                        <p>BRONCE: <%= todoMedallas.contBronce%></p>
                         <%
                         for(let i=0; i < todoMedallas.medallas.length; ++i){ if(todoMedallas.medallas[i].Metal=="bronce" ){ %>
                             <div class=medallas>
@@ -73,7 +73,7 @@
                         <%}}%>
                     </div>
                     <div id="boxPlata">
-                        <p>PLATA: (<%= todoMedallas.contPlata%>)</p>
+                        <p>PLATA: <%= todoMedallas.contPlata%></p>
                         <%
                         for(let i=0; i < todoMedallas.medallas.length; ++i){ if(todoMedallas.medallas[i].Metal=="plata" ){ %>
                             <div class=medallas>

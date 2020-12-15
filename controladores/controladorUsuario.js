@@ -38,21 +38,24 @@ function perfil(request, response) {
         if (success) {
             daoUsuario.getUserQuestionNumber(request.body.ident, function (info, numero) {
                 daoUsuario.getUserAnswerNumber(request.body.ident, function (info, respuestas) {
-                    response.status(200);
-                    response.render("paginaPerfilUsuario", {
-                        "usuario": success,
-                        "numeroPreguntas": numero.cuenta,
-                        "numeroRespuestas": respuestas.cuenta,
-                        "correo": request.session.correo,
-                        "usuarioActual": request.session.nombreUsuario,
-                        "imagen": request.session.imagen
+                    daoUsuario.getUsuariosMedallas(request.body.ident, function (info, medallas) {
+                        response.status(200);
+                        response.render("paginaPerfilUsuario", {
+                            "usuario": success,
+                            "numeroPreguntas": numero.cuenta,
+                            "numeroRespuestas": respuestas.cuenta,
+                            "correo": request.session.correo,
+                            "usuarioActual": request.session.nombreUsuario,
+                            "imagen": request.session.imagen,
+                            "todoMedallas": medallas
+                        });
                     });
                 });
             });
         } else {
             response.status(404);
             console.log("No existe ese usuario");
-            
+
         }
     });
 }
@@ -132,9 +135,9 @@ function usuarioRegistrado(request, response) {
                     fs.copyFile('./public/imagenPre/' + files[ranNum], './public/imagen/' + files[ranNum], (err) => {
                         if (err) throw err;
                         else
-                        fs.rename('./public/imagen/' + files[ranNum], './public/imagen/' + request.body.emailUsuario + '.png', function (err) {
-                            if (err) console.log('ERROR: ' + err);
-                        });
+                            fs.rename('./public/imagen/' + files[ranNum], './public/imagen/' + request.body.emailUsuario + '.png', function (err) {
+                                if (err) console.log('ERROR: ' + err);
+                            });
                     });
 
                     name = request.body.emailUsuario + '.png';
@@ -179,7 +182,7 @@ function usuarioRegistrado(request, response) {
     }
 }
 
-function usuarios(request, response){
+function usuarios(request, response) {
     daoUsuario.getUsuarios(function (err, usuarios) {
         if (err) {
             response.status(500);

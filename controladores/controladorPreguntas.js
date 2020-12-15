@@ -7,8 +7,9 @@ const express = require('express');
 const usuariosDAO = require("../usuarios/DAOusuarios");
 const daoUsuarios = new usuariosDAO(pool);
 const preguntasDAO = require("../preguntas/DAOpreguntas");
-const DAOpreguntas = require("../preguntas/DAOpreguntas");
 const daoPreguntas = new preguntasDAO(pool);
+const medallasDAO = require("../medallas/DAOmedallas");
+const daoMedallas = new medallasDAO(pool);
 
 function preguntas(request, response) {
     daoPreguntas.getPreguntas(function (err, preguntas) {
@@ -112,20 +113,23 @@ function preguntasSinResponder(request, response) {
 function getPregunta(request, response) {
     daoPreguntas.setVisitas(request.params.id, function (err, devuelve) {
         daoPreguntas.getPregunta(request.params.id, function (err, pregunta) {
-            daoPreguntas.getRespuestasPregunta(request.params.id, function (err, respuestas) {
-                if (err) {
-                    response.status(404);
-                } else {
-                    response.status(200);
-                    response.render("pregunta", {
-                        "pregunta": pregunta,
-                        "respuestas": respuestas,
-                        "imagen": request.session.imagen,
-                        "usuarioActual": request.session.nombreUsuario,
-                        "correo": request.session.correo
-                    });
-                }
+            daoMedallas.setMedallaPreguntaVisitas(pregunta, function (err, res) {
+                daoPreguntas.getRespuestasPregunta(request.params.id, function (err, respuestas) {
+                    if (err) {
+                        response.status(404);
+                    } else {
+                        response.status(200);
+                        response.render("pregunta", {
+                            "pregunta": pregunta,
+                            "respuestas": respuestas,
+                            "imagen": request.session.imagen,
+                            "usuarioActual": request.session.nombreUsuario,
+                            "correo": request.session.correo
+                        });
+                    }
+                });
             });
+
         });
     });
 }
@@ -197,29 +201,32 @@ function procesarVoto(request, response) {
     daoUsuarios.hasUserVoteThatQuestion(pregunta, function (err, res) {
         if (!res) {
             daoPreguntas.setVotosPregunta(pregunta, function (err, devuelve) {
-                daoUsuarios.setUserReputation(pregunta, function (err, resultado) {
+                daoMedallas.setMedallaPreguntaVotos(pregunta, function (err, ret) {
+                    daoUsuarios.setUserReputation(pregunta, function (err, resultado) {
 
-                    if (err) {
-                        response.status(404);
-                    } else {
-                        daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
-                            daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
-                                if (err) {
-                                    response.status(404);
-                                } else {
-                                    response.status(200);
-                                    response.render("pregunta", {
-                                        "pregunta": pregunta,
-                                        "respuestas": respuestas,
-                                        "imagen": request.session.imagen,
-                                        "usuarioActual": request.session.nombreUsuario,
-                                        "correo": request.session.correo
-                                    });
-                                }
+                        if (err) {
+                            response.status(404);
+                        } else {
+                            daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
+                                daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
+                                    if (err) {
+                                        response.status(404);
+                                    } else {
+                                        response.status(200);
+                                        response.render("pregunta", {
+                                            "pregunta": pregunta,
+                                            "respuestas": respuestas,
+                                            "imagen": request.session.imagen,
+                                            "usuarioActual": request.session.nombreUsuario,
+                                            "correo": request.session.correo
+                                        });
+                                    }
+                                });
                             });
-                        });
-                    }
+                        }
+                    });
                 });
+
             });
         }
         else {
@@ -260,33 +267,33 @@ function procesarVotoRespuesta(request, response) {
         "ID_respuesta": request.body.respuesta
     };
 
-    console.log(respuesta);
     daoUsuarios.hasUserVoteThatAnswer(respuesta, function (err, res) {
-        console.log(res);
         if (!res) {
             daoPreguntas.setVotosRespuesta(respuesta, function (err, devuelve) {
-                daoUsuarios.setUserReputation(respuesta, function (err, resultado) {
+                daoMedallas.setMedallaRespuestaVotos(respuesta, function(err, res){
+                    daoUsuarios.setUserReputation(respuesta, function (err, resultado) {
 
-                    if (err) {
-                        response.status(404);
-                    } else {
-                        daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
-                            daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
-                                if (err) {
-                                    response.status(404);
-                                } else {
-                                    response.status(200);
-                                    response.render("pregunta", {
-                                        "pregunta": pregunta,
-                                        "respuestas": respuestas,
-                                        "imagen": request.session.imagen,
-                                        "usuarioActual": request.session.nombreUsuario,
-                                        "correo": request.session.correo
-                                    });
-                                }
+                        if (err) {
+                            response.status(404);
+                        } else {
+                            daoPreguntas.getPregunta(request.body.id, function (err, pregunta) {
+                                daoPreguntas.getRespuestasPregunta(request.body.id, function (err, respuestas) {
+                                    if (err) {
+                                        response.status(404);
+                                    } else {
+                                        response.status(200);
+                                        response.render("pregunta", {
+                                            "pregunta": pregunta,
+                                            "respuestas": respuestas,
+                                            "imagen": request.session.imagen,
+                                            "usuarioActual": request.session.nombreUsuario,
+                                            "correo": request.session.correo
+                                        });
+                                    }
+                                });
                             });
-                        });
-                    }
+                        }
+                    });
                 });
             });
         }

@@ -532,7 +532,7 @@ Codigo paginaPerfilUsuario.php
     margin-left: auto;
     margin-right: auto;
 
-    align-items: center;
+    text-align: center;
 
     
 }
@@ -540,40 +540,34 @@ Codigo paginaPerfilUsuario.php
 #boxMedallas{
     width: 100%;
     height: 100%;
+    text-align: center;
 }
 
 #boxBronce{
-    position: flex;
-    width: 32%;
-    height: 74%;
-
-    float: left;
+    display: flex;
+    width: 33.3%;
     margin-top: 2%;
-   
-
+    align-items: center;
+    flex-direction: column;
     text-align: center;
-
 }
 
 #boxBronce p{
     width: 60%;
     height: 20%;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 10px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(219, 141, 23, 0.705);
 }
 
 #boxPlata{
-    position: flex;
-    width: 32%;
-    height: 74%;
-
-    float: left;
+    display: flex;
+    width: 33.3%;
     margin-top: 2%;
-    margin-left: 1%;
-    
+    align-items: center;
+    flex-direction: column;
     text-align: center;
 
 }
@@ -581,34 +575,29 @@ Codigo paginaPerfilUsuario.php
 #boxPlata p{
     width: 60%;
     height: 20%;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 10px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(192, 192, 192, 0.699);
 }
 
 #boxOro{
-    position: flex;
-    width: 32%;
-    height: 74%;
-
+    display: flex;
+    width: 33.3%;
     margin-top: 2%;
-    margin-left: 1%;
-    float: right;
-    display: left;
-
+    align-items: center;
+    flex-direction: column;
     text-align: center;
-
 }
 
 #boxOro p{
+    display: flex;
     width: 60%;
     height: 20%;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 10px;
-   
+    align-items: center;
+    justify-content: center;
     background-color: rgba(255, 238, 4, 0.651);
 }
 
@@ -920,4 +909,41 @@ pagina preguntas.html y resultados.html
 }
 img{
    border-radius: 50%;
+}
+
+.medallas{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(34, 32, 32);
+    color:white;
+    padding:1%;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 2%;
+    width: 40%;
+}
+.medallas label{
+    margin-left: 10%;
+}
+
+.circuloBronce {
+    margin-right: 5%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background:  rgba(219, 141, 23, 0.705);
+}
+.circuloPlata {
+    margin-right: 5%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background:rgba(192, 192, 192, 0.699);
+}
+.circuloOro {
+    margin-right: 5%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 238, 4, 0.651);
 }

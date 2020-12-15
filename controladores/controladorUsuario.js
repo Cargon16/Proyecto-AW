@@ -7,7 +7,7 @@ const express = require('express');
 const fs = require("fs");
 
 
-const UserDAO = require("../usuarios/DAOusuarios");
+const UserDAO = require("../preguntas/DAOusuarios");
 const daoUsuario = new UserDAO(pool);
 
 function root(request, response) {

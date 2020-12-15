@@ -2,73 +2,95 @@
 <html lang="es">
 
 <head>
-    <%-
-         include("headers")
-    %>
+    <%- include("headers") %>
 </head>
 
 <body>
     <header>
-        <%-
-            include("headerLogged");
-        %>
+        <%- include("headerLogged"); %>
     </header>
 
-    <%-
-    include("busqueda");
-    %>
+    <%- include("busqueda"); %>
 
 
-    <div id="boxPerfil">
-        <div id="boxSuperior">
-            <div id="boxUsuario">
-                <img src="/imagen/<%- usuario.FotoPerfil %>">
-                <h2><%- usuario.Nombre %></h2>
-                <h2>Miembro desde: <%- usuario.FechaAlta.getDate()+"/"+ usuario.FechaAlta.getMonth()+"/"+usuario.FechaAlta.getFullYear() %></h2>
-            </div>
-
-            <div id="boxEstadistica">
-                <div id="boxTextEstadisticas">
-                    <p id="text_estadisticas">ESTADISTICAS</p>
-                </div>
-                <div id="boxReputacion" style="display:flex">
-                    <div id="boxPreguntas">
-                        <h2>Preguntas</h2>
-                        <p class="datos"><%- numeroPreguntas %></p>
-                    </div>
-                    <div id="boxRepu">
-                        <h2>Reputacion</h2>
-                        <p class="datos"><%- usuario.Reputacion %></p>
-                    </div>
-                    <div id="boxRespuestas">
-                        <h2>Respuestas</h2>
-                        <p class="datos"><%- numeroRespuestas %></p>
-                    </div>
+        <div id="boxPerfil">
+            <div id="boxSuperior">
+                <div id="boxUsuario">
+                    <img src="/imagen/<%- usuario.FotoPerfil %>">
+                    <h2>
+                        <%- usuario.Nombre %>
+                    </h2>
+                    <h2>Miembro desde: <%- usuario.FechaAlta.getDate()+"/"+
+                            usuario.FechaAlta.getMonth()+"/"+usuario.FechaAlta.getFullYear() %>
+                    </h2>
                 </div>
 
-            </div>
+                <div id="boxEstadistica">
+                    <div id="boxTextEstadisticas">
+                        <p id="text_estadisticas">ESTADISTICAS</p>
+                    </div>
+                    <div id="boxReputacion" style="display:flex">
+                        <div id="boxPreguntas">
+                            <h2>Preguntas</h2>
+                            <p class="datos">
+                                <%- numeroPreguntas %>
+                            </p>
+                        </div>
+                        <div id="boxRepu">
+                            <h2>Reputacion</h2>
+                            <p class="datos">
+                                <%- usuario.Reputacion %>
+                            </p>
+                        </div>
+                        <div id="boxRespuestas">
+                            <h2>Respuestas</h2>
+                            <p class="datos">
+                                <%- numeroRespuestas %>
+                            </p>
+                        </div>
+                    </div>
 
+                </div>
+
+            </div>
+            <div id="boxInferior">
+                <div id="boxTextMedallas">
+                    <p id="text_medallas">MEDALLAS</p>
+                </div>
+
+                <div id="boxMedallas" style="display:flex">
+                    <div id="boxBronce">
+                        <p>BRONCE</p>
+                        <% medallas.forEach(function(medalla, medallas){ if(medalla.Metal=="bronce" ){ %>
+                            <div class=medallas>
+                                <div class="circuloBronce"></div>
+                                <%=medalla.Nombre%>
+                            </div>
+                            <%}});%>
+                    </div>
+                    <div id="boxPlata">
+                        <p>PLATA</p>
+                        <% medallas.forEach(function(medalla, medallas){ if(medalla.Metal=="plata" ){ %>
+                            <div class=medallas>
+                                <div class="circuloPlata"></div>
+                                <%=medalla.Nombre%>
+                            </div>
+                        <%}});%>
+                    </div>
+                    <div id="boxOro">
+                        <p>ORO</p>
+                        <% medallas.forEach(function(medalla, medallas){ if(medalla.Metal=="oro" ){ %>
+                            <div class=medallas>
+                                <div class="circuloOro"> </div>
+                                <%=medalla.Nombre%>
+                            </div>
+                        <%}});%>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
-        <div id="boxInferior">
-            <div id="boxTextMedallas">
-                <p id="text_medallas">MEDALLAS</p>
-            </div>
-
-            <div id="boxMedallas" style="display:flex">
-                <div id="boxBronce">
-                    <p>BRONCE</p>
-                </div>
-                <div id="boxPlata">
-                    <p>PLATA</p>
-                </div>
-                <div id="boxOro">
-                    <p>ORO</p>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
 </body>
 
 </html>

@@ -314,6 +314,49 @@ class DAOusuarios {
         
         );
     }
-}
 
+    getUsuariosMedallas(id_Usuario, callback){
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+                connection.query("SELECT medallas.Metal, medallas.Nombre FROM medallas WHERE id_usuario = ?",
+                [id_Usuario],
+                    function (err, rows) {
+
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {               
+                            let medallas = tratarMedallas(rows);          
+                            callback(null, medallas);
+                        }
+                    });
+            }
+        }
+        
+        );
+    }
+}
+function tratarMedallas(filas) {
+    let medallas = [];
+
+    for (let f = 0; f < filas.length; f++) {
+        let medalla = {};
+
+        if (medallas.some(n => n.Nombre === filas[f].Nombre)) { //si esa medalla ya se ha insertado 
+            let t = medallas.filter(n => n.Nombre === filas[f].Nombre);   //se busca en el array
+            t[0].num++; //se añade la nueva etiqueta a su array de etiquetas
+        } else {  //si no está en el array, se crea un objeto nuevo y se inserta
+            medalla.Nombre = filas[f].Nombre;
+            medalla.Metal = filas[f].Metal;
+            medalla.num = 1;
+            medallas.push(medalla);
+        }   
+    }
+
+    return medallas;
+}
 module.exports = DAOusuarios;

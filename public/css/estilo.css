@@ -22,11 +22,10 @@ Codigo login.php y registro.php
 */
 
 .boxFormulario{
-    position: absolute;
+
+    display: flex;
     margin-top: 0.5%;
     width: 100%;
-    height: 60%;
-   
 }
 
 .formularios{
@@ -218,16 +217,14 @@ Codigo busqueda.html
 
 .busquedas{
     width: 100%;
-    height: 20%;
     position: absolute;
     align-items: center;
-   
-    
+    display: flex;
 }
 
 .busquedas input{
     width: 85%;
-    height: 30%;
+    height: 40%;
     margin-top: 1%;
     margin-bottom: 3%;
 
@@ -235,14 +232,14 @@ Codigo busqueda.html
 
     border: 1px solid #989898;
     box-sizing: border-box;
-    border-radius: 5px;
-    background: url(../iconos/buscar.png) no-repeat scroll 7px 7px #FFFCFC;
-    padding-left: 30px;
+    border-radius: 10px;
+    background: url(../iconos/buscar.png) no-repeat scroll 4px 4px #FFFCFC;
+    padding-left: 2%;
 }
 
 .busquedas button{
     width: 5%;
-    height: 30%;
+    height: 40%;
 
     margin-top: 1%;
     margin-bottom: 3%;
@@ -680,19 +677,29 @@ pagina preguntas.html y resultados.html
     margin-left: auto;
 }
 
+.preguntas{
+    
+    margin-top: 0.5%;
+    width: 100%;
+    height: 60%;
+}
+
 .pregunta{
     width: 100%;
 
-    border: 2px solid black;
+    
+    margin-bottom: 1%;
+    border: 2px solid rgb(117, 117, 117);
     margin-top: 4%;
     background-color: white;
     margin-right: 3%;
     margin-left: 3%;
     display: flex;
     flex-direction: row;
+    border-radius: 10px;
    
-
 }
+
 
 .info{
 

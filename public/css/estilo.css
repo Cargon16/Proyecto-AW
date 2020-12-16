@@ -752,6 +752,7 @@ pagina preguntas.html y resultados.html
     font-weight: bold;
 }
 .tag{
+    text-decoration: none;
     width: 5% !important;
     margin-left: 1%;
     background-color: #cfcdcdc7;
@@ -759,6 +760,8 @@ pagina preguntas.html y resultados.html
     padding: 0.5% !important;
     text-align: center;
     justify-content: center;
+    font-weight: bold;
+    color: rgb(17, 117, 184);
 }
 
 .btnPerfil{
@@ -891,13 +894,16 @@ pagina preguntas.html y resultados.html
     align-content: center;
 }
 #tag{
-    padding: 2%;
+    text-decoration: none;
     border-radius: 10px;
     text-align: center;
     justify-content: center;
     align-items: center;
     background-color: #cfcdcdc7;
-    width: 10%;
+    width: 20%;
+    font-weight: bold;
+    color: rgb(17, 117, 184);
+    
 }
 
 .nombreUsu{

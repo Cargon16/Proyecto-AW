@@ -258,8 +258,8 @@ class DAOpreguntas {
             if (error) {
                 callback(new Error("Error de conexion a la base de datos."), null);
             } else {
-                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Visitas, preguntas.Votos, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
-                usuarios.Nombre, usuarios.FotoPerfil, tag.tag FROM preguntas LEFT JOIN tag ON preguntas.ID_Pregunta = tag.ID_Pregunta LEFT JOIN usuarios ON preguntas.ID_Usuario = usuarios.Correo WHERE tag.tag LIKE ? ORDER BY preguntas.Fecha DESC",
+                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Visitas, preguntas.Votos, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario,\
+                usuarios.Nombre, usuarios.FotoPerfil, tag.tag FROM preguntas LEFT JOIN tag ON preguntas.ID_Pregunta = tag.ID_Pregunta LEFT JOIN usuarios ON preguntas.ID_Usuario = usuarios.Correo WHERE ? = SOME(SELECT tag.tag FROM tag WHERE tag.ID_Pregunta = preguntas.ID_Pregunta) ORDER BY preguntas.Fecha DESC",
                  [tag],
                   function (err, result) {
                     connection.release();

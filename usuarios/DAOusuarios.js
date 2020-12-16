@@ -19,7 +19,7 @@ class DAOusuarios {
 
                 today = yyyy + '/' + mm + '/' + dd;
                 const sql = "INSERT INTO usuarios (Correo, Contraseña, Nombre, Reputacion, FechaAlta, FotoPerfil) VALUES (?,?,?,?,?,?);";
-                let userData = [usuario.email, usuario.password, usuario.nombreMostrar, 0, today, usuario.fotoPerfil];
+                let userData = [usuario.email, usuario.password, usuario.nombreMostrar, 1, today, usuario.fotoPerfil];
                 connection.query(sql, userData, function (err, result) {
                     connection.release();
                     if (err) {
@@ -199,7 +199,7 @@ class DAOusuarios {
                 callback(new Error("Error de conexión a la base de datos"));
             }
             else {
-                connection.query("UPDATE usuarios SET Reputacion = Reputacion + ? WHERE Correo = ?",
+                connection.query("UPDATE usuarios SET Reputacion = GREATEST(1, Reputacion + ?) WHERE Correo = ?",
                     [pregunta.v, pregunta.usuarioActual],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión

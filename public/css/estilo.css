@@ -237,10 +237,10 @@ Codigo busqueda.html
     padding-left: 2%;
 }
 
-.busquedas button{
+#buttonBuscar{
     width: 5%;
     height: 40%;
-
+    padding-left: 0;
     margin-top: 1%;
     margin-bottom: 3%;
     margin-right: 0.2%;

@@ -15,7 +15,7 @@
             <%
             let obj = pregunta.tags;
             for(let i =0; i < obj.length; ++i){ %>
-            <div class= "tag"><%= obj[i] %></div>
+            <a class= "tag" href="/preguntas/etiqueta/<%- obj[i] %>"><%= obj[i] %></a>
             <% }; %>
         </div>
 

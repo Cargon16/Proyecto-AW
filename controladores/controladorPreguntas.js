@@ -317,6 +317,39 @@ function procesarVotoRespuesta(request, response) {
         }
     });
 }
+function buscaPregunta(request, response){
+    daoPreguntas.getPreguntaFiltrada(request.body.Buscar,function (err, preguntas){
+        if (err) {
+            response.status(500);
+            console.log("busquedaPregunta_post" + err);
+        } else {
+
+            response.render("paginaPreguntasFiltradas", {
+                "preguntas": preguntas,
+                "usuarioActual": request.session.nombreUsuario,
+                "correo": request.session.correo,
+                "imagen": request.session.imagen
+            });
+        }
+    })
+}
+
+function preguntasEtiqueta(request, response){
+    daoPreguntas.getPreguntaPorEtiqueta(request.params.id,function (err, preguntas){
+        if (err) {
+            response.status(500);
+            console.log("busquedaPregunta_post" + err);
+        } else {
+
+            response.render("paginaPreguntasFiltradas", {
+                "preguntas": preguntas,
+                "usuarioActual": request.session.nombreUsuario,
+                "correo": request.session.correo,
+                "imagen": request.session.imagen
+            });
+        }
+    })
+}
 
 module.exports = {
     preguntas,
@@ -326,5 +359,7 @@ module.exports = {
     getPregunta,
     procesarCrearRespuesta,
     procesarVoto,
-    procesarVotoRespuesta
+    procesarVotoRespuesta,
+    buscaPregunta,
+    preguntasEtiqueta
 }

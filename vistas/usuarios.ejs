@@ -38,9 +38,7 @@
                                 </label>
 
                                 <% if(usuario.tag !=null){ %>
-                                    <p id="tag">
-                                        <%-usuario.tag%>
-                                    </p>
+                                    <a id= "tag" href="/preguntas/etiqueta/<%-usuario.tag%>"><%=usuario.tag%></a>
                                     <%}%>
                             </div>
                         </div>

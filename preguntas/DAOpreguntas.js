@@ -231,7 +231,49 @@ class DAOpreguntas {
             }
         })
     }
+    getPreguntaFiltrada(filtro, callback) {
+        this.pool.getConnection(function (error, connection) {
+            if (error) {
+                callback(new Error("Error de conexion a la base de datos."), null);
+            } else {
+                let filtrado = "%" + filtro + "%";
+                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Visitas, preguntas.Votos, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario, \
+                usuarios.Nombre, usuarios.FotoPerfil, tag.tag FROM preguntas LEFT JOIN tag ON preguntas.ID_Pregunta = tag.ID_Pregunta LEFT JOIN usuarios ON preguntas.ID_Usuario = usuarios.Correo WHERE preguntas.Titulo LIKE ? OR preguntas.Cuerpo LIKE ? ORDER BY preguntas.Fecha DESC",
+                 [filtrado, filtrado],
+                  function (err, result) {
+                    connection.release();
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"), null);
+                    } else {
+                        let preguntas = tratarTareas(result);
+                        callback(null, preguntas);
+                    }
+                });
+            }
+        })
+    }
 
+    getPreguntaPorEtiqueta(tag, callback){
+        this.pool.getConnection(function (error, connection) {
+            if (error) {
+                callback(new Error("Error de conexion a la base de datos."), null);
+            } else {
+                connection.query("SELECT preguntas.ID_Pregunta, preguntas.Titulo, preguntas.Visitas, preguntas.Votos, preguntas.Cuerpo, preguntas.Fecha, preguntas.Reputacion, preguntas.ID_Usuario,\
+                usuarios.Nombre, usuarios.FotoPerfil, tag.tag FROM preguntas LEFT JOIN tag ON preguntas.ID_Pregunta = tag.ID_Pregunta LEFT JOIN usuarios ON preguntas.ID_Usuario = usuarios.Correo WHERE ? = SOME(SELECT tag.tag FROM tag WHERE tag.ID_Pregunta = preguntas.ID_Pregunta) ORDER BY preguntas.Fecha DESC",
+                 [tag],
+                  function (err, result) {
+                    connection.release();
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"), null);
+                    } else {
+                        console.log(result);
+                        let preguntas = tratarTareas(result);
+                        callback(null, preguntas);
+                    }
+                });
+            }
+        })
+    }
 }
 function tratarTareas(filas) {
     let tareas = [];
@@ -239,7 +281,7 @@ function tratarTareas(filas) {
     for (let f = 0; f < filas.length; f++) {
         let tarea = {};
 
-        if (tareas.some(n => n.ID_Pregunta === filas[f].ID_Pregunta)) { //si esa tarea ya se ha insertado 
+        if (tareas.some(n => n.ID_Pregunta === filas[f].ID_Pregunta)) { //si esa pregunta ya se ha insertado 
             let t = tareas.filter(n => n.ID_Pregunta === filas[f].ID_Pregunta);   //se busca en el array
             t[0].tags.push(filas[f].tag); //se añade la nueva etiqueta a su array de etiquetas
         } else {  //si no está en el array, se crea un objeto nuevo y se inserta
@@ -252,13 +294,13 @@ function tratarTareas(filas) {
             tarea.Reputacion = filas[f].Reputacion;
             tarea.ID_Usuario = filas[f].ID_Usuario;
             tarea.Nombre = filas[f].Nombre;
-            tarea.FotoPerfil = filas[f].FotoPerfil; 
+            tarea.FotoPerfil = filas[f].FotoPerfil;
             tarea.tags = [];
             if (filas[f].tag !== null)
                 tarea.tags.push(filas[f].tag);
 
             tareas.push(tarea);
-        }   
+        }
     }
 
     return tareas;

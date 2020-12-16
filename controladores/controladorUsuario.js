@@ -12,7 +12,7 @@ const daoUsuario = new UserDAO(pool);
 
 function root(request, response) {
     response.status(200);
-    response.redirect("/login")
+    response.redirect("/login");
 }
 
 function login(request, response) {
@@ -54,8 +54,6 @@ function perfil(request, response) {
             });
         } else {
             response.status(404);
-            console.log("No existe ese usuario");
-
         }
     });
 }
@@ -163,15 +161,12 @@ function usuarioRegistrado(request, response) {
                 response.status(500);
                 console.log(err + " post_usuarioRegistrado");
                 response.render("registro", {
-                    "msg": "Error al crear usuario"
+                    "msg": err
                 })
             } else {
                 response.status(200);
                 if (insertado) {
-                    response.render("login", {
-                        "msg": "Usuario creado.",
-                        "imagen": usuario.fotoPerfil
-                    })
+                    response.redirect("/login");
                 } else {
                     response.render("registro", {
                         "msg": "Error al crear usuario"

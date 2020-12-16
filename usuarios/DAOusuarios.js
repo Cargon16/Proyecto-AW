@@ -344,7 +344,7 @@ class DAOusuarios {
 
         let nombre="%" + nombreUsuario + "%";
 
-        console.log(nombre);
+  
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));

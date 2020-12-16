@@ -343,11 +343,6 @@ class DAOusuarios {
     getUsuarioFiltrado(nombreUsuario, callback) {
 
         let nombre="%" + nombreUsuario + "%";
-<<<<<<< HEAD
-
-  
-=======
->>>>>>> dea4c364a492a9775c02a7cba2f83cf56232d530
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));

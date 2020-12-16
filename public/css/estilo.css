@@ -752,10 +752,11 @@ pagina preguntas.html y resultados.html
     font-weight: bold;
 }
 .tag{
+    width: 5% !important;
     margin-left: 1%;
     background-color: #cfcdcdc7;
     border-radius: 3px;
-    padding: 0.5%;
+    padding: 0.5% !important;
     text-align: center;
     justify-content: center;
 }

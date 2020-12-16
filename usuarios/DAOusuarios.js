@@ -305,45 +305,74 @@ class DAOusuarios {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
-                        else {                         
+                        else {
                             callback(null, rows);
                         }
                     });
             }
         }
-        
+
         );
     }
 
-    getUsuariosMedallas(id_Usuario, callback){
+    getUsuariosMedallas(id_Usuario, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             }
             else {
                 connection.query("SELECT medallas.Metal, medallas.Nombre FROM medallas WHERE id_usuario = ?",
-                [id_Usuario],
+                    [id_Usuario],
                     function (err, rows) {
 
                         connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
-                        else {               
-                            let medallas = tratarMedallas(rows);          
+                        else {
+                            let medallas = tratarMedallas(rows);
                             callback(null, medallas);
                         }
                     });
             }
         }
-        
+
+        );
+    }
+
+    getUsuarioFiltrado(nombreUsuario, callback) {
+
+        let nombre="%" + nombreUsuario + "%";
+
+        console.log(nombre);
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+                //connection.query("SELECT * FROM usuarios;",
+                connection.query("SELECT (SELECT tag.tag  FROM tag LEFT JOIN preguntas ON tag.ID_Pregunta=preguntas.ID_Pregunta\
+                        WHERE preguntas.ID_Usuario=u1.Correo GROUP BY tag ORDER BY tag DESC LIMIT 1) AS tag, u1.Correo, u1.Nombre, u1.Reputacion, u1.FotoPerfil\
+                        FROM usuarios u1 WHERE u1.Nombre LIKE ?;",[nombre],
+                    function (err, rows) {
+
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            callback(null, rows);
+                        }
+                    });
+            }
+        }
         );
     }
 }
 function tratarMedallas(filas) {
     let todoMedallas = {};
     let medallas = [];
-    let contBronce =0, contPlata =0, contOro=0;
+    let contBronce = 0, contPlata = 0, contOro = 0;
     for (let f = 0; f < filas.length; f++) {
         let medalla = {};
 
@@ -355,14 +384,14 @@ function tratarMedallas(filas) {
             medalla.Metal = filas[f].Metal;
             medalla.num = 1;
             medallas.push(medalla);
-        } 
-        switch(filas[f].Metal){
-            case "bronce": contBronce++;break;
-            case "plata": contPlata++;break;
-            case "oro": contOro++;break;
-        } 
+        }
+        switch (filas[f].Metal) {
+            case "bronce": contBronce++; break;
+            case "plata": contPlata++; break;
+            case "oro": contOro++; break;
+        }
     }
-    todoMedallas ={"contBronce":contBronce, "contPlata":contPlata, "contOro":contOro, "medallas": medallas};
+    todoMedallas = { "contBronce": contBronce, "contPlata": contPlata, "contOro": contOro, "medallas": medallas };
     return todoMedallas;
 }
 module.exports = DAOusuarios;

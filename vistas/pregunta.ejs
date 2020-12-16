@@ -33,14 +33,22 @@
                         <input type="hidden" value="<%- pregunta.ID_Pregunta%>" name="id">
                         <input type="hidden" value="<%- pregunta.ID_Usuario %>" name="usuario">
                         <input type="hidden" value="1" name="puntuacion">
+                        <% if(opt == "disabled"){%>
+                        <input type="image" src="/iconos/positive-vote.png" disabled>
+                        <%}else{%>
                         <input type="image" src="/iconos/positive-vote.png">
+                        <%}%>
                     </form>
                     <form class="voto" action="/preguntas/vote" method="POST">
                         <input type="hidden" value="-2" name="v">
                         <input type="hidden" value="<%- pregunta.ID_Pregunta%>" name="id">
                         <input type="hidden" value="<%- pregunta.ID_Usuario %>" name="usuario">
                         <input type="hidden" value="-1" name="puntuacion">
+                        <% if(opt == "disabled"){%>
+                        <input type="image" src="/iconos/negative-vote.png" disabled>
+                        <%}else{%>
                         <input type="image" src="/iconos/negative-vote.png">
+                        <%}%>
                     </form>
 
                 </div>
@@ -49,10 +57,11 @@
                         <%- pregunta.Cuerpo %>
                             <div class="tags">
                                 <%
+                                if(pregunta.tags != null){
                                 let obj = pregunta.tags.split(",");
                                 for(let i =0; i < obj.length; ++i){ %>
                                     <a class= "tag" href="/preguntas/etiqueta/<%- obj[i] %>"><%= obj[i] %></a>
-                                <% }; %>
+                                <% }}; %>
                             </div>
                     </div>
                 </div>

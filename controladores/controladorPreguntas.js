@@ -110,18 +110,28 @@ function getPregunta(request, response) {
         daoPreguntas.getPregunta(request.params.id, function (err, pregunta) {
             daoMedallas.setMedallaPreguntaVisitas(pregunta, function (err, res) {
                 daoPreguntas.getRespuestasPregunta(request.params.id, function (err, respuestas) {
-                    if (err) {
-                        response.status(404);
-                    } else {
-                        response.status(200);
-                        response.render("pregunta", {
-                            "pregunta": pregunta,
-                            "respuestas": respuestas,
-                            "imagen": request.session.imagen,
-                            "usuarioActual": request.session.nombreUsuario,
-                            "correo": request.session.correo
-                        });
-                    }
+                    let p={
+                        "usuarioLoggueado": request.session.correo,
+                        "id": pregunta.ID_Pregunta
+                    };
+                    daoUsuarios.hasVoteQuestion(p, function(err, res){
+                        if (err) {
+                            response.status(404);
+                        } else {
+                            response.status(200);
+                            let opt = "disabled";
+                            if(!res) opt= "enabled";
+                            console.log(opt);
+                            response.render("pregunta", {
+                                "pregunta": pregunta,
+                                "respuestas": respuestas,
+                                "imagen": request.session.imagen,
+                                "usuarioActual": request.session.nombreUsuario,
+                                "correo": request.session.correo,
+                                "opt": opt
+                            });
+                        }
+                    });
                 });
             });
 
@@ -214,14 +224,14 @@ function procesarVotoRespuesta(request, response) {
                         if (err) {
                             response.status(404);
                         } else {
-                            response.redirect("preguntas/pregunta/" + respuesta.id);
+                            response.redirect("/preguntas/pregunta/" + respuesta.id);
                         }
                     });
                 });
             });
         }
         else {
-            response.redirect("preguntas/pregunta/" + respuesta.id);
+            response.redirect("/preguntas/pregunta/" + respuesta.id);
         }
     });
 }

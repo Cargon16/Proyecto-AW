@@ -21,6 +21,7 @@ router.get("/usuarios", routerSessionUsuario.usuarioActual, routerUsuarios.usuar
 router.post("/procesarLogin", routerUsuarios.procesarLogin);
 router.post("/registro", multerFactory.single("perfil"), routerUsuarios.usuarioRegistrado);
 router.post("/perfil", routerSessionUsuario.usuarioActual, routerUsuarios.perfil);
+router.post("/busquedaUsuario", routerSessionUsuario.usuarioActual, routerUsuarios.busquedaUsuario); 
 module.exports = router;
 
 

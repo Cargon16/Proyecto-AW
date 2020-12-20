@@ -136,7 +136,7 @@
 
                         <form action="/preguntas/addRespuesta" method="POST" id="preguntaFormulada">
                             <label id="tituloFormulario">Tu respuesta</label>
-                            <textarea id="inputCuerpo" name="turespuesta"> </textarea>
+                            <input id="inputCuerpoRespuesta" name="turespuesta" required pattern=".*\S+.*">
                             <input type="hidden" value="<%- pregunta.ID_Pregunta%>" name="idPregunta">
                             <div>
                                 <input id="buttonCrearCuentaResp" type="submit" value="Publica tu respuesta" />

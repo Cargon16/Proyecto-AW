@@ -344,6 +344,12 @@ Codigo paginaFormularPregunta.php
     margin-bottom: 0.5%;
 }
 
+#inputCuerpoRespuesta{
+    width: 100%;
+    height: 50px;
+    margin-top: 0.1%;
+    margin-bottom: 0.5%;
+}
 /*
 Codigo paginaPerfilUsuario.php
 */
@@ -620,8 +626,6 @@ pagina preguntas.html y resultados.html
     text-align: left;
     display: flex;
     flex-direction: column;
-
-    border: 2px solid red;
 }
 
 
@@ -790,14 +794,12 @@ pagina preguntas.html y resultados.html
     height: 20%;
     font-size: 250%;
     display: flex;
-    border: 2px solid yellow;
-    word-wrap: break-word;
     margin-bottom: 2%;  
 }
 .boxTituloQuestion h1{
     font-weight: bold;
     font-size: 100%;
-    word-wrap: break-word;
+    width: 100%;
 }
 
 .visitas{

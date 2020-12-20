@@ -21,13 +21,12 @@
             <input id="inputCorreo" name="emailUsuario" type="email"> </input>
            
             <label id = "textPassword">Contraseña *</label>
-            <input id="inputPassword" type="password" name="password"> </input>
+            <input id="inputPassword" type="password" name="password" pattern=".{8,}" required onchange="this.setCustomValidity(this.validity.patternMismatch ? 'La contraseña debe tener 8 caracteres mínimo' : ''); if(this.checkValidity()) form.passwordConfirm.pattern = this.value;"> </input>
 
             <label id = "textPassword">Confirmar contraseña *</label>
-            <input id="inputPassword" type="password" name="passwordConfirm"> </input>
-
+            <input id="inputPassword" type="password" name="passwordConfirm" pattern=".{8,}" required onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Las contraseñas tienen que ser iguales' : '');""> </input>
             <label id = "textNombre">Nombre para mostrar*</label>
-            <input id="inputNombre"  name="nombreMostrar"> </input>
+            <input id="inputNombre"  name="nombreMostrar" required tittle="Debes introducir un nombre de usuario"> </input>
            
             <label id = "textPerfil">Foto de perfil*</label>
             <input id = "inputPerfil" name="perfil" type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
@@ -38,7 +37,7 @@
             <a href="login" id="buttonIniciarSesionRegi" role="button">Iniciar sesion</a>
            
         </form>
-       
+        
     </div>
    
 </body>

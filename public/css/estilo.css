@@ -89,18 +89,17 @@ font-size: 100%;
 
 #buttonIniciarSesion{
     margin-top: 5%;
-    padding: 2%;
-    width: 20%;
-
+    width: 25%;
     background: #295F9D;
     border-radius: 10px;
     font-style: normal;
     font-weight: normal;
-
+    font-size:medium;
     /* identical to box height */
 
     text-decoration: none;
     justify-content: center;
+    align-items: center;
     display: flex;
     align-items: center;
     text-align: center;

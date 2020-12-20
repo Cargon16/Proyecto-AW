@@ -109,48 +109,34 @@ function procesarLogin(request, response) {
 function usuarioRegistrado(request, response) {
     var usuario = null;
     let msg = null;
-    if (request.body.emailUsuario == "" || request.body.password == "" || request.body.passwordConfirm == "" || request.body.nombreMostrar == "") {
-        msg = "Revisa los campos obligatorios(*)";
+
+
+    var ranNum = Math.floor(Math.random() * 2);
+    let name;
+    if (request.file != null) {
+        let arr = request.file.path.split("\\");
+        name = arr[arr.length - 1];
+
+    } else {
+        let files = fs.readdirSync("./public/imagenPre");
+        fs.copyFile('./public/imagenPre/' + files[ranNum], './public/imagen/' + files[ranNum], (err) => {
+            if (err) throw err;
+            else
+                fs.rename('./public/imagen/' + files[ranNum], './public/imagen/' + request.body.emailUsuario + '.png', function (err) {
+                    if (err) console.log('ERROR: ' + err);
+                });
+        });
+
+        name = request.body.emailUsuario + '.png';
     }
-    else {
-        if (request.body.password.length < 8) {
-            msg = "La contraseña debe tener al menos ocho caracteres.";
-        }
-        else {
-            if (request.body.password != request.body.passwordConfirm) {
-                msg = "Las contraseñas deben coincidir.";
-            }
-            else {
 
-                var ranNum = Math.floor(Math.random() * 2);
-                let name;
-                if (request.file != null) {
-                    let arr = request.file.path.split("\\");
-                    name = arr[arr.length - 1];
+    usuario = {
+        "email": request.body.emailUsuario,
+        "password": request.body.password,
+        "nombreMostrar": request.body.nombreMostrar,
+        "fotoPerfil": name
+    };
 
-                } else {
-                    let files = fs.readdirSync("./public/imagenPre");
-                    fs.copyFile('./public/imagenPre/' + files[ranNum], './public/imagen/' + files[ranNum], (err) => {
-                        if (err) throw err;
-                        else
-                            fs.rename('./public/imagen/' + files[ranNum], './public/imagen/' + request.body.emailUsuario + '.png', function (err) {
-                                if (err) console.log('ERROR: ' + err);
-                            });
-                    });
-
-                    name = request.body.emailUsuario + '.png';
-                }
-
-                usuario = {
-                    "email": request.body.emailUsuario,
-                    "password": request.body.password,
-                    "nombreMostrar": request.body.nombreMostrar,
-                    "fotoPerfil": name
-                };
-
-            }
-        }
-    }
     if (usuario == null) {
         response.render("registro", {
             "msg": msg
@@ -194,8 +180,8 @@ function usuarios(request, response) {
     })
 }
 
-function busquedaUsuario(request, response){
-    daoUsuario.getUsuarioFiltrado(request.body.nameUsuario,function (err, usuarios){
+function busquedaUsuario(request, response) {
+    daoUsuario.getUsuarioFiltrado(request.body.nameUsuario, function (err, usuarios) {
         if (err) {
             response.status(500);
             console.log("busquedausuario_post" + err);

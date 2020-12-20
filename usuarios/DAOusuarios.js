@@ -23,7 +23,7 @@ class DAOusuarios {
                 connection.query(sql, userData, function (err, result) {
                     connection.release();
                     if (err) {
-                        callback(new Error("Error de acceso a la base de datos"), null);
+                        callback(new Error("Ese correo ya está en uso"), null);
                     } else {
                         callback(null, true);
                     }

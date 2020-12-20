@@ -249,7 +249,8 @@ function buscaPregunta(request, response) {
                 "preguntas": preguntas,
                 "usuarioActual": request.session.nombreUsuario,
                 "correo": request.session.correo,
-                "imagen": request.session.imagen
+                "imagen": request.session.imagen,
+                "busqueda": request.body.Buscar
             });
         }
     })
@@ -266,7 +267,8 @@ function preguntasEtiqueta(request, response) {
                 "preguntas": preguntas,
                 "usuarioActual": request.session.nombreUsuario,
                 "correo": request.session.correo,
-                "imagen": request.session.imagen
+                "imagen": request.session.imagen,
+                "etiqueta": request.params.id
             });
         }
     })

@@ -267,7 +267,6 @@ class DAOpreguntas {
                     if (err) {
                         callback(new Error("Error de acceso a la base de datos"), null);
                     } else {
-                        console.log(result);
                         let preguntas = tratarTareas(result);
                         callback(null, preguntas);
                     }

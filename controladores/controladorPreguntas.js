@@ -109,7 +109,8 @@ function getPregunta(request, response) {
     daoPreguntas.setVisitas(request.params.id, function (err, devuelve) {
         daoPreguntas.getPregunta(request.params.id, function (err, pregunta) {
             daoMedallas.setMedallaPreguntaVisitas(pregunta, function (err, res) {
-                daoPreguntas.getRespuestasPregunta(request.params.id, function (err, respuestas) {
+                daoPreguntas.getRespuestasPregunta(request.params.id, request.session.correo, function (err, respuestas) {
+              
                     let p={
                         "usuarioLoggueado": request.session.correo,
                         "id": pregunta.ID_Pregunta
@@ -121,7 +122,7 @@ function getPregunta(request, response) {
                             response.status(200);
                             let opt = "disabled";
                             if(!res) opt= "enabled";
-                            console.log(opt);
+
                             response.render("pregunta", {
                                 "pregunta": pregunta,
                                 "respuestas": respuestas,
@@ -132,6 +133,8 @@ function getPregunta(request, response) {
                             });
                         }
                     });
+
+
                 });
             });
 

@@ -109,16 +109,17 @@ class DAOpreguntas {
         });
     }
 
-    getRespuestasPregunta(id_pregunta, callback) {
+    getRespuestasPregunta(id_pregunta,usuarioLoggueado, callback) {
         this.pool.getConnection(function (error, connection) {
             if (error) {
                 callback(new Error("Error de conexion a la base de datos."), null);
             }
             else {
                 connection.query("SELECT respuestas.ID_Respuesta, respuestas.Cuerpo, respuestas.Fecha, respuestas.Reputacion, respuestas.Votos, respuestas.ID_Usuario, \
-                usuarios.Nombre, usuarios.FotoPerfil FROM respuestas, usuarios WHERE usuarios.Correo = respuestas.ID_Usuario AND respuestas.ID_Pregunta = ?",
-                    [id_pregunta],
+                usuarios.Nombre, usuarios.FotoPerfil, CASE WHEN (SELECT COUNT(ID_Usuario) FROM votosrespuesta WHERE votosrespuesta.ID_Respuesta = respuestas.ID_Respuesta AND votosrespuesta.ID_Usuario = ?) > 0 THEN 1 ELSE 0 END AS votado FROM respuestas, usuarios WHERE usuarios.Correo = respuestas.ID_Usuario AND respuestas.ID_Pregunta = ?",
+                    [usuarioLoggueado, id_pregunta],
                     function (err, rows) {
+                     
                         connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));

@@ -15,9 +15,9 @@
 
             <div id="boxPregunta">
                 <div class="boxTituloQuestion">
-                    <label>
+                    <h1>
                         <%-pregunta.Titulo %>
-                    </label>
+                    </h1>
                 </div>
 
                 <div class="visitas">
@@ -95,7 +95,11 @@
                                 <input type="hidden" value="<%- pregunta.ID_Usuario %>" name="usuario">
                                 <input type="hidden" value="1" name="puntuacion">
                                 <input type="hidden" value="<%- respuesta.ID_Respuesta%>" name="respuesta">
-                                <input type="image" src="/iconos/positive-vote.png">
+                                <% if(respuesta.votado == 1){%>
+                                    <input type="image" src="/iconos/positive-vote.png" disabled>
+                                    <%}else{%>
+                                    <input type="image" src="/iconos/positive-vote.png">
+                                <%}%>
                             </form>
                             <form class="voto" action="/preguntas/voteRespuesta" method="POST">
                                 <input type="hidden" value="-2" name="v">
@@ -103,7 +107,11 @@
                                 <input type="hidden" value="<%- pregunta.ID_Usuario %>" name="usuario">
                                 <input type="hidden" value="-1" name="puntuacion">
                                 <input type="hidden" value="<%- respuesta.ID_Respuesta%>" name="respuesta">
-                                <input type="image" src="/iconos/negative-vote.png">
+                                <% if(respuesta.votado == 1){%>
+                                    <input type="image" src="/iconos/negative-vote.png" disabled>
+                                    <%}else{%>
+                                    <input type="image" src="/iconos/negative-vote.png">
+                                <%}%>
                             </form>
         
                         </div>

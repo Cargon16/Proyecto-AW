@@ -14,7 +14,7 @@ html{
     background-size: 100%;
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: medium;
-
+    word-wrap: break-word;
 }
 
 /*
@@ -607,6 +607,7 @@ pagina preguntas.html y resultados.html
 */
 
 #boxPregunta{
+    display: flex;
     width: 60%;
     height: 100%;
     
@@ -619,6 +620,8 @@ pagina preguntas.html y resultados.html
     text-align: left;
     display: flex;
     flex-direction: column;
+
+    border: 2px solid red;
 }
 
 
@@ -757,6 +760,7 @@ pagina preguntas.html y resultados.html
     flex-direction: row;
     margin-top: 2%;
     font-weight: bold;
+    margin-bottom: 1%;
 }
 .tag{
     text-decoration: none;
@@ -780,17 +784,20 @@ pagina preguntas.html y resultados.html
 }
 
 .boxTituloQuestion{
+
     position: flex;
     width: 100%;
     height: 20%;
     font-size: 250%;
     display: flex;
-    
+    border: 2px solid yellow;
+    word-wrap: break-word;
     margin-bottom: 2%;  
 }
-.boxTituloQuestion label{
+.boxTituloQuestion h1{
     font-weight: bold;
     font-size: 100%;
+    word-wrap: break-word;
 }
 
 .visitas{

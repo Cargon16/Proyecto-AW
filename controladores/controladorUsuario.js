@@ -99,7 +99,7 @@ function procesarLogin(request, response) {
                 });
             } else {
                 response.render("login", {
-                    msg: "Direccion de correo y/o password no válidos"
+                    msg: "Dirección de correo y/o password no válidos"
                 });
             }
         }

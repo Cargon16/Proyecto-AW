@@ -21,7 +21,7 @@ function login(request, response) {
         response.redirect("/paginaPrincipal");
     } else {
         response.render("login", {
-            "errorMsg": null
+            msg: ""
         });
     }
 }
@@ -99,7 +99,7 @@ function procesarLogin(request, response) {
                 });
             } else {
                 response.render("login", {
-                    errorMsg: "Direccion de correo y/o password no válidos"
+                    msg: "Direccion de correo y/o password no válidos"
                 });
             }
         }

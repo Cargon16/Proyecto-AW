@@ -13,15 +13,22 @@
     </header>
 
     <div id="boxFormulario">
-
         <form id="inicioSesion" class="formularios" method="POST" action="/procesarLogin">
 
-            
+            <h1><%- msg%></h1>
             <label id = "textCorreo">Correo *</label>
+            <% if(msg == ""){%>
             <input id="inputCorreo" name="correo" type="email"> </input>
-           
+            <%}else{%>
+            <input id="inputCorreoFallo" name="correo" type="email"> </input>
+            <%}%>
+            
             <label id = "textPassword">Contraseña *</label>
-            <input id="inputPassword" name="password" type="password"> </input>
+            <% if(msg == ""){%>
+            <input id="inputPassword" name="password" type="password" required> </input>
+            <%}else{%>
+            <input id="inputPasswordFallo" name="password" type="password" required> </input>
+            <%}%>
            
             <input id="buttonIniciarSesion" type="submit" value="Iniciar sesión"/>
             <a href="registro" id="buttonCrearCuenta" role="button">Crear Cuenta</a>

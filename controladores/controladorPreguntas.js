@@ -115,7 +115,6 @@ function getPregunta(request, response) {
         daoPreguntas.getPregunta(request.params.id, function (err, pregunta) {
             daoMedallas.setMedallaPreguntaVisitas(pregunta, function (err, res) {
                 daoPreguntas.getRespuestasPregunta(request.params.id, request.session.correo, function (err, respuestas) {
-              
                     let p={
                         "usuarioLoggueado": request.session.correo,
                         "id": pregunta.ID_Pregunta

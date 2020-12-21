@@ -14,7 +14,7 @@ class DAOmedallas {
                 connection.query("SELECT preguntas.Votos FROM preguntas WHERE preguntas.ID_Pregunta = ?",
                     [pregunta.id],
                     function (err, res) {
-                        connection.release(); // devolver al pool la conexión
+                        //connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
@@ -36,6 +36,7 @@ class DAOmedallas {
                                 connection.query("INSERT INTO medallas (Metal, Nombre, id_usuario, Fecha) VALUES (?,?,?,?);",
                                     [metal, nombre, pregunta.usuarioActual, today],
                                     function (err, rows) {
+                                        connection.release();
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         }
@@ -44,7 +45,10 @@ class DAOmedallas {
                                         }
                                     });
                             }
-                            else callback(null, true);
+                            else{
+                                connection.release();
+                                callback(null, true);
+                            } 
                         }
                     });
             }
@@ -82,7 +86,10 @@ class DAOmedallas {
                             }
                         });
                 }
-                else callback(null, true);
+                else {
+                    connection.release();
+                    callback(null, true);
+                }
             }
         });
     }
@@ -96,7 +103,7 @@ class DAOmedallas {
                 connection.query("SELECT respuestas.Votos FROM respuestas WHERE respuestas.ID_Respuesta = ?",
                     [respuesta.ID_respuesta],
                     function (err, res) {
-                        connection.release(); // devolver al pool la conexión
+                        //connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
@@ -117,6 +124,7 @@ class DAOmedallas {
                                 connection.query("INSERT INTO medallas (Metal, Nombre, id_usuario, Fecha) VALUES (?,?,?,?);",
                                     [metal, nombre, respuesta.usuarioActual, today],
                                     function (err, rows) {
+                                        connection.release();
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         }
@@ -125,7 +133,10 @@ class DAOmedallas {
                                         }
                                     });
                             }
-                            else callback(null, true);
+                            else{
+                                connection.release();
+                                callback(null, true);
+                            } 
                         }
                     });
             }

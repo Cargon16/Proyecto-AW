@@ -44,7 +44,7 @@ class DAOpreguntas {
                 const sql = "INSERT INTO preguntas (Titulo, Cuerpo, ID_Usuario, Fecha, Reputacion, Votos, Visitas) VALUES (?,?,?,?,?,?,?);";
                 let userData = [pregunta.titulo, pregunta.cuerpo, pregunta.usuarioActual, today, 0, 0, 0];
                 connection.query(sql, userData, function (err, result) {
-                    connection.release();
+                    //connection.release();
                     if (err) {
                         callback(new Error("Error de acceso a la base de datos 1"), null);
                     } else {
@@ -52,12 +52,12 @@ class DAOpreguntas {
                             const sql1 = "INSERT INTO tag (ID_Pregunta, tag) VALUES (?,?);";
                             let userData1 = [result.insertId, pregunta.etiquetas[i]];
                             connection.query(sql1, userData1, function (err, result) {
-                                //connection.release();
                                 if (err) {
                                     callback(new Error("Error de acceso a la base de datos"), null);
                                 }
                             });
                         }
+                        connection.release();
                         callback(null, true);
                     }
                 });
@@ -183,14 +183,14 @@ class DAOpreguntas {
                 const sql = "UPDATE preguntas SET Votos = Votos + 1 WHERE preguntas.ID_Pregunta = ?";
                 let userData = [info.id];
                 connection.query(sql, userData, function (err, result) {
-                    connection.release();
+                    //connection.release();
                     if (err) {
                         callback(new Error("Error de acceso a la base de datos"), null);
                     } else {
                         let consulta = "UPDATE preguntas SET Reputacion = Reputacion + ? WHERE preguntas.ID_Pregunta = ?";
                         let valores = [info.puntuacion, info.id];
-                        connection.query(consulta, valores,
-                            function (err) {
+                        connection.query(consulta, valores, function (err) {
+                            connection.release();
                                 if (err) {
                                     callback(new Error("Error de acceso a la base de datos 1"));
                                 }
@@ -213,14 +213,14 @@ class DAOpreguntas {
                 const sql = "UPDATE respuestas SET Votos = Votos + 1 WHERE ID_Respuesta = ?";
                 let userData = [info.ID_respuesta];
                 connection.query(sql, userData, function (err, result) {
-                    connection.release();
+                    //connection.release();
                     if (err) {
                         callback(new Error("Error de acceso a la base de datos"), null);
                     } else {
                         let consulta = "UPDATE respuestas SET Reputacion = Reputacion + ? WHERE ID_Respuesta = ?";
                         let valores = [info.puntuacion, info.ID_respuesta];
-                        connection.query(consulta, valores,
-                            function (err) {
+                        connection.query(consulta, valores, function (err) {
+                            connection.release();
                                 if (err) {
                                     callback(new Error("Error de acceso a la base de datos 1"));
                                 }

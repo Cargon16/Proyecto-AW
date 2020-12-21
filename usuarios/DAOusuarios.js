@@ -223,7 +223,7 @@ class DAOusuarios {
                 connection.query("SELECT *  FROM votospreguntas WHERE ID_Usuario = ? AND ID_Pregunta = ?",
                     [pregunta.usuarioLoggueado, pregunta.id],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
+                        //connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
@@ -233,6 +233,7 @@ class DAOusuarios {
                                 let valores = [pregunta.usuarioLoggueado, pregunta.id];
                                 connection.query(consulta, valores,
                                     function (err) {
+                                        connection.release();
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         }
@@ -261,7 +262,7 @@ class DAOusuarios {
                 connection.query("SELECT *  FROM votosrespuesta WHERE ID_Usuario = ? AND ID_Respuesta = ?",
                     [respuesta.usuarioLoggueado, respuesta.ID_respuesta],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
+                        //connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
@@ -271,6 +272,7 @@ class DAOusuarios {
                                 let valores = [respuesta.usuarioLoggueado, respuesta.ID_respuesta];
                                 connection.query(consulta, valores,
                                     function (err) {
+                                        connection.release();
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         }

@@ -21,7 +21,7 @@
 
     
         <form id="formularPregunta" class="formularioPregunta"  method="POST" action="/preguntas/formularPregunta" conten-type="application/json"">
-            <%- msg %>
+           <h1><%- msg %></h1> 
 
             <div id="divTitulo">
                 <label>Formular una pregunta</label>
@@ -34,11 +34,11 @@
            
             <label id="tituloFormulario">Cuerpo</label>
             <label id="textSubCuerpo">Incluye toda la información que alguien necesitaría para responder tu pregunta</label>
-            <input id="inputCuerpo" name="cuerpo" required pattern=".*\S+.*"> </textarea>
+            <input id="inputCuerpo" name="cuerpo" required pattern=".*\S+.*">
 
             <label id="tituloFormulario">Etiquetas</label>
             <label id="textSubEtiquetas">Añade hasta 5 etiquetas para describir sobre qué trata tu pregunta</label>
-            <input id="inputEtiquetas" name="etiquetas" placeholder="Por ejemplo: @node@express"> </input>
+            <input id="inputEtiquetas" name="etiquetas" placeholder="Por ejemplo: @node@express" pattern="^\s*\S*\s*$"> </input>
 
             <input id="buttonPublicarPregunta" type="submit" value="Publica tu pregunta"/>
         </form>

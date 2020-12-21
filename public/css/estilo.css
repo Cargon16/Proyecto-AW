@@ -189,10 +189,9 @@ font-size: 100%;
 
 #buttonPublicarPregunta{
     margin-top: 2%;
-    padding: 1%;
     width: 10%;
     height: 10%;
-
+    padding-left: 0%;
     background: #295F9D;
     border-radius: 10px;
     font-style: normal;
@@ -300,24 +299,6 @@ Codigo paginaFormularPregunta.php
 
 .formularioPregunta label{
     font-size: 100%;
-}
-
-.formularioPregunta button{
-    width: 10%;
-    height: 10%;
-
-    margin-bottom: 3%;
-
-    background: #295F9D;
-    border-radius: 10px;
-    font-size: 100%;
-    /* identical to box height */
-
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #FFFFFF;
 }
 
 .formularioPregunta input{

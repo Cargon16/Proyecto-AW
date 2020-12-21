@@ -73,7 +73,12 @@ function procesarCrearPregunta(request, response) {
         }
     }
     if (pregunta == null) {
-        response.redirect("/preguntas/crearPregunta");
+        response.render("paginaFormularPregunta", {
+            msg: msg,
+            "usuarioActual": request.session.nombreUsuario,
+            "correo": request.session.correo,
+            "imagen": request.session.imagen
+        });
     } else {
         daoPreguntas.insertarPregunta(pregunta, function (err, insertado) {
             if (err || !insertado) {

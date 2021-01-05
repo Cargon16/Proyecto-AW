@@ -54,6 +54,10 @@ function perfil(request, response) {
             });
         } else {
             response.status(404);
+            response.render("error404", {
+                "usuarioActual": request.session.nombreUsuario,
+                "imagen": request.session.imagen,
+            });
         }
     });
 }
@@ -64,32 +68,38 @@ function logout(request, response) {
     response.redirect("/login");
 }
 
-function paginaPrincipal(request, response) {
+function paginaPrincipal(request, response, next) {
     response.status(200);
     if (request.session.nombreUsuario == null) {
         response.redirect("/login");
     } else {
         daoUsuario.getUserImage(request.session.correo, function (err, existe) {
-            request.session.imagen = existe.FotoPerfil;
-            response.render("paginaPrincipal", {
-                "usuarioActual": request.session.nombreUsuario,
-                "correo": request.session.correo,
-                "imagen": existe.FotoPerfil
-            });
+            if (err) {
+                next(err);
+            }
+            else {
+                request.session.imagen = existe.FotoPerfil;
+                response.render("paginaPrincipal", {
+                    "usuarioActual": request.session.nombreUsuario,
+                    "correo": request.session.correo,
+                    "imagen": existe.FotoPerfil
+                });
+            }
         });
     }
 }
 
-function procesarLogin(request, response) {
+function procesarLogin(request, response, next) {
     daoUsuario.isUserCorrect(request.body.correo, request.body.password, function (err, existe) {
         if (err) {
-            response.status(500);
+            next(err);
             console.log("procesarLogin_post" + err);
         } else {
             response.status(200);
             if (existe) {
                 daoUsuario.getUserName(request.body.correo, function (err, nombre) {
                     if (err) {
+                        next(err);
                         console.log("login post\n" + err);
                     } else {
                         request.session.nombreUsuario = nombre;
@@ -106,7 +116,7 @@ function procesarLogin(request, response) {
     })
 }
 
-function usuarioRegistrado(request, response) {
+function usuarioRegistrado(request, response, next) {
     var usuario = null;
     let msg = null;
 
@@ -144,7 +154,6 @@ function usuarioRegistrado(request, response) {
     } else {
         daoUsuario.insertarUsuario(usuario, function (err, insertado) {
             if (err) {
-                response.status(500);
                 console.log(err + " post_usuarioRegistrado");
                 response.render("registro", {
                     "msg": err
@@ -163,10 +172,10 @@ function usuarioRegistrado(request, response) {
     }
 }
 
-function usuarios(request, response) {
+function usuarios(request, response, next) {
     daoUsuario.getUsuarios(function (err, usuarios) {
         if (err) {
-            response.status(500);
+            next(err);
             console.log("getUsuarios_post" + err);
         } else {
 
@@ -180,10 +189,10 @@ function usuarios(request, response) {
     })
 }
 
-function busquedaUsuario(request, response) {
+function busquedaUsuario(request, response, next) {
     daoUsuario.getUsuarioFiltrado(request.body.nameUsuario, function (err, usuarios) {
         if (err) {
-            response.status(500);
+            next(err);
             console.log("busquedausuario_post" + err);
         } else {
 

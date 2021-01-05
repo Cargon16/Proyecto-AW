@@ -11,10 +11,10 @@ const daoPreguntas = new preguntasDAO(pool);
 const medallasDAO = require("../medallas/DAOmedallas");
 const daoMedallas = new medallasDAO(pool);
 
-function preguntas(request, response) {
+function preguntas(request, response, next) {
     daoPreguntas.getPreguntas(function (err, preguntas) {
         if (err) {
-            response.status(404);
+            next(err);
         } else {
             response.status(200);
             response.render("paginaTodasPreguntas", {
@@ -38,7 +38,7 @@ function creaPregunta(request, response) {
 }
 
 
-function procesarCrearPregunta(request, response) {
+function procesarCrearPregunta(request, response, next) {
 
     var pregunta = null;
     let msg = null;
@@ -82,7 +82,7 @@ function procesarCrearPregunta(request, response) {
     } else {
         daoPreguntas.insertarPregunta(pregunta, function (err, insertado) {
             if (err || !insertado) {
-                response.status(500);
+                next(err);
                 console.log(err + " post_preguntaInsertada");
                 response.redirect("/preguntas/crearPregunta")
             } else {
@@ -94,10 +94,10 @@ function procesarCrearPregunta(request, response) {
 
 }
 
-function preguntasSinResponder(request, response) {
+function preguntasSinResponder(request, response, next) {
     daoPreguntas.getPreguntasSinResponder(function (err, preguntas) {
         if (err) {
-            response.status(404);
+            next(err);
         } else {
             response.status(200);
             response.render("paginaPreguntasSinResponder", {
@@ -110,7 +110,7 @@ function preguntasSinResponder(request, response) {
     });
 }
 
-function getPregunta(request, response) {
+function getPregunta(request, response, next) {
     daoPreguntas.setVisitas(request.params.id, function (err, devuelve) {
         daoPreguntas.getPregunta(request.params.id, function (err, pregunta) {
             daoMedallas.setMedallaPreguntaVisitas(pregunta, function (err, res) {
@@ -121,7 +121,7 @@ function getPregunta(request, response) {
                     };
                     daoUsuarios.hasVoteQuestion(p, function(err, res){
                         if (err) {
-                            response.status(404);
+                            next(err);
                         } else {
                             response.status(200);
                             let opt = "disabled";
@@ -146,7 +146,7 @@ function getPregunta(request, response) {
     });
 }
 
-function procesarCrearRespuesta(request, response) {
+function procesarCrearRespuesta(request, response, next) {
 
     var respuesta = null;
     let msg = null;
@@ -167,7 +167,7 @@ function procesarCrearRespuesta(request, response) {
         daoPreguntas.insertarRespuesta(respuesta, function (err, insertado) {
 
             if (err || !insertado) {
-                response.status(500);
+                next(err);
                 console.log(err + " post_preguntaInsertada");
                 response.redirect("/preguntas/pregunta/" + respuesta.pregunta);
             } else {
@@ -179,7 +179,7 @@ function procesarCrearRespuesta(request, response) {
     }
 }
 
-function procesarVoto(request, response) {
+function procesarVoto(request, response, next) {
     let pregunta = {
         "id": request.body.id,
         "puntuacion": request.body.puntuacion,
@@ -197,7 +197,7 @@ function procesarVoto(request, response) {
                     daoUsuarios.setUserReputation(pregunta, function (err, resultado) {
 
                         if (err) {
-                            response.status(404);
+                            next(err);
                         } else {
                             response.redirect("/preguntas/pregunta/" + pregunta.id);
                         }
@@ -212,7 +212,7 @@ function procesarVoto(request, response) {
     });
 }
 
-function procesarVotoRespuesta(request, response) {
+function procesarVotoRespuesta(request, response, next) {
     let respuesta = {
         "id": request.body.id,
         "puntuacion": request.body.puntuacion,
@@ -229,7 +229,7 @@ function procesarVotoRespuesta(request, response) {
                     daoUsuarios.setUserReputation(respuesta, function (err, resultado) {
 
                         if (err) {
-                            response.status(404);
+                            next(err);
                         } else {
                             response.redirect("/preguntas/pregunta/" + respuesta.id);
                         }
@@ -242,10 +242,10 @@ function procesarVotoRespuesta(request, response) {
         }
     });
 }
-function buscaPregunta(request, response) {
+function buscaPregunta(request, response, next) {
     daoPreguntas.getPreguntaFiltrada(request.body.Buscar, function (err, preguntas) {
         if (err) {
-            response.status(500);
+            next(err);
             console.log("busquedaPregunta_post" + err);
         } else {
 
@@ -260,10 +260,10 @@ function buscaPregunta(request, response) {
     })
 }
 
-function preguntasEtiqueta(request, response) {
+function preguntasEtiqueta(request, response, next) {
     daoPreguntas.getPreguntaPorEtiqueta(request.params.id, function (err, preguntas) {
         if (err) {
-            response.status(500);
+            next(err);
             console.log("busquedaPregunta_post" + err);
         } else {
 

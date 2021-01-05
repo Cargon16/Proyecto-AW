@@ -40,14 +40,12 @@ app.listen(config.port, function (err) {
         console.log(`Servidor arrancado en el puerto ${config.port}`);
     }
 });
-
-// Middleware para el control del error 404
 app.use(function(request, response, next) {
     response.status(404);
     response.render("error404", { recurso: request.url });
 });
 
-// Middleware para el control del error 500
+// Middleware para el control del error 500 (error interno).
 app.use(function(error, request, response, next) {
     response.status(500);
     response.render("error500", { mensaje: error.message, pila: error.stack });

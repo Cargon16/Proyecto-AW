@@ -1019,3 +1019,8 @@ paginaPerfilUsuario
     box-sizing: border-box;
     border-radius: 5px;
 }
+
+#error{
+    font-size: 75px;
+    text-align: center;
+}

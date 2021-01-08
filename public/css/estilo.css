@@ -749,7 +749,7 @@ pagina preguntas.html y resultados.html
 }
 .tag{
     text-decoration: none;
-    width: 5% !important;
+    width: 10% !important;
     margin-left: 1%;
     background-color: #cfcdcdc7;
     border-radius: 3px;
@@ -757,6 +757,7 @@ pagina preguntas.html y resultados.html
     text-align: center;
     justify-content: center;
     font-weight: bold;
+    font-size: 100%;
     color: rgb(17, 117, 184);
 }
 

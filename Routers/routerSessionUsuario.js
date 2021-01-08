@@ -14,7 +14,7 @@ function usuarioActual (request, response, next) {
         next();
     } else {
         response.status(200);
-        response.render("login", { errorMsg: "Identifíquese para continuar." });
+        response.render("login", { msg: "Identifíquese para continuar." });
     }
 }
 

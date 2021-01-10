@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `medallas`
 --
 
-DROP DATABASE `404` ;
+DROP DATABASE IF EXISTS `404`;
 CREATE DATABASE `404` ;
 
 CREATE TABLE `medallas` (

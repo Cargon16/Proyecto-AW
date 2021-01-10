@@ -9,7 +9,8 @@
 
 #cabeceraLog{
     height: 20%;
-    background: linear-gradient(180deg, rgba(115,173,247,1) 13%, rgba(197,230,251,1) 64%, rgba(230,240,242,1) 100%);
+   
+    background-color: #282828;
     padding-top: 1%;
     width: 100%;
     display: flex;
@@ -23,7 +24,6 @@
     width: 80%;
     align-items: center;
     border-radius: 0%;
-
 }
 
 
@@ -41,7 +41,7 @@
     margin-top: 2%;
     margin-bottom: 5%;
     padding: 2%;
-    background: #295F9D;
+    background: #00B5AA;
     border-radius: 10px;
     color: #FFFFFF;
     text-decoration: none;

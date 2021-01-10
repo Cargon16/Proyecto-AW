@@ -10,7 +10,7 @@
 #tituloCabecera{
     display: flex;
     height: 20%;
-    background: linear-gradient(180deg, rgba(115,173,247,1) 13%, rgba(197,230,251,1) 64%, rgba(230,240,242,1) 100%);
+    background-color: #282828;
     align-items: center;
     padding-top: 1%;
 }

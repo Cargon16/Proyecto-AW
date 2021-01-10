@@ -44,13 +44,14 @@ class DAOpreguntas {
                 const sql = "INSERT INTO preguntas (Titulo, Cuerpo, ID_Usuario, Fecha, Reputacion, Votos, Visitas) VALUES (?,?,?,?,?,?,?);";
                 let userData = [pregunta.titulo, pregunta.cuerpo, pregunta.usuarioActual, today, 0, 0, 0];
                 connection.query(sql, userData, function (err, result) {
-                    //connection.release();
                     if (err) {
                         callback(new Error("Error de acceso a la base de datos 1"), null);
                     } else {
-                        for (let i = 0; i < pregunta.etiquetas.length; ++i) {
+                        let tags = tratarTag(pregunta.etiquetas);
+
+                        for (let i = 0; i < tags.length; ++i) {
                             const sql1 = "INSERT INTO tag (ID_Pregunta, tag) VALUES (?,?);";
-                            let userData1 = [result.insertId, pregunta.etiquetas[i]];
+                            let userData1 = [result.insertId, tags[i]];
                             connection.query(sql1, userData1, function (err, result) {
                                 if (err) {
                                     callback(new Error("Error de acceso a la base de datos"), null);
@@ -304,6 +305,21 @@ function tratarTareas(filas) {
     }
 
     return tareas;
+}
+
+function tratarTag(lista){
+    const newArr = []
+    const myObj = {}
+    
+    lista.forEach(el => {
+      // comprobamos si el valor existe en el objeto
+      if (!(el in myObj)) {
+        // si no existe creamos ese valor y lo añadimos al array final, y si sí existe no lo añadimos
+        myObj[el] = true
+        newArr.push(el)
+      }
+    })
+    return newArr;
 }
 
 module.exports = DAOpreguntas;

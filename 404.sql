@@ -35,6 +35,8 @@ CREATE TABLE `medallas` (
   `Metal` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
   `Nombre` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
   `id_usuario` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `id_pregunta` int(100) DEFAULT NULL,
+  `id_respuesta` int(100) DEFAULT NULL,
   `Fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -125,7 +127,9 @@ ALTER TABLE `tag`
 --
 ALTER TABLE `medallas`
   ADD PRIMARY KEY (`ID_Medalla`),
-  ADD KEY `fk_usuario_medallas` (`id_usuario`);
+  ADD KEY `fk_usuario_medallas` (`id_usuario`),
+  ADD KEY `fk_pregunta_medallas` (`id_pregunta`),
+  ADD KEY `fk_respuesta_medallas` (`id_respuesta`);
 
 --
 -- Indices de la tabla `preguntas`
@@ -195,7 +199,9 @@ ALTER TABLE `respuestas`
 -- Filtros para la tabla `medallas`
 --
 ALTER TABLE `medallas`
-  ADD CONSTRAINT `fk_usuario_medallas` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`Correo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_usuario_medallas` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`Correo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_respuesta_medallas` FOREIGN KEY (`id_respuesta`) REFERENCES `respuestas` (`ID_Respuesta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pregunta_medallas` FOREIGN KEY (`id_pregunta`) REFERENCES `preguntas` (`ID_Pregunta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `preguntas`

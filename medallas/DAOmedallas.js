@@ -33,8 +33,10 @@ class DAOmedallas {
                                 var yyyy = today.getFullYear();
 
                                 today = yyyy + '/' + mm + '/' + dd;
-                                connection.query("INSERT INTO medallas (Metal, Nombre, id_usuario, Fecha) VALUES (?,?,?,?);",
-                                    [metal, nombre, pregunta.usuarioActual, today],
+                                //connection.query("INSERT INTO medallas (Metal, Nombre, id_usuario, Fecha) VALUES (?,?,?,?);",
+                                connection.query("INSERT INTO medallas (Metal, Nombre, id_usuario, Fecha, id_pregunta) SELECT * FROM (SELECT ?, ?, ?, ?, ?) AS tmp\
+                                 WHERE NOT EXISTS (SELECT ID_Medalla FROM medallas WHERE id_usuario = ? AND id_pregunta = ? AND Nombre = ?) LIMIT 1;",
+                                    [metal, nombre, pregunta.usuarioActual, today, pregunta.id,pregunta.usuarioActual, pregunta.id, nombre],
                                     function (err, rows) {
                                         connection.release();
                                         if (err) {
@@ -121,8 +123,10 @@ class DAOmedallas {
                                 var yyyy = today.getFullYear();
 
                                 today = yyyy + '/' + mm + '/' + dd;
-                                connection.query("INSERT INTO medallas (Metal, Nombre, id_usuario, Fecha) VALUES (?,?,?,?);",
-                                    [metal, nombre, respuesta.usuarioActual, today],
+                                //connection.query("INSERT INTO medallas (Metal, Nombre, id_usuario, Fecha) VALUES (?,?,?,?);",
+                                connection.query("INSERT INTO medallas (Metal, Nombre, id_usuario, Fecha, id_pregunta) SELECT * FROM (SELECT ?, ?, ?, ?, ?) AS tmp\
+                                 WHERE NOT EXISTS (SELECT ID_Medalla FROM medallas WHERE id_usuario = ? AND id_respuesta = ? AND Nombre = ?) LIMIT 1;",
+                                    [metal, nombre, respuesta.usuarioActual, today, respuesta.ID_respuesta, respuesta.usuarioActual, respuesta.ID_respuesta, nombre],
                                     function (err, rows) {
                                         connection.release();
                                         if (err) {

@@ -11,7 +11,7 @@ class DAOmedallas {
             }
             else {
                 let nombre, metal;
-                connection.query("SELECT preguntas.Votos FROM preguntas WHERE preguntas.ID_Pregunta = ?",
+                connection.query("SELECT preguntas.Reputacion FROM preguntas WHERE preguntas.ID_Pregunta = ?",
                     [pregunta.id],
                     function (err, res) {
                         //connection.release(); // devolver al pool la conexión
@@ -19,7 +19,7 @@ class DAOmedallas {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
-                            switch (res[0].Votos) {
+                            switch (res[0].Reputacion) {
                                 case 1: nombre = "Estudiante"; metal = "bronce"; break;
                                 case 2: nombre = "Pregunta interesante"; metal = "bronce"; break;
                                 case 4: nombre = "Buena pregunta"; metal = "plata"; break;
@@ -100,7 +100,7 @@ class DAOmedallas {
             }
             else {
                 let nombre, metal;
-                connection.query("SELECT respuestas.Votos FROM respuestas WHERE respuestas.ID_Respuesta = ?",
+                connection.query("SELECT respuestas.Reputacion FROM respuestas WHERE respuestas.ID_Respuesta = ?",
                     [respuesta.ID_respuesta],
                     function (err, res) {
                         //connection.release(); // devolver al pool la conexión
@@ -108,7 +108,7 @@ class DAOmedallas {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
-                            switch (res[0].Votos) {
+                            switch (res[0].Reputacion) {
                                 case 2: nombre = "Respuesta interesante"; metal = "bronce"; break;
                                 case 4: nombre = "Buena respuesta"; metal = "plata"; break;
                                 case 6: nombre = "Excelente respuesta"; metal = "oro"; break;

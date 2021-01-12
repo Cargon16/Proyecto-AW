@@ -363,7 +363,6 @@ Codigo paginaPerfilUsuario.php
     position: relative;
     width: 100%;
     height: 10%;
-    padding-right: 10%;
 
     justify-content: center;
     font-size: 100%;
@@ -379,7 +378,7 @@ Codigo paginaPerfilUsuario.php
     width: 100%;
     height: 80%;
     text-align: center;
- 
+    justify-content: center;
  
     background-color: #404040;
     border-radius: 10px;
@@ -412,10 +411,10 @@ Codigo paginaPerfilUsuario.php
     height: 74%;
 
     float: left;
-    margin-top: 2%;
-    margin-left: 1%;
     
     text-align: center;
+    align-items: center;
+
 
 }
 
@@ -430,7 +429,6 @@ Codigo paginaPerfilUsuario.php
     width: 32%;
     height: 74%;
 
-    margin-left: 1%;
     float: right;
     display: left;
     border-radius: 10px;
@@ -548,7 +546,7 @@ Codigo paginaPerfilUsuario.php
     border-radius: 10px;
     align-items: center;
     justify-content: center;
-    background-color: #E5E93D;
+    background-color: #FFBF00;
 }
 
 
@@ -976,7 +974,7 @@ paginaPerfilUsuario
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #E5E93D;
+    background: #FFBF00;
 }
 #inputCorreoFallo, #inputPasswordFallo{
     width: 100%;

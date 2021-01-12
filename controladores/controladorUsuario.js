@@ -120,56 +120,68 @@ function usuarioRegistrado(request, response, next) {
     var usuario = null;
     let msg = null;
 
-
-    var ranNum = Math.floor(Math.random() * 2);
-    let name;
-    if (request.file != null) {
-        let arr = request.file.path.split("\\");
-        name = arr[arr.length - 1];
-
-    } else {
-        let files = fs.readdirSync("./public/imagenPre");
-        fs.copyFile('./public/imagenPre/' + files[ranNum], './public/imagen/' + files[ranNum], (err) => {
-            if (err) throw err;
-            else
-                fs.rename('./public/imagen/' + files[ranNum], './public/imagen/' + request.body.emailUsuario + '.png', function (err) {
-                    if (err) console.log('ERROR: ' + err);
-                });
-        });
-
-        name = request.body.emailUsuario + '.png';
-    }
-
-    usuario = {
-        "email": request.body.emailUsuario,
-        "password": request.body.password,
-        "nombreMostrar": request.body.nombreMostrar,
-        "fotoPerfil": name
-    };
-
-    if (usuario == null) {
-        response.render("registro", {
-            "msg": msg
-        });
-    } else {
-        daoUsuario.insertarUsuario(usuario, function (err, insertado) {
-            if (err) {
-                console.log(err + " post_usuarioRegistrado");
+    daoUsuario.emailInUse(request.body.emailUsuario, function (err, enUso) {
+        if (err) {
+            next(err);
+        }
+        else {
+            if(enUso){
                 response.render("registro", {
-                    "msg": err
+                    "msg": "El correo ya está en uso"
                 })
-            } else {
-                response.status(200);
-                if (insertado) {
-                    response.redirect("/login");
+            }
+            else {
+                var ranNum = Math.floor(Math.random() * 2);
+                let name;
+                if (request.file != null) {
+                    let arr = request.file.path.split("\\");
+                    name = arr[arr.length - 1];
+
                 } else {
+                    let files = fs.readdirSync("./public/imagenPre");
+                    fs.copyFile('./public/imagenPre/' + files[ranNum], './public/imagen/' + files[ranNum], (err) => {
+                        if (err) throw err;
+                        else
+                            fs.rename('./public/imagen/' + files[ranNum], './public/imagen/' + request.body.emailUsuario + '.png', function (err) {
+                                if (err) console.log('ERROR: ' + err);
+                            });
+                    });
+
+                    name = request.body.emailUsuario + '.png';
+                }
+
+                usuario = {
+                    "email": request.body.emailUsuario,
+                    "password": request.body.password,
+                    "nombreMostrar": request.body.nombreMostrar,
+                    "fotoPerfil": name
+                };
+
+                if (usuario == null) {
                     response.render("registro", {
-                        "msg": "Error al crear usuario"
+                        "msg": msg
+                    });
+                } else {
+                    daoUsuario.insertarUsuario(usuario, function (err, insertado) {
+                        if (err) {
+                            console.log(err + " post_usuarioRegistrado");
+                            next(err);
+                        } else {
+                            response.status(200);
+                            if (insertado) {
+                                response.redirect("/login");
+                            } else {
+                                response.render("registro", {
+                                    "msg": "Error al crear usuario"
+                                })
+                            }
+                        }
                     })
                 }
             }
-        })
-    }
+        }
+    });
+
 }
 
 function usuarios(request, response, next) {

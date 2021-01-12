@@ -23,7 +23,7 @@ class DAOusuarios {
                 connection.query(sql, userData, function (err, result) {
                     connection.release();
                     if (err) {
-                        callback(new Error("Ese correo ya está en uso"), null);
+                        callback(new Error("Error de acceso a la base de datos"), null);
                     } else {
                         callback(null, true);
                     }
@@ -376,6 +376,34 @@ class DAOusuarios {
             else {
                 connection.query("SELECT *  FROM votospreguntas WHERE ID_Usuario = ? AND ID_Pregunta = ?",
                     [pregunta.usuarioLoggueado, pregunta.id],
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            if (rows.length == 0) {
+                                callback(null, false);
+                            }
+                            else {
+                                callback(null, true);
+                            }
+
+                        }
+                    });
+            }
+        }
+        );
+    }
+
+    emailInUse(email, callback){
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+                connection.query("SELECT Nombre FROM usuarios WHERE Correo = ?",
+                    [email],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {

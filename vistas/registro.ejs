@@ -21,10 +21,10 @@
             <input id="inputCorreo" name="emailUsuario" type="email" required> </input>
            
             <label id = "textPassword">Contraseña *</label>
-            <input id="inputPassword" type="password" name="password" pattern=".{8,}" required onchange="this.setCustomValidity(this.validity.patternMismatch ? 'La contraseña debe tener 8 caracteres mínimo' : ''); if(this.checkValidity()) form.passwordConfirm.pattern = this.value;"> </input>
+            <input id="inputPassword" type="password" name="password" pattern=".{8,}" required title="La contraseña debe tener 8 caracteres mínimo"> </input>
 
             <label id = "textPassword">Confirmar contraseña *</label>
-            <input id="inputPassword" type="password" name="passwordConfirm" pattern=".{8,}" required onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Las contraseñas tienen que ser iguales' : '');""> </input>
+            <input id="inputPassword" type="password" name="passwordConfirm" pattern=".{8,}" required title="La contraseña debe tener 8 caracteres mínimo"> </input>
             <label id = "textNombre">Nombre para mostrar*</label>
             <input id="inputNombre"  name="nombreMostrar" required tittle="Debes introducir un nombre de usuario"> </input>
            

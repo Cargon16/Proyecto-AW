@@ -18,9 +18,9 @@
             <h1><%- msg%></h1>
             <label id = "textCorreo">Correo *</label>
             <% if(msg == ""){%>
-            <input id="inputCorreo" name="correo" type="email"> </input>
+            <input id="inputCorreo" name="correo" type="email" required> </input>
             <%}else{%>
-            <input id="inputCorreoFallo" name="correo" type="email"> </input>
+            <input id="inputCorreoFallo" name="correo" type="email" required> </input>
             <%}%>
             
             <label id = "textPassword">Contraseña *</label>

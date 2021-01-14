@@ -21,7 +21,7 @@
                         <%- usuario.Nombre %>
                     </h2>
                     <h2>Miembro desde: <%- usuario.FechaAlta.getDate()+"/"+
-                            usuario.FechaAlta.getMonth()+"/"+usuario.FechaAlta.getFullYear() %>
+                            (usuario.FechaAlta.getMonth() + 1) +"/"+usuario.FechaAlta.getFullYear() %>
                     </h2>
                 </div>
 
